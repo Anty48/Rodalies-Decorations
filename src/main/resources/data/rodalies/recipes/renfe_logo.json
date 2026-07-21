@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " O ",
+    "OQO",
+    " O "
+  ],
+  "key": {
+    "O": {
+      "item": "minecraft:quartz_block"
+    },
+    "Q": {
+      "item": "minecraft:purple_dye"
+    }
+  },
+  "result": {
+    "item": "rodalies:renfe_logo",
+    "count": 4
+  }
+}

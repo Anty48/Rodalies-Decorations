@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "minecraft:quartz_block" },
+    { "item": "minecraft:purple_dye" }
+  ],
+  "result": {
+    "item": "rodalies:purple_side",
+    "count": 1
+  }
+}

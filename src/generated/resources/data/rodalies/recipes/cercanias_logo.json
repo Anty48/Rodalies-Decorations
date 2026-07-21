@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "T": {
+      "item": "minecraft:red_dye"
+    },
+    "X": {
+      "item": "minecraft:smooth_quartz"
+    }
+  },
+  "pattern": [
+    " X ",
+    "XTX",
+    " X "
+  ],
+  "result": {
+    "count": 4,
+    "item": "rodalies:cercanias_logo"
+  },
+  "show_notification": true
+}
