@@ -45,5 +45,18 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('C', Blocks.BLACK_STAINED_GLASS)
                 .unlockedBy("has_black_stained_glass", has(Blocks.BLACK_STAINED_GLASS))
                 .save(writer);
+
+        // Cartel de estacion: banda de hormigon gris (C) arriba sobre un poste de hierro (L).
+        // CCC
+        //  L
+        //  L    -> 1 cartel
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModBlocks.STATION_SIGNAL.get(), 1)
+                .pattern("CCC")
+                .pattern(" L ")
+                .pattern(" L ")
+                .define('C', Blocks.GRAY_CONCRETE)
+                .define('L', Items.IRON_INGOT)
+                .unlockedBy("has_gray_concrete", has(Blocks.GRAY_CONCRETE))
+                .save(writer);
     }
 }

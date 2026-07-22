@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "facing=north,part=mid": { "model": "rodalies:block/station_signal" },
+    "facing=east,part=mid":  { "model": "rodalies:block/station_signal", "y": 90 },
+    "facing=south,part=mid": { "model": "rodalies:block/station_signal", "y": 180 },
+    "facing=west,part=mid":  { "model": "rodalies:block/station_signal", "y": 270 },
+
+    "facing=north,part=base": { "model": "rodalies:block/station_signal_empty" },
+    "facing=east,part=base":  { "model": "rodalies:block/station_signal_empty" },
+    "facing=south,part=base": { "model": "rodalies:block/station_signal_empty" },
+    "facing=west,part=base":  { "model": "rodalies:block/station_signal_empty" },
+
+    "facing=north,part=top": { "model": "rodalies:block/station_signal_empty" },
+    "facing=east,part=top":  { "model": "rodalies:block/station_signal_empty" },
+    "facing=south,part=top": { "model": "rodalies:block/station_signal_empty" },
+    "facing=west,part=top":  { "model": "rodalies:block/station_signal_empty" },
+
+    "facing=north,part=top_left": { "model": "rodalies:block/station_signal_empty" },
+    "facing=east,part=top_left":  { "model": "rodalies:block/station_signal_empty" },
+    "facing=south,part=top_left": { "model": "rodalies:block/station_signal_empty" },
+    "facing=west,part=top_left":  { "model": "rodalies:block/station_signal_empty" },
+
+    "facing=north,part=top_right": { "model": "rodalies:block/station_signal_empty" },
+    "facing=east,part=top_right":  { "model": "rodalies:block/station_signal_empty" },
+    "facing=south,part=top_right": { "model": "rodalies:block/station_signal_empty" },
+    "facing=west,part=top_right":  { "model": "rodalies:block/station_signal_empty" }
+  }
+}

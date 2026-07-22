@@ -61,6 +61,15 @@ public class ModBlocks {
                 .sound(SoundType.GLASS)
                 .noOcclusion()));
 
+    // Cartel de estacion: bloque con texto editable (BlockEntity + renderer). Modelo 3x3 que
+    // sobresale de la celda; colision solo el poste. noOcclusion porque casi toda su celda es aire.
+    public static final RegistryObject<Block> STATION_SIGNAL =
+        BLOCKS.register("station_signal",
+            () -> new StationSignalBlock(BlockBehaviour.Properties.of()
+                .strength(1.5f)
+                .sound(SoundType.METAL)
+                .noOcclusion()));
+
     // --- Registro de items ---
 
     public static final DeferredRegister<Item> ITEMS =
@@ -85,6 +94,10 @@ public class ModBlocks {
     public static final RegistryObject<Item> PARABRISAS_447_ITEM =
         ITEMS.register("parabrisas_447",
             () -> new BlockItem(PARABRISAS_447.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> STATION_SIGNAL_ITEM =
+        ITEMS.register("station_signal",
+            () -> new BlockItem(STATION_SIGNAL.get(), new Item.Properties()));
     // --- Creative Tab ---
 
     public static final DeferredRegister<CreativeModeTab> CREATIVE_TABS =
@@ -100,6 +113,7 @@ public class ModBlocks {
                 output.accept(PURPLE_SIDE_ITEM.get());
                 output.accept(CERCANIAS_LOGO_ITEM.get());
                 output.accept(PARABRISAS_447_ITEM.get());
+                output.accept(STATION_SIGNAL_ITEM.get());
             })
             .build());
 }

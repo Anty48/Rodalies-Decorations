@@ -2,6 +2,7 @@ package rodalies;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import rodalies.network.ModNetwork;
 
 @Mod("rodalies")
 public class RodaliesMod {
@@ -11,5 +12,8 @@ public class RodaliesMod {
         ModBlocks.BLOCKS.register(bus);
         ModBlocks.ITEMS.register(bus);
         ModBlocks.CREATIVE_TABS.register(bus);
+        ModBlockEntities.BLOCK_ENTITIES.register(bus);
+
+        ModNetwork.register();
     }
 }

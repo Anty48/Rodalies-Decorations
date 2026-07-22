@@ -22,12 +22,14 @@ public class ModBlockLootTables extends BlockLootSubProvider {
     protected void generate() {
         dropSelf(ModBlocks.CERCANIAS_LOGO.get());
         dropSelf(ModBlocks.PARABRISAS_447.get());
+        dropSelf(ModBlocks.STATION_SIGNAL.get());
     }
 
     @Override
     protected Iterable<Block> getKnownBlocks() {
         return List.of(
                 ModBlocks.CERCANIAS_LOGO.get(),
-                ModBlocks.PARABRISAS_447.get());
+                ModBlocks.PARABRISAS_447.get(),
+                ModBlocks.STATION_SIGNAL.get());
     }
 }

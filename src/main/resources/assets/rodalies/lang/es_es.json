@@ -9,5 +9,8 @@
   "item.rodalies.cercanias_logo": "Logo de Cercanías",
   "block.rodalies.parabrisas_447": "Parabrisas de tren",
   "item.rodalies.parabrisas_447": "Parabrisas de tren",
+  "block.rodalies.station_signal": "Cartel de estación",
+  "item.rodalies.station_signal": "Cartel de estación",
+  "screen.rodalies.station_signal": "Nombre de la estación",
   "itemGroup.rodalies": "Rodalies"
 }
