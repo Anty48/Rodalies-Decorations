@@ -9,8 +9,10 @@
   "item.rodalies.cercanias_logo": "Cercanias Logo",
   "block.rodalies.parabrisas_447": "Train Windshield",
   "item.rodalies.parabrisas_447": "Train Windshield",
-  "block.rodalies.station_signal": "Station Sign",
-  "item.rodalies.station_signal": "Station Sign",
+  "block.rodalies.station_signal": "Rodalies Station Sign",
+  "item.rodalies.station_signal": "Rodalies Station Sign",
+  "block.rodalies.station_signal_plain": "Station Sign",
+  "item.rodalies.station_signal_plain": "Station Sign",
   "screen.rodalies.station_signal": "Station name",
   "itemGroup.rodalies": "Rodalies"
 }

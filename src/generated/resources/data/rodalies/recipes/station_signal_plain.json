@@ -7,18 +7,15 @@
     },
     "L": {
       "item": "minecraft:iron_ingot"
-    },
-    "O": {
-      "item": "minecraft:orange_dye"
     }
   },
   "pattern": [
     "CCC",
-    "OL ",
+    " L ",
     " L "
   ],
   "result": {
-    "item": "rodalies:station_signal"
+    "item": "rodalies:station_signal_plain"
   },
   "show_notification": true
 }

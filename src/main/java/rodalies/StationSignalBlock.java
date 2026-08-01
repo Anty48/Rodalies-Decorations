@@ -56,11 +56,21 @@ public class StationSignalBlock extends HorizontalDirectionalBlock implements En
     private static final VoxelShape SLAB_NS = Block.box(0, 5, 6, 16, 16, 10);
     private static final VoxelShape SLAB_EW = Block.box(6, 5, 0, 10, 16, 16);
 
-    public StationSignalBlock(Properties properties) {
+    // true = el panel lleva el logo de Rodalies a un lado -> el renderer desplaza el texto para no
+    // taparlo. false = panel sin logo -> el renderer centra el texto en todo el panel.
+    private final boolean hasLogo;
+
+    public StationSignalBlock(Properties properties, boolean hasLogo) {
         super(properties);
+        this.hasLogo = hasLogo;
         registerDefaultState(stateDefinition.any()
                 .setValue(FACING, Direction.NORTH)
                 .setValue(PART, Part.MID));
+    }
+
+    /** ¿El panel lleva el logo de Rodalies? Lo usa el renderer para decidir si centra el texto. */
+    public boolean hasLogo() {
+        return hasLogo;
     }
 
     @Override

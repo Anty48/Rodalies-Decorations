@@ -17,6 +17,7 @@ public class ModBlockEntities {
         BLOCK_ENTITIES.register("station_signal",
             () -> BlockEntityType.Builder.of(
                     StationSignalBlockEntity::new,
-                    ModBlocks.STATION_SIGNAL.get())
+                    ModBlocks.STATION_SIGNAL.get(),
+                    ModBlocks.STATION_SIGNAL_PLAIN.get())
                 .build(null));
 }

@@ -1,7 +1,9 @@
-// 1.20.1	2026-07-22T21:29:20.0958125	Recipes
+// 1.20.1	2026-08-01T21:40:52.7034106	Recipes
 a5bed5f63ff52525984cb128709157e23e7cf97b data/rodalies/advancements/recipes/building_blocks/cercanias_logo.json
 00257fc453932572eb7c1cffe798547f0ea23f87 data/rodalies/advancements/recipes/decorations/parabrisas_447.json
 63c79072f5f78fc4ba8cca73492e6da31d18de0c data/rodalies/advancements/recipes/decorations/station_signal.json
+321aac3e5a82aebc8db1cf826bde1cc415f8a879 data/rodalies/advancements/recipes/decorations/station_signal_plain.json
 27e684750072a6db4692759f55126c06df23db2e data/rodalies/recipes/cercanias_logo.json
 2104555fa46cbd4cce620fc488b3e218d98fa17f data/rodalies/recipes/parabrisas_447.json
-12e33493b364e3e9c38863dd91f0b178e09064f0 data/rodalies/recipes/station_signal.json
+0903c22b26ea5faf70cf7872f5e49918f88ef7f0 data/rodalies/recipes/station_signal.json
+1c034f658941a14ac59d9638929b29d8ca68be4e data/rodalies/recipes/station_signal_plain.json

@@ -1,4 +1,5 @@
-// 1.20.1	2026-07-22T21:29:20.0906352	Loot Tables
+// 1.20.1	2026-08-01T21:40:52.7011803	Loot Tables
 10c973a7ee0c409d83a429def0ce27536657d3ed data/rodalies/loot_tables/blocks/cercanias_logo.json
 cf93f00662b76caf2dca3732871df559f2b67bb1 data/rodalies/loot_tables/blocks/parabrisas_447.json
 bbd9c0163b282f900c604bd94eb5ff25e0d59579 data/rodalies/loot_tables/blocks/station_signal.json
+0c4915cf19e1e9aa1effabbea4164868c8e1c7ae data/rodalies/loot_tables/blocks/station_signal_plain.json

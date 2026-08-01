@@ -68,7 +68,16 @@ public class ModBlocks {
             () -> new StationSignalBlock(BlockBehaviour.Properties.of()
                 .strength(1.5f)
                 .sound(SoundType.METAL)
-                .noOcclusion()));
+                .noOcclusion(), true)); // con logo de Rodalies -> texto desplazado
+
+    // Version generica del cartel (sin logo de Rodalies): mismo modelo/comportamiento, pero el
+    // texto va centrado. Usable por quien no quiera la marca Rodalies.
+    public static final RegistryObject<Block> STATION_SIGNAL_PLAIN =
+        BLOCKS.register("station_signal_plain",
+            () -> new StationSignalBlock(BlockBehaviour.Properties.of()
+                .strength(1.5f)
+                .sound(SoundType.METAL)
+                .noOcclusion(), false)); // sin logo -> texto centrado
 
     // --- Registro de items ---
 
@@ -98,6 +107,10 @@ public class ModBlocks {
     public static final RegistryObject<Item> STATION_SIGNAL_ITEM =
         ITEMS.register("station_signal",
             () -> new BlockItem(STATION_SIGNAL.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> STATION_SIGNAL_PLAIN_ITEM =
+        ITEMS.register("station_signal_plain",
+            () -> new BlockItem(STATION_SIGNAL_PLAIN.get(), new Item.Properties()));
     // --- Creative Tab ---
 
     public static final DeferredRegister<CreativeModeTab> CREATIVE_TABS =
@@ -114,6 +127,7 @@ public class ModBlocks {
                 output.accept(CERCANIAS_LOGO_ITEM.get());
                 output.accept(PARABRISAS_447_ITEM.get());
                 output.accept(STATION_SIGNAL_ITEM.get());
+                output.accept(STATION_SIGNAL_PLAIN_ITEM.get());
             })
             .build());
 }

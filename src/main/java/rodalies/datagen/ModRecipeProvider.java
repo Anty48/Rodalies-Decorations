@@ -46,11 +46,27 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_black_stained_glass", has(Blocks.BLACK_STAINED_GLASS))
                 .save(writer);
 
-        // Cartel de estacion: banda de hormigon gris (C) arriba sobre un poste de hierro (L).
+        // Cartel de estacion de Rodalies: como el generico pero con un tinte naranja (O) que marca
+        // la version de marca Rodalies.
+        // CCC
+        // OL
+        //  L    -> 1 cartel de Rodalies
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModBlocks.STATION_SIGNAL.get(), 1)
+                .pattern("CCC")
+                .pattern("OL ")
+                .pattern(" L ")
+                .define('C', Blocks.GRAY_CONCRETE)
+                .define('L', Items.IRON_INGOT)
+                .define('O', Items.ORANGE_DYE)
+                .unlockedBy("has_gray_concrete", has(Blocks.GRAY_CONCRETE))
+                .save(writer);
+
+        // Cartel de estacion generico (sin logo): banda de hormigon gris (C) arriba sobre un poste
+        // de hierro (L). Sin tinte -> version neutra.
         // CCC
         //  L
-        //  L    -> 1 cartel
-        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModBlocks.STATION_SIGNAL.get(), 1)
+        //  L    -> 1 cartel generico
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModBlocks.STATION_SIGNAL_PLAIN.get(), 1)
                 .pattern("CCC")
                 .pattern(" L ")
                 .pattern(" L ")
