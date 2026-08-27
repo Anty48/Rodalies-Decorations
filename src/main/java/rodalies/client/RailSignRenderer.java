@@ -41,16 +41,16 @@ public class RailSignRenderer implements BlockEntityRenderer<RailSignBlockEntity
     private static final float VIA_MAX_H = 6.5f; // alto maximo del texto (~70% del panel de 9px)
 
     // --- Rombos de velocidad (Speed_limit y LVT): cara frontal norte, texto horizontal centrado ---
-    // Base en el poste (x=8) y luego +1px a la derecha del observador (-X) y +1px abajo (-Y).
-    private static final float DIAMOND_CX = 7f;
+    // Base en el poste (x=8) con medio pixel a la derecha del observador (-X) y 1px abajo (-Y).
+    private static final float DIAMOND_CX = 7.5f;
     private static final float DIAMOND_CY = 25.364f;
     private static final float DIAMOND_FACE_Z = 6f;  // cara frontal (norte)
     private static final float DIAMOND_MAX_W = 11f;
     private static final float DIAMOND_MAX_H = 8f;
     private static final float DIAMOND_TEXT_ROT = 0f; // 45/-45 si se quisiera el texto inclinado
 
-    // --- Cartel normal (cuadrado blanco, hasta 2 lineas): base en el poste + 1px derecha/abajo ---
-    private static final float NORMAL_CX = 7f;
+    // --- Cartel normal (cuadrado blanco, hasta 2 lineas): base en el poste + 0.5px derecha / 1px abajo ---
+    private static final float NORMAL_CX = 7.5f;
     private static final float NORMAL_CY = 24.5f;
     private static final float NORMAL_FACE_Z = 6f;
     private static final float NORMAL_MAX_W = 10.5f;
