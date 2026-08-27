@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:gray_concrete"
+    },
+    "L": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "pattern": [
+    "C",
+    "L",
+    "L"
+  ],
+  "result": {
+    "count": 2,
+    "item": "rodalies:platform_number_signal"
+  },
+  "show_notification": true
+}

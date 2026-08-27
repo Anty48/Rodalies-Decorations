@@ -79,6 +79,38 @@ public class ModBlocks {
                 .sound(SoundType.METAL)
                 .noOcclusion(), false)); // sin logo -> texto centrado
 
+    // Señales ferroviarias (poste + señal que sobresale de la celda). Comparten RailSignBlock y solo
+    // cambian por su RailSignType (cuanto texto llevan y como se dibuja). noOcclusion porque casi
+    // toda la celda es aire y el modelo sobresale hacia arriba.
+    private static BlockBehaviour.Properties signProps() {
+        return BlockBehaviour.Properties.of().strength(1.5f).sound(SoundType.METAL).noOcclusion();
+    }
+
+    // Cartel de numero de via: hasta 3 caracteres blancos, visible por ambos lados.
+    public static final RegistryObject<Block> PLATFORM_NUMBER_SIGNAL =
+        BLOCKS.register("platform_number_signal",
+            () -> new RailSignBlock(signProps(), RailSignType.PLATFORM_NUMBER));
+
+    // Señal de velocidad permanente (rombo blanco): hasta 3 digitos negros, un lado.
+    public static final RegistryObject<Block> SPEED_LIMIT =
+        BLOCKS.register("speed_limit",
+            () -> new RailSignBlock(signProps(), RailSignType.SPEED_LIMIT));
+
+    // LVT (rombo amarillo temporal): hasta 3 digitos negros, un lado.
+    public static final RegistryObject<Block> LVT =
+        BLOCKS.register("lvt",
+            () -> new RailSignBlock(signProps(), RailSignType.LVT));
+
+    // Fin de LVT (cuadrado amarillo): sin texto.
+    public static final RegistryObject<Block> LVT_END =
+        BLOCKS.register("lvt_end",
+            () -> new RailSignBlock(signProps(), RailSignType.LVT_END));
+
+    // Cartel de señales (cuadrado blanco): hasta 2 lineas de texto negro que se adaptan, un lado.
+    public static final RegistryObject<Block> NORMAL_SIGNAL =
+        BLOCKS.register("normal_signal",
+            () -> new RailSignBlock(signProps(), RailSignType.NORMAL));
+
     // --- Registro de items ---
 
     public static final DeferredRegister<Item> ITEMS =
@@ -111,6 +143,27 @@ public class ModBlocks {
     public static final RegistryObject<Item> STATION_SIGNAL_PLAIN_ITEM =
         ITEMS.register("station_signal_plain",
             () -> new BlockItem(STATION_SIGNAL_PLAIN.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> PLATFORM_NUMBER_SIGNAL_ITEM =
+        ITEMS.register("platform_number_signal",
+            () -> new BlockItem(PLATFORM_NUMBER_SIGNAL.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> SPEED_LIMIT_ITEM =
+        ITEMS.register("speed_limit",
+            () -> new BlockItem(SPEED_LIMIT.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> LVT_ITEM =
+        ITEMS.register("lvt",
+            () -> new BlockItem(LVT.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> LVT_END_ITEM =
+        ITEMS.register("lvt_end",
+            () -> new BlockItem(LVT_END.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> NORMAL_SIGNAL_ITEM =
+        ITEMS.register("normal_signal",
+            () -> new BlockItem(NORMAL_SIGNAL.get(), new Item.Properties()));
+
     // --- Creative Tab ---
 
     public static final DeferredRegister<CreativeModeTab> CREATIVE_TABS =
@@ -128,6 +181,11 @@ public class ModBlocks {
                 output.accept(PARABRISAS_447_ITEM.get());
                 output.accept(STATION_SIGNAL_ITEM.get());
                 output.accept(STATION_SIGNAL_PLAIN_ITEM.get());
+                output.accept(PLATFORM_NUMBER_SIGNAL_ITEM.get());
+                output.accept(SPEED_LIMIT_ITEM.get());
+                output.accept(LVT_ITEM.get());
+                output.accept(LVT_END_ITEM.get());
+                output.accept(NORMAL_SIGNAL_ITEM.get());
             })
             .build());
 }

@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "rodalies:block/lvt_end" },
+    "facing=east":  { "model": "rodalies:block/lvt_end", "y": 90 },
+    "facing=south": { "model": "rodalies:block/lvt_end", "y": 180 },
+    "facing=west":  { "model": "rodalies:block/lvt_end", "y": 270 }
+  }
+}

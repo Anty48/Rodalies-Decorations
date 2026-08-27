@@ -20,4 +20,15 @@ public class ModBlockEntities {
                     ModBlocks.STATION_SIGNAL.get(),
                     ModBlocks.STATION_SIGNAL_PLAIN.get())
                 .build(null));
+
+    // BlockEntity compartido por las señales ferroviarias con texto editable (LVT_END no lleva).
+    public static final RegistryObject<BlockEntityType<RailSignBlockEntity>> RAIL_SIGN_BE =
+        BLOCK_ENTITIES.register("rail_sign",
+            () -> BlockEntityType.Builder.of(
+                    RailSignBlockEntity::new,
+                    ModBlocks.PLATFORM_NUMBER_SIGNAL.get(),
+                    ModBlocks.SPEED_LIMIT.get(),
+                    ModBlocks.LVT.get(),
+                    ModBlocks.NORMAL_SIGNAL.get())
+                .build(null));
 }

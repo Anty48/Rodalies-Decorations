@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "rodalies:block/speed_limit" },
+    "facing=east":  { "model": "rodalies:block/speed_limit", "y": 90 },
+    "facing=south": { "model": "rodalies:block/speed_limit", "y": 180 },
+    "facing=west":  { "model": "rodalies:block/speed_limit", "y": 270 }
+  }
+}

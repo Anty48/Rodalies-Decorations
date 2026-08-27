@@ -24,6 +24,11 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(ModBlocks.PARABRISAS_447.get());
         dropSelf(ModBlocks.STATION_SIGNAL.get());
         dropSelf(ModBlocks.STATION_SIGNAL_PLAIN.get());
+        dropSelf(ModBlocks.PLATFORM_NUMBER_SIGNAL.get());
+        dropSelf(ModBlocks.SPEED_LIMIT.get());
+        dropSelf(ModBlocks.LVT.get());
+        dropSelf(ModBlocks.LVT_END.get());
+        dropSelf(ModBlocks.NORMAL_SIGNAL.get());
     }
 
     @Override
@@ -32,6 +37,11 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                 ModBlocks.CERCANIAS_LOGO.get(),
                 ModBlocks.PARABRISAS_447.get(),
                 ModBlocks.STATION_SIGNAL.get(),
-                ModBlocks.STATION_SIGNAL_PLAIN.get());
+                ModBlocks.STATION_SIGNAL_PLAIN.get(),
+                ModBlocks.PLATFORM_NUMBER_SIGNAL.get(),
+                ModBlocks.SPEED_LIMIT.get(),
+                ModBlocks.LVT.get(),
+                ModBlocks.LVT_END.get(),
+                ModBlocks.NORMAL_SIGNAL.get());
     }
 }

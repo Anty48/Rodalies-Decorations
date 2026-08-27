@@ -1,6 +1,7 @@
 package rodalies.client;
 
 import net.minecraft.client.Minecraft;
+import rodalies.RailSignBlockEntity;
 import rodalies.StationSignalBlockEntity;
 
 /**
@@ -10,5 +11,9 @@ public class ClientHooks {
 
     public static void openStationSignalScreen(StationSignalBlockEntity sign) {
         Minecraft.getInstance().setScreen(new StationSignalEditScreen(sign));
+    }
+
+    public static void openRailSignScreen(RailSignBlockEntity sign) {
+        Minecraft.getInstance().setScreen(new RailSignEditScreen(sign));
     }
 }

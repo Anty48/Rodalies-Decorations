@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "item": "minecraft:yellow_dye"
+    },
+    "L": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "pattern": [
+    "LDL",
+    " L ",
+    " L "
+  ],
+  "result": {
+    "item": "rodalies:lvt_end"
+  },
+  "show_notification": true
+}

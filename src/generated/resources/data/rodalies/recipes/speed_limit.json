@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "item": "minecraft:white_dye"
+    },
+    "L": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "pattern": [
+    " D ",
+    "LLL",
+    " L "
+  ],
+  "result": {
+    "item": "rodalies:speed_limit"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "item": "minecraft:white_dye"
+    },
+    "L": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "pattern": [
+    "LDL",
+    " L ",
+    " L "
+  ],
+  "result": {
+    "item": "rodalies:normal_signal"
+  },
+  "show_notification": true
+}

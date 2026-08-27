@@ -1,0 +1,191 @@
+package rodalies.client;
+
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.renderer.LightTexture;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.core.Direction;
+import org.joml.Matrix4f;
+import rodalies.RailSignBlock;
+import rodalies.RailSignBlockEntity;
+import rodalies.RailSignType;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Dibuja el texto de las señales ferroviarias sobre su panel. Cada tipo de señal tiene su propia
+ * geometria (posicion del panel, cara(s) donde va el texto, color). Todas las medidas de abajo van
+ * en pixeles del modelo (1 bloque = 16 px). Si al probar en runClient el texto queda descolocado o
+ * de mal tamaño, ajusta las constantes del bloque correspondiente.
+ */
+public class RailSignRenderer implements BlockEntityRenderer<RailSignBlockEntity> {
+
+    private static final int LIGHT = LightTexture.FULL_BRIGHT; // texto siempre legible (retroiluminado)
+    private static final float Z_OFFSET = 0.02f;               // separa el texto del panel (evita z-fighting)
+
+    private static final int WHITE = 0xFFFFFFFF;
+    private static final int BLACK = 0xFF000000;
+
+    // --- Cartel de numero de via (panel colgado que mira a ±X, texto por ambos lados) ---
+    private static final float VIA_CY = 20.5f;   // centro vertical del panel
+    private static final float VIA_CZ = 13.5f;   // centro (eje Z) del panel colgante
+    private static final float VIA_FACE_E = 9f;  // cara este del panel
+    private static final float VIA_FACE_W = 7f;  // cara oeste del panel
+    private static final float VIA_MAX_W = 8f;   // ancho maximo del texto (~90% del panel de 9px)
+    private static final float VIA_MAX_H = 6.5f; // alto maximo del texto (~70% del panel de 9px)
+
+    // --- Rombos de velocidad (Speed_limit y LVT): cara frontal norte, texto horizontal centrado ---
+    private static final float DIAMOND_CX = 7.914f;  // centro del rombo (calculado del giro de 45º)
+    private static final float DIAMOND_CY = 26.364f;
+    private static final float DIAMOND_FACE_Z = 6f;  // cara frontal (norte)
+    private static final float DIAMOND_MAX_W = 11f;
+    private static final float DIAMOND_MAX_H = 8f;
+    // El rombo es un cuadrado girado 45º SOBRE el eje de vision (Z), asi que su cara sigue mirando al
+    // norte y el texto horizontal ya se ve recto. Si lo quisieras inclinado, pon aqui 45 o -45.
+    private static final float DIAMOND_TEXT_ROT = 0f;
+
+    // --- Cartel normal (cuadrado blanco, hasta 2 lineas): cara frontal norte ---
+    private static final float NORMAL_CX = 8f;
+    private static final float NORMAL_CY = 25.5f;
+    private static final float NORMAL_FACE_Z = 6f;
+    private static final float NORMAL_MAX_W = 10.5f;
+    private static final float NORMAL_MAX_H = 9f;
+
+    private final Font font;
+
+    public RailSignRenderer(BlockEntityRendererProvider.Context ctx) {
+        this.font = ctx.getFont();
+    }
+
+    @Override
+    public void render(RailSignBlockEntity be, float partialTick, PoseStack pose,
+                       MultiBufferSource buffer, int packedLight, int packedOverlay) {
+        String text = be.getText();
+        if (text == null || text.isEmpty()) {
+            return;
+        }
+        RailSignType type = be.getSignType();
+        Direction facing = be.getBlockState().getValue(RailSignBlock.FACING);
+
+        pose.pushPose();
+        // Orientar como la blockstate (north=0, east=90, south=180, west=270).
+        pose.translate(0.5, 0.5, 0.5);
+        pose.mulPose(Axis.YP.rotationDegrees(-blockstateY(facing)));
+        pose.translate(-0.5, -0.5, -0.5);
+
+        switch (type) {
+            case PLATFORM_NUMBER -> {
+                List<String> lines = List.of(firstLine(text));
+                drawOnXFace(pose, buffer, lines, VIA_CY, VIA_CZ, VIA_FACE_E, true, WHITE, VIA_MAX_W, VIA_MAX_H);
+                drawOnXFace(pose, buffer, lines, VIA_CY, VIA_CZ, VIA_FACE_W, false, WHITE, VIA_MAX_W, VIA_MAX_H);
+            }
+            case SPEED_LIMIT, LVT -> {
+                List<String> lines = List.of(firstLine(text));
+                drawOnNorthFace(pose, buffer, lines, DIAMOND_CX, DIAMOND_CY, DIAMOND_FACE_Z, BLACK,
+                        DIAMOND_MAX_W, DIAMOND_MAX_H, DIAMOND_TEXT_ROT);
+            }
+            case NORMAL -> {
+                List<String> lines = splitLines(text, 2);
+                drawOnNorthFace(pose, buffer, lines, NORMAL_CX, NORMAL_CY, NORMAL_FACE_Z, BLACK,
+                        NORMAL_MAX_W, NORMAL_MAX_H, 0f);
+            }
+            default -> { /* LVT_END: sin texto */ }
+        }
+
+        pose.popPose();
+    }
+
+    /** Texto en la cara frontal (norte, -Z). El texto horizontal se ve recto de frente. */
+    private void drawOnNorthFace(PoseStack pose, MultiBufferSource buffer, List<String> lines,
+                                 float cx, float cy, float faceZ, int color,
+                                 float maxWpx, float maxHpx, float textRot) {
+        pose.pushPose();
+        pose.translate(cx / 16f, cy / 16f, faceZ / 16f);
+        pose.mulPose(Axis.YP.rotationDegrees(180f)); // la fuente mira a +Z; la giramos para mirar al norte
+        pose.translate(0, 0, Z_OFFSET);
+        if (textRot != 0f) {
+            pose.mulPose(Axis.ZP.rotationDegrees(textRot));
+        }
+        drawLinesCentered(pose, buffer, lines, color, maxWpx, maxHpx);
+        pose.popPose();
+    }
+
+    /** Texto en una cara lateral (±X): panel del cartel de via, visible por ambos lados. */
+    private void drawOnXFace(PoseStack pose, MultiBufferSource buffer, List<String> lines,
+                             float cy, float cz, float faceX, boolean east, int color,
+                             float maxWpx, float maxHpx) {
+        pose.pushPose();
+        pose.translate(faceX / 16f, cy / 16f, cz / 16f);
+        // La fuente mira a +Z; girar para que mire a +X (este) o -X (oeste).
+        pose.mulPose(Axis.YP.rotationDegrees(east ? 90f : -90f));
+        pose.translate(0, 0, Z_OFFSET);
+        drawLinesCentered(pose, buffer, lines, color, maxWpx, maxHpx);
+        pose.popPose();
+    }
+
+    /**
+     * Dibuja las lineas centradas (horizontal y vertical) escalando para que el bloque de texto
+     * quepa en maxWpx × maxHpx. Con pocas letras el texto sale grande (limitado por el alto).
+     */
+    private void drawLinesCentered(PoseStack pose, MultiBufferSource buffer, List<String> lines,
+                                   int color, float maxWpx, float maxHpx) {
+        int n = lines.size();
+        if (n == 0) {
+            return;
+        }
+        float lh = font.lineHeight;
+        float widest = 1f;
+        for (String l : lines) {
+            widest = Math.max(widest, font.width(l));
+        }
+        float totalH = n * lh;
+        float maxW = maxWpx / 16f;
+        float maxH = maxHpx / 16f;
+        float scale = Math.min(maxW / widest, maxH / totalH);
+
+        pose.pushPose();
+        // -scale en Y: la fuente crece hacia abajo; en el mundo +Y es arriba.
+        pose.scale(scale, -scale, scale);
+        Matrix4f matrix = pose.last().pose();
+        float yStart = -totalH / 2f;
+        for (int i = 0; i < n; i++) {
+            String l = lines.get(i);
+            float x = -font.width(l) / 2f;
+            float y = yStart + i * lh;
+            font.drawInBatch(l, x, y, color, false, matrix, buffer,
+                    Font.DisplayMode.POLYGON_OFFSET, 0, LIGHT);
+        }
+        pose.popPose();
+    }
+
+    private static String firstLine(String text) {
+        int nl = text.indexOf('\n');
+        return nl >= 0 ? text.substring(0, nl) : text;
+    }
+
+    /** Parte el texto en como mucho 'max' lineas por '\n', descartando lineas vacias al final. */
+    private static List<String> splitLines(String text, int max) {
+        String[] raw = text.split("\n", -1);
+        List<String> out = new ArrayList<>();
+        for (int i = 0; i < raw.length && out.size() < max; i++) {
+            out.add(raw[i]);
+        }
+        while (out.size() > 1 && out.get(out.size() - 1).isEmpty()) {
+            out.remove(out.size() - 1);
+        }
+        return out;
+    }
+
+    private static float blockstateY(Direction facing) {
+        return switch (facing) {
+            case EAST -> 90f;
+            case SOUTH -> 180f;
+            case WEST -> 270f;
+            default -> 0f; // NORTH
+        };
+    }
+}

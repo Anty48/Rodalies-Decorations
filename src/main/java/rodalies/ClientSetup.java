@@ -7,6 +7,7 @@ import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import rodalies.client.RailSignRenderer;
 import rodalies.client.StationSignalRenderer;
 
 /**
@@ -29,5 +30,7 @@ public class ClientSetup {
     public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
         // Renderer que dibuja el texto grande del cartel de estacion.
         event.registerBlockEntityRenderer(ModBlockEntities.STATION_SIGNAL_BE.get(), StationSignalRenderer::new);
+        // Renderer del texto de las señales ferroviarias (via, velocidad, LVT, cartel).
+        event.registerBlockEntityRenderer(ModBlockEntities.RAIL_SIGN_BE.get(), RailSignRenderer::new);
     }
 }

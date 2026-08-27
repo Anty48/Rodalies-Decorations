@@ -13,6 +13,17 @@
   "item.rodalies.station_signal": "Señal de estación de Rodalies",
   "block.rodalies.station_signal_plain": "Señal de estación",
   "item.rodalies.station_signal_plain": "Señal de estación",
+  "block.rodalies.platform_number_signal": "Cartel de número de vía",
+  "item.rodalies.platform_number_signal": "Cartel de número de vía",
+  "block.rodalies.speed_limit": "Señal de velocidad",
+  "item.rodalies.speed_limit": "Señal de velocidad",
+  "block.rodalies.lvt": "Señal LVT (temporal)",
+  "item.rodalies.lvt": "Señal LVT (temporal)",
+  "block.rodalies.lvt_end": "Fin de LVT",
+  "item.rodalies.lvt_end": "Fin de LVT",
+  "block.rodalies.normal_signal": "Cartel de señales",
+  "item.rodalies.normal_signal": "Cartel de señales",
   "screen.rodalies.station_signal": "Nombre de la estación",
+  "screen.rodalies.rail_sign": "Texto de la señal",
   "itemGroup.rodalies": "Rodalies"
 }

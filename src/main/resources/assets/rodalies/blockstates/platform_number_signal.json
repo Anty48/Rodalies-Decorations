@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "rodalies:block/platform_number_signal" },
+    "facing=east":  { "model": "rodalies:block/platform_number_signal", "y": 90 },
+    "facing=south": { "model": "rodalies:block/platform_number_signal", "y": 180 },
+    "facing=west":  { "model": "rodalies:block/platform_number_signal", "y": 270 }
+  }
+}

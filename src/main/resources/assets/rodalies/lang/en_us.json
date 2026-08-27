@@ -13,6 +13,17 @@
   "item.rodalies.station_signal": "Rodalies Station Sign",
   "block.rodalies.station_signal_plain": "Station Sign",
   "item.rodalies.station_signal_plain": "Station Sign",
+  "block.rodalies.platform_number_signal": "Platform Number Sign",
+  "item.rodalies.platform_number_signal": "Platform Number Sign",
+  "block.rodalies.speed_limit": "Speed Limit Sign",
+  "item.rodalies.speed_limit": "Speed Limit Sign",
+  "block.rodalies.lvt": "Temporary Speed Restriction (LVT)",
+  "item.rodalies.lvt": "Temporary Speed Restriction (LVT)",
+  "block.rodalies.lvt_end": "End of Speed Restriction (LVT)",
+  "item.rodalies.lvt_end": "End of Speed Restriction (LVT)",
+  "block.rodalies.normal_signal": "Signal Board",
+  "item.rodalies.normal_signal": "Signal Board",
   "screen.rodalies.station_signal": "Station name",
+  "screen.rodalies.rail_sign": "Sign text",
   "itemGroup.rodalies": "Rodalies"
 }
