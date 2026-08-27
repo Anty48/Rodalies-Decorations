@@ -59,7 +59,7 @@ public class RailSignBlock extends HorizontalDirectionalBlock implements EntityB
     private static final VoxelShape TOP_DIAMOND = Block.box(0, 1, 5, 16, 14, 8);   // rombos (velocidad/LVT)
     private static final VoxelShape TOP_NORMAL = Block.box(1, 2, 5, 15, 16, 8);    // cuadrado (cartel)
     private static final VoxelShape TOP_LVT_END = Block.box(1, 2, 5, 15, 15, 8);   // cuadrado (fin LVT)
-    private static final VoxelShape TOP_PLATFORM = Block.box(7, 0, 7, 9, 11, 16);  // panel colgante de via
+    private static final VoxelShape TOP_PLATFORM = Block.box(7, 0, 7, 9, 16, 16);  // poste + panel colgante de via
 
     private final RailSignType type;
 

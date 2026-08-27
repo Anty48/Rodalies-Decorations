@@ -10,7 +10,7 @@
 		{
 			"name": "poste",
 			"from": [7, -16, 7],
-			"to": [9, 26, 9],
+			"to": [9, 32, 9],
 			"rotation": {"angle": 0, "axis": "y", "origin": [7, 0, 7]},
 			"faces": {
 				"north": {"uv": [0, 0, 2, 16], "texture": "#2"},
@@ -23,9 +23,9 @@
 		},
 		{
 			"name": "poste lateral",
-			"from": [7, 25, 9],
-			"to": [9, 26, 18],
-			"rotation": {"angle": 0, "axis": "y", "origin": [7, 24, 9]},
+			"from": [7, 31, 9],
+			"to": [9, 32, 18],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7, 30, 9]},
 			"faces": {
 				"north": {"uv": [0, 0, 2, 1], "texture": "#2"},
 				"east": {"uv": [1, 0, 10, 1], "texture": "#2"},
@@ -36,9 +36,9 @@
 			}
 		},
 		{
-			"from": [7, 16, 9],
-			"to": [9, 25, 18],
-			"rotation": {"angle": 0, "axis": "y", "origin": [7, 23, 9]},
+			"from": [7, 22, 9],
+			"to": [9, 31, 18],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7, 29, 9]},
 			"faces": {
 				"north": {"uv": [0, 0, 2, 9], "texture": "#0"},
 				"east": {"uv": [0, 0, 9, 9], "texture": "#0"},

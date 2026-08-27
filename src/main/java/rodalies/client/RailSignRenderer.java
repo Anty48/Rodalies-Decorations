@@ -33,7 +33,7 @@ public class RailSignRenderer implements BlockEntityRenderer<RailSignBlockEntity
     private static final int VIA_WHITE = 0xFFD8D8D8;
 
     // --- Cartel de numero de via (panel colgado que mira a ±X, texto por ambos lados) ---
-    private static final float VIA_CY = 20.5f;   // centro vertical del panel
+    private static final float VIA_CY = 26.5f;   // centro vertical del panel (panel en y22..31)
     private static final float VIA_CZ = 13.5f;   // centro (eje Z) del panel colgante
     private static final float VIA_FACE_E = 9f;  // cara este del panel
     private static final float VIA_FACE_W = 7f;  // cara oeste del panel
@@ -41,18 +41,17 @@ public class RailSignRenderer implements BlockEntityRenderer<RailSignBlockEntity
     private static final float VIA_MAX_H = 6.5f; // alto maximo del texto (~70% del panel de 9px)
 
     // --- Rombos de velocidad (Speed_limit y LVT): cara frontal norte, texto horizontal centrado ---
-    // Centrado en el poste (x=8). El rombo es un cuadrado girado 45º sobre el eje de vision, asi que
-    // su cara sigue mirando al norte y el texto horizontal ya se ve recto.
-    private static final float DIAMOND_CX = 8f;
-    private static final float DIAMOND_CY = 26.364f;
+    // Base en el poste (x=8) y luego +1px a la derecha del observador (-X) y +1px abajo (-Y).
+    private static final float DIAMOND_CX = 7f;
+    private static final float DIAMOND_CY = 25.364f;
     private static final float DIAMOND_FACE_Z = 6f;  // cara frontal (norte)
     private static final float DIAMOND_MAX_W = 11f;
     private static final float DIAMOND_MAX_H = 8f;
     private static final float DIAMOND_TEXT_ROT = 0f; // 45/-45 si se quisiera el texto inclinado
 
-    // --- Cartel normal (cuadrado blanco, hasta 2 lineas): cara frontal norte, centrado en el poste ---
-    private static final float NORMAL_CX = 8f;
-    private static final float NORMAL_CY = 25.5f;
+    // --- Cartel normal (cuadrado blanco, hasta 2 lineas): base en el poste + 1px derecha/abajo ---
+    private static final float NORMAL_CX = 7f;
+    private static final float NORMAL_CY = 24.5f;
     private static final float NORMAL_FACE_Z = 6f;
     private static final float NORMAL_MAX_W = 10.5f;
     private static final float NORMAL_MAX_H = 9f;
