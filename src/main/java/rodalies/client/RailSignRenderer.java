@@ -19,16 +19,18 @@ import java.util.List;
 /**
  * Dibuja el texto de las señales ferroviarias sobre su panel. Cada tipo de señal tiene su propia
  * geometria (posicion del panel, cara(s) donde va el texto, color). Todas las medidas de abajo van
- * en pixeles del modelo (1 bloque = 16 px). Si al probar en runClient el texto queda descolocado o
- * de mal tamaño, ajusta las constantes del bloque correspondiente.
+ * en pixeles del modelo (1 bloque = 16 px), relativas a la celda MIDDLE (la que dibuja el modelo).
+ * Si al probar en runClient el texto queda descolocado o de mal tamaño, ajusta las constantes del
+ * bloque correspondiente. El poste esta centrado en x=8, z=8: sirve de referencia para centrar.
  */
 public class RailSignRenderer implements BlockEntityRenderer<RailSignBlockEntity> {
 
-    private static final int LIGHT = LightTexture.FULL_BRIGHT; // texto siempre legible (retroiluminado)
-    private static final float Z_OFFSET = 0.02f;               // separa el texto del panel (evita z-fighting)
+    private static final int FULL_BRIGHT = LightTexture.FULL_BRIGHT; // texto siempre legible
+    private static final float Z_OFFSET = 0.02f;                     // separa el texto del panel (z-fighting)
 
-    private static final int WHITE = 0xFFFFFFFF;
     private static final int BLACK = 0xFF000000;
+    // Blanco algo apagado para el numero de via: el blanco puro a plena luz "brillaba" demasiado.
+    private static final int VIA_WHITE = 0xFFD8D8D8;
 
     // --- Cartel de numero de via (panel colgado que mira a ±X, texto por ambos lados) ---
     private static final float VIA_CY = 20.5f;   // centro vertical del panel
@@ -39,16 +41,16 @@ public class RailSignRenderer implements BlockEntityRenderer<RailSignBlockEntity
     private static final float VIA_MAX_H = 6.5f; // alto maximo del texto (~70% del panel de 9px)
 
     // --- Rombos de velocidad (Speed_limit y LVT): cara frontal norte, texto horizontal centrado ---
-    private static final float DIAMOND_CX = 7.914f;  // centro del rombo (calculado del giro de 45º)
+    // Centrado en el poste (x=8). El rombo es un cuadrado girado 45º sobre el eje de vision, asi que
+    // su cara sigue mirando al norte y el texto horizontal ya se ve recto.
+    private static final float DIAMOND_CX = 8f;
     private static final float DIAMOND_CY = 26.364f;
     private static final float DIAMOND_FACE_Z = 6f;  // cara frontal (norte)
     private static final float DIAMOND_MAX_W = 11f;
     private static final float DIAMOND_MAX_H = 8f;
-    // El rombo es un cuadrado girado 45º SOBRE el eje de vision (Z), asi que su cara sigue mirando al
-    // norte y el texto horizontal ya se ve recto. Si lo quisieras inclinado, pon aqui 45 o -45.
-    private static final float DIAMOND_TEXT_ROT = 0f;
+    private static final float DIAMOND_TEXT_ROT = 0f; // 45/-45 si se quisiera el texto inclinado
 
-    // --- Cartel normal (cuadrado blanco, hasta 2 lineas): cara frontal norte ---
+    // --- Cartel normal (cuadrado blanco, hasta 2 lineas): cara frontal norte, centrado en el poste ---
     private static final float NORMAL_CX = 8f;
     private static final float NORMAL_CY = 25.5f;
     private static final float NORMAL_FACE_Z = 6f;
@@ -79,18 +81,19 @@ public class RailSignRenderer implements BlockEntityRenderer<RailSignBlockEntity
 
         switch (type) {
             case PLATFORM_NUMBER -> {
+                // Numero de via: blanco apagado y con luz natural (no emisivo) para que no "brille".
                 List<String> lines = List.of(firstLine(text));
-                drawOnXFace(pose, buffer, lines, VIA_CY, VIA_CZ, VIA_FACE_E, true, WHITE, VIA_MAX_W, VIA_MAX_H);
-                drawOnXFace(pose, buffer, lines, VIA_CY, VIA_CZ, VIA_FACE_W, false, WHITE, VIA_MAX_W, VIA_MAX_H);
+                drawOnXFace(pose, buffer, lines, VIA_CY, VIA_CZ, VIA_FACE_E, true, VIA_WHITE, packedLight, VIA_MAX_W, VIA_MAX_H);
+                drawOnXFace(pose, buffer, lines, VIA_CY, VIA_CZ, VIA_FACE_W, false, VIA_WHITE, packedLight, VIA_MAX_W, VIA_MAX_H);
             }
             case SPEED_LIMIT, LVT -> {
                 List<String> lines = List.of(firstLine(text));
-                drawOnNorthFace(pose, buffer, lines, DIAMOND_CX, DIAMOND_CY, DIAMOND_FACE_Z, BLACK,
+                drawOnNorthFace(pose, buffer, lines, DIAMOND_CX, DIAMOND_CY, DIAMOND_FACE_Z, BLACK, FULL_BRIGHT,
                         DIAMOND_MAX_W, DIAMOND_MAX_H, DIAMOND_TEXT_ROT);
             }
             case NORMAL -> {
                 List<String> lines = splitLines(text, 2);
-                drawOnNorthFace(pose, buffer, lines, NORMAL_CX, NORMAL_CY, NORMAL_FACE_Z, BLACK,
+                drawOnNorthFace(pose, buffer, lines, NORMAL_CX, NORMAL_CY, NORMAL_FACE_Z, BLACK, FULL_BRIGHT,
                         NORMAL_MAX_W, NORMAL_MAX_H, 0f);
             }
             default -> { /* LVT_END: sin texto */ }
@@ -101,7 +104,7 @@ public class RailSignRenderer implements BlockEntityRenderer<RailSignBlockEntity
 
     /** Texto en la cara frontal (norte, -Z). El texto horizontal se ve recto de frente. */
     private void drawOnNorthFace(PoseStack pose, MultiBufferSource buffer, List<String> lines,
-                                 float cx, float cy, float faceZ, int color,
+                                 float cx, float cy, float faceZ, int color, int light,
                                  float maxWpx, float maxHpx, float textRot) {
         pose.pushPose();
         pose.translate(cx / 16f, cy / 16f, faceZ / 16f);
@@ -110,20 +113,20 @@ public class RailSignRenderer implements BlockEntityRenderer<RailSignBlockEntity
         if (textRot != 0f) {
             pose.mulPose(Axis.ZP.rotationDegrees(textRot));
         }
-        drawLinesCentered(pose, buffer, lines, color, maxWpx, maxHpx);
+        drawLinesCentered(pose, buffer, lines, color, light, maxWpx, maxHpx);
         pose.popPose();
     }
 
     /** Texto en una cara lateral (±X): panel del cartel de via, visible por ambos lados. */
     private void drawOnXFace(PoseStack pose, MultiBufferSource buffer, List<String> lines,
-                             float cy, float cz, float faceX, boolean east, int color,
+                             float cy, float cz, float faceX, boolean east, int color, int light,
                              float maxWpx, float maxHpx) {
         pose.pushPose();
         pose.translate(faceX / 16f, cy / 16f, cz / 16f);
         // La fuente mira a +Z; girar para que mire a +X (este) o -X (oeste).
         pose.mulPose(Axis.YP.rotationDegrees(east ? 90f : -90f));
         pose.translate(0, 0, Z_OFFSET);
-        drawLinesCentered(pose, buffer, lines, color, maxWpx, maxHpx);
+        drawLinesCentered(pose, buffer, lines, color, light, maxWpx, maxHpx);
         pose.popPose();
     }
 
@@ -132,7 +135,7 @@ public class RailSignRenderer implements BlockEntityRenderer<RailSignBlockEntity
      * quepa en maxWpx × maxHpx. Con pocas letras el texto sale grande (limitado por el alto).
      */
     private void drawLinesCentered(PoseStack pose, MultiBufferSource buffer, List<String> lines,
-                                   int color, float maxWpx, float maxHpx) {
+                                   int color, int light, float maxWpx, float maxHpx) {
         int n = lines.size();
         if (n == 0) {
             return;
@@ -157,7 +160,7 @@ public class RailSignRenderer implements BlockEntityRenderer<RailSignBlockEntity
             float x = -font.width(l) / 2f;
             float y = yStart + i * lh;
             font.drawInBatch(l, x, y, color, false, matrix, buffer,
-                    Font.DisplayMode.POLYGON_OFFSET, 0, LIGHT);
+                    Font.DisplayMode.POLYGON_OFFSET, 0, light);
         }
         pose.popPose();
     }
