@@ -12,6 +12,7 @@ import org.joml.Matrix4f;
 import rodalies.RailSignBlock;
 import rodalies.RailSignBlockEntity;
 import rodalies.RailSignType;
+import rodalies.SpeedLimitBlock;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,13 +41,17 @@ public class RailSignRenderer implements BlockEntityRenderer<RailSignBlockEntity
     private static final float VIA_MAX_W = 8f;   // ancho maximo del texto (~90% del panel de 9px)
     private static final float VIA_MAX_H = 6.5f; // alto maximo del texto (~70% del panel de 9px)
 
-    // --- Rombos de velocidad (Speed_limit y LVT): cara frontal norte, texto horizontal centrado ---
+    // --- Rombos de velocidad (Speed_limit y LTV): cara frontal norte, texto horizontal centrado ---
     // Base en el poste (x=8) con medio pixel a la derecha del observador (-X) y 1px abajo (-Y).
     private static final float DIAMOND_CX = 7.5f;
-    private static final float DIAMOND_CY = 25.364f;
+    private static final float DIAMOND_CY = 25.614f;  // centro vertical de la LTV (subido 0.25px)
+    private static final float SPEED_CY = 25.614f;    // velocidad normal (bajada 0.25px respecto a antes)
     private static final float DIAMOND_FACE_Z = 6f;  // cara frontal (norte)
-    private static final float DIAMOND_MAX_W = 11f;
-    private static final float DIAMOND_MAX_H = 8f;
+    // En la triple la señal central se movio 0.6px hacia atras (evita z-fighting): su texto tambien.
+    private static final float DIAMOND_FACE_Z_BACK = 6.6f;
+    // Reducidos un 15% respecto al panel: con 2 digitos el texto se veia demasiado grande.
+    private static final float DIAMOND_MAX_W = 9.35f;
+    private static final float DIAMOND_MAX_H = 6.8f;
     private static final float DIAMOND_TEXT_ROT = 0f; // 45/-45 si se quisiera el texto inclinado
 
     // --- Cartel normal (cuadrado blanco, hasta 2 lineas): base en el poste + 0.5px derecha / 1px abajo ---
@@ -66,10 +71,16 @@ public class RailSignRenderer implements BlockEntityRenderer<RailSignBlockEntity
     public void render(RailSignBlockEntity be, float partialTick, PoseStack pose,
                        MultiBufferSource buffer, int packedLight, int packedOverlay) {
         String text = be.getText();
-        if (text == null || text.isEmpty()) {
-            return;
-        }
         RailSignType type = be.getSignType();
+        // Estado de apilado de la velocidad (double/triple llevan mas textos; ltv_end abajo no tiene).
+        SpeedLimitBlock.Stack stack = type == RailSignType.SPEED_LIMIT
+                && be.getBlockState().hasProperty(SpeedLimitBlock.STACK)
+                ? be.getBlockState().getValue(SpeedLimitBlock.STACK) : SpeedLimitBlock.Stack.NONE;
+        boolean hasExtra = stack == SpeedLimitBlock.Stack.DOUBLE || stack == SpeedLimitBlock.Stack.TRIPLE;
+        boolean hasMain = text != null && !text.isEmpty();
+        if (!hasMain && !hasExtra) {
+            return; // nada que dibujar
+        }
         Direction facing = be.getBlockState().getValue(RailSignBlock.FACING);
 
         pose.pushPose();
@@ -85,7 +96,26 @@ public class RailSignRenderer implements BlockEntityRenderer<RailSignBlockEntity
                 drawOnXFace(pose, buffer, lines, VIA_CY, VIA_CZ, VIA_FACE_E, true, VIA_WHITE, packedLight, VIA_MAX_W, VIA_MAX_H);
                 drawOnXFace(pose, buffer, lines, VIA_CY, VIA_CZ, VIA_FACE_W, false, VIA_WHITE, packedLight, VIA_MAX_W, VIA_MAX_H);
             }
-            case SPEED_LIMIT, LVT -> {
+            case SPEED_LIMIT -> {
+                if (stack == SpeedLimitBlock.Stack.TRIPLE) {
+                    // Triple: la de arriba sube 1px respecto a la normal; desde esa referencia la
+                    // central va -17 (movida 0.6 atras por z-fighting) y la inferior -33.
+                    float triTop = SPEED_CY + 1f;
+                    drawExtraSpeed(pose, buffer, text, triTop, DIAMOND_FACE_Z);
+                    drawExtraSpeed(pose, buffer, be.getText2(), triTop - 17f, DIAMOND_FACE_Z_BACK);
+                    drawExtraSpeed(pose, buffer, be.getText3(), triTop - 33f, DIAMOND_FACE_Z);
+                } else {
+                    if (hasMain) {
+                        drawOnNorthFace(pose, buffer, List.of(firstLine(text)), DIAMOND_CX, SPEED_CY,
+                                DIAMOND_FACE_Z, BLACK, FULL_BRIGHT, DIAMOND_MAX_W, DIAMOND_MAX_H, DIAMOND_TEXT_ROT);
+                    }
+                    if (stack == SpeedLimitBlock.Stack.DOUBLE) {
+                        // Segunda velocidad: 22px por debajo (editable aparte).
+                        drawExtraSpeed(pose, buffer, be.getText2(), SPEED_CY - 22f, DIAMOND_FACE_Z);
+                    }
+                }
+            }
+            case LTV -> {
                 List<String> lines = List.of(firstLine(text));
                 drawOnNorthFace(pose, buffer, lines, DIAMOND_CX, DIAMOND_CY, DIAMOND_FACE_Z, BLACK, FULL_BRIGHT,
                         DIAMOND_MAX_W, DIAMOND_MAX_H, DIAMOND_TEXT_ROT);
@@ -95,10 +125,19 @@ public class RailSignRenderer implements BlockEntityRenderer<RailSignBlockEntity
                 drawOnNorthFace(pose, buffer, lines, NORMAL_CX, NORMAL_CY, NORMAL_FACE_Z, BLACK, FULL_BRIGHT,
                         NORMAL_MAX_W, NORMAL_MAX_H, 0f);
             }
-            default -> { /* LVT_END: sin texto */ }
+            default -> { /* LTV_END: sin texto */ }
         }
 
         pose.popPose();
+    }
+
+    /** Dibuja una señal de velocidad apilada (una linea, estilo rombo) si el texto no esta vacio. */
+    private void drawExtraSpeed(PoseStack pose, MultiBufferSource buffer, String t, float cy, float faceZ) {
+        if (t == null || t.isEmpty()) {
+            return;
+        }
+        drawOnNorthFace(pose, buffer, List.of(firstLine(t)), DIAMOND_CX, cy, faceZ,
+                BLACK, FULL_BRIGHT, DIAMOND_MAX_W, DIAMOND_MAX_H, DIAMOND_TEXT_ROT);
     }
 
     /** Texto en la cara frontal (norte, -Z). El texto horizontal se ve recto de frente. */

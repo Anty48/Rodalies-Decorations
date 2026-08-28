@@ -2,19 +2,20 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "D": {
-      "item": "minecraft:white_dye"
+    "B": {
+      "item": "rodalies:base"
     },
-    "L": {
-      "item": "minecraft:iron_ingot"
+    "C": {
+      "item": "minecraft:white_dye"
     }
   },
   "pattern": [
-    "LDL",
-    " L ",
-    " L "
+    " C ",
+    " B ",
+    " B "
   ],
   "result": {
+    "count": 2,
     "item": "rodalies:normal_signal"
   },
   "show_notification": true

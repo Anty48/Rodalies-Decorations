@@ -1,18 +1,160 @@
 {
   "variants": {
-    "facing=north,part=middle": { "model": "rodalies:block/speed_limit" },
-    "facing=east,part=middle":  { "model": "rodalies:block/speed_limit", "y": 90 },
-    "facing=south,part=middle": { "model": "rodalies:block/speed_limit", "y": 180 },
-    "facing=west,part=middle":  { "model": "rodalies:block/speed_limit", "y": 270 },
-
-    "facing=north,part=bottom": { "model": "rodalies:block/rail_sign_empty" },
-    "facing=east,part=bottom":  { "model": "rodalies:block/rail_sign_empty" },
-    "facing=south,part=bottom": { "model": "rodalies:block/rail_sign_empty" },
-    "facing=west,part=bottom":  { "model": "rodalies:block/rail_sign_empty" },
-
-    "facing=north,part=top": { "model": "rodalies:block/rail_sign_empty" },
-    "facing=east,part=top":  { "model": "rodalies:block/rail_sign_empty" },
-    "facing=south,part=top": { "model": "rodalies:block/rail_sign_empty" },
-    "facing=west,part=top":  { "model": "rodalies:block/rail_sign_empty" }
+    "facing=north,part=middle,stack=none": {
+      "model": "rodalies:block/speed_limit"
+    },
+    "facing=east,part=middle,stack=none": {
+      "model": "rodalies:block/speed_limit",
+      "y": 90
+    },
+    "facing=south,part=middle,stack=none": {
+      "model": "rodalies:block/speed_limit",
+      "y": 180
+    },
+    "facing=west,part=middle,stack=none": {
+      "model": "rodalies:block/speed_limit",
+      "y": 270
+    },
+    "facing=north,part=bottom,stack=none": {
+      "model": "rodalies:block/rail_sign_empty"
+    },
+    "facing=east,part=bottom,stack=none": {
+      "model": "rodalies:block/rail_sign_empty"
+    },
+    "facing=south,part=bottom,stack=none": {
+      "model": "rodalies:block/rail_sign_empty"
+    },
+    "facing=west,part=bottom,stack=none": {
+      "model": "rodalies:block/rail_sign_empty"
+    },
+    "facing=north,part=top,stack=none": {
+      "model": "rodalies:block/rail_sign_empty"
+    },
+    "facing=east,part=top,stack=none": {
+      "model": "rodalies:block/rail_sign_empty"
+    },
+    "facing=south,part=top,stack=none": {
+      "model": "rodalies:block/rail_sign_empty"
+    },
+    "facing=west,part=top,stack=none": {
+      "model": "rodalies:block/rail_sign_empty"
+    },
+    "facing=north,part=middle,stack=double": {
+      "model": "rodalies:block/speed_limit_double"
+    },
+    "facing=east,part=middle,stack=double": {
+      "model": "rodalies:block/speed_limit_double",
+      "y": 90
+    },
+    "facing=south,part=middle,stack=double": {
+      "model": "rodalies:block/speed_limit_double",
+      "y": 180
+    },
+    "facing=west,part=middle,stack=double": {
+      "model": "rodalies:block/speed_limit_double",
+      "y": 270
+    },
+    "facing=north,part=bottom,stack=double": {
+      "model": "rodalies:block/rail_sign_empty"
+    },
+    "facing=east,part=bottom,stack=double": {
+      "model": "rodalies:block/rail_sign_empty"
+    },
+    "facing=south,part=bottom,stack=double": {
+      "model": "rodalies:block/rail_sign_empty"
+    },
+    "facing=west,part=bottom,stack=double": {
+      "model": "rodalies:block/rail_sign_empty"
+    },
+    "facing=north,part=top,stack=double": {
+      "model": "rodalies:block/rail_sign_empty"
+    },
+    "facing=east,part=top,stack=double": {
+      "model": "rodalies:block/rail_sign_empty"
+    },
+    "facing=south,part=top,stack=double": {
+      "model": "rodalies:block/rail_sign_empty"
+    },
+    "facing=west,part=top,stack=double": {
+      "model": "rodalies:block/rail_sign_empty"
+    },
+    "facing=north,part=middle,stack=triple": {
+      "model": "rodalies:block/speed_limit_triple"
+    },
+    "facing=east,part=middle,stack=triple": {
+      "model": "rodalies:block/speed_limit_triple",
+      "y": 90
+    },
+    "facing=south,part=middle,stack=triple": {
+      "model": "rodalies:block/speed_limit_triple",
+      "y": 180
+    },
+    "facing=west,part=middle,stack=triple": {
+      "model": "rodalies:block/speed_limit_triple",
+      "y": 270
+    },
+    "facing=north,part=bottom,stack=triple": {
+      "model": "rodalies:block/rail_sign_empty"
+    },
+    "facing=east,part=bottom,stack=triple": {
+      "model": "rodalies:block/rail_sign_empty"
+    },
+    "facing=south,part=bottom,stack=triple": {
+      "model": "rodalies:block/rail_sign_empty"
+    },
+    "facing=west,part=bottom,stack=triple": {
+      "model": "rodalies:block/rail_sign_empty"
+    },
+    "facing=north,part=top,stack=triple": {
+      "model": "rodalies:block/rail_sign_empty"
+    },
+    "facing=east,part=top,stack=triple": {
+      "model": "rodalies:block/rail_sign_empty"
+    },
+    "facing=south,part=top,stack=triple": {
+      "model": "rodalies:block/rail_sign_empty"
+    },
+    "facing=west,part=top,stack=triple": {
+      "model": "rodalies:block/rail_sign_empty"
+    },
+    "facing=north,part=middle,stack=ltv_end": {
+      "model": "rodalies:block/speed_limit_ltv_end_double"
+    },
+    "facing=east,part=middle,stack=ltv_end": {
+      "model": "rodalies:block/speed_limit_ltv_end_double",
+      "y": 90
+    },
+    "facing=south,part=middle,stack=ltv_end": {
+      "model": "rodalies:block/speed_limit_ltv_end_double",
+      "y": 180
+    },
+    "facing=west,part=middle,stack=ltv_end": {
+      "model": "rodalies:block/speed_limit_ltv_end_double",
+      "y": 270
+    },
+    "facing=north,part=bottom,stack=ltv_end": {
+      "model": "rodalies:block/rail_sign_empty"
+    },
+    "facing=east,part=bottom,stack=ltv_end": {
+      "model": "rodalies:block/rail_sign_empty"
+    },
+    "facing=south,part=bottom,stack=ltv_end": {
+      "model": "rodalies:block/rail_sign_empty"
+    },
+    "facing=west,part=bottom,stack=ltv_end": {
+      "model": "rodalies:block/rail_sign_empty"
+    },
+    "facing=north,part=top,stack=ltv_end": {
+      "model": "rodalies:block/rail_sign_empty"
+    },
+    "facing=east,part=top,stack=ltv_end": {
+      "model": "rodalies:block/rail_sign_empty"
+    },
+    "facing=south,part=top,stack=ltv_end": {
+      "model": "rodalies:block/rail_sign_empty"
+    },
+    "facing=west,part=top,stack=ltv_end": {
+      "model": "rodalies:block/rail_sign_empty"
+    }
   }
 }

@@ -66,7 +66,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> STATION_SIGNAL =
         BLOCKS.register("station_signal",
             () -> new StationSignalBlock(BlockBehaviour.Properties.of()
-                .strength(1.5f)
+                .strength(1.5f, 10.0f)
                 .sound(SoundType.METAL)
                 .noOcclusion(), true)); // con logo de Rodalies -> texto desplazado
 
@@ -75,7 +75,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> STATION_SIGNAL_PLAIN =
         BLOCKS.register("station_signal_plain",
             () -> new StationSignalBlock(BlockBehaviour.Properties.of()
-                .strength(1.5f)
+                .strength(1.5f, 10.0f)
                 .sound(SoundType.METAL)
                 .noOcclusion(), false)); // sin logo -> texto centrado
 
@@ -83,33 +83,84 @@ public class ModBlocks {
     // cambian por su RailSignType (cuanto texto llevan y como se dibuja). noOcclusion porque casi
     // toda la celda es aire y el modelo sobresale hacia arriba.
     private static BlockBehaviour.Properties signProps() {
-        return BlockBehaviour.Properties.of().strength(1.5f).sound(SoundType.METAL).noOcclusion();
+        // Dureza baja (1.5, rapida de picar) pero resistencia a explosiones alta (10.0); sonido metal.
+        return BlockBehaviour.Properties.of().strength(1.5f, 10.0f).sound(SoundType.METAL).noOcclusion();
     }
+
+    // Bloque base (1 celda): la pieza con la que se craftean todas las señales.
+    public static final RegistryObject<Block> BASE =
+        BLOCKS.register("base", () -> new BaseBlock(signProps()));
 
     // Cartel de numero de via: hasta 3 caracteres blancos, visible por ambos lados.
     public static final RegistryObject<Block> PLATFORM_NUMBER_SIGNAL =
         BLOCKS.register("platform_number_signal",
             () -> new RailSignBlock(signProps(), RailSignType.PLATFORM_NUMBER));
 
-    // Señal de velocidad permanente (rombo blanco): hasta 3 digitos negros, un lado.
+    // Señal de velocidad permanente (rombo blanco): hasta 3 digitos negros, un lado. Admite el estado
+    // "doble" (SpeedLimitBlock): clic derecho con otra señal de velocidad en mano apila una 2ª señal.
     public static final RegistryObject<Block> SPEED_LIMIT =
         BLOCKS.register("speed_limit",
-            () -> new RailSignBlock(signProps(), RailSignType.SPEED_LIMIT));
+            () -> new SpeedLimitBlock(signProps()));
 
-    // LVT (rombo amarillo temporal): hasta 3 digitos negros, un lado.
-    public static final RegistryObject<Block> LVT =
-        BLOCKS.register("lvt",
-            () -> new RailSignBlock(signProps(), RailSignType.LVT));
+    // LTV (rombo amarillo temporal): hasta 3 digitos negros, un lado.
+    public static final RegistryObject<Block> LTV =
+        BLOCKS.register("ltv",
+            () -> new RailSignBlock(signProps(), RailSignType.LTV));
 
-    // Fin de LVT (cuadrado amarillo): sin texto.
-    public static final RegistryObject<Block> LVT_END =
-        BLOCKS.register("lvt_end",
-            () -> new RailSignBlock(signProps(), RailSignType.LVT_END));
+    // Fin de LTV (cuadrado amarillo): sin texto.
+    public static final RegistryObject<Block> LTV_END =
+        BLOCKS.register("ltv_end",
+            () -> new RailSignBlock(signProps(), RailSignType.LTV_END));
 
     // Cartel de señales (cuadrado blanco): hasta 2 lineas de texto negro que se adaptan, un lado.
     public static final RegistryObject<Block> NORMAL_SIGNAL =
         BLOCKS.register("normal_signal",
             () -> new RailSignBlock(signProps(), RailSignType.NORMAL));
+
+    // --- Versiones SHORT (poste una celda mas corto; se colocan en la celda del medio) ---
+
+    public static final RegistryObject<Block> SPEED_LIMIT_SHORT =
+        BLOCKS.register("speed_limit_short",
+            () -> new RailSignBlock(signProps(), RailSignType.SPEED_LIMIT, true));
+
+    public static final RegistryObject<Block> LTV_SHORT =
+        BLOCKS.register("ltv_short",
+            () -> new RailSignBlock(signProps(), RailSignType.LTV, true));
+
+    public static final RegistryObject<Block> LTV_END_SHORT =
+        BLOCKS.register("ltv_end_short",
+            () -> new RailSignBlock(signProps(), RailSignType.LTV_END, true));
+
+    public static final RegistryObject<Block> NORMAL_SIGNAL_SHORT =
+        BLOCKS.register("normal_signal_short",
+            () -> new RailSignBlock(signProps(), RailSignType.NORMAL, true));
+
+    // Señal de apeadero (sin texto): mismas propiedades de bloque que el fin de LTV. Full + short.
+    public static final RegistryObject<Block> APEADERO_SIGNAL =
+        BLOCKS.register("apeadero_signal",
+            () -> new RailSignBlock(signProps(), RailSignType.LTV_END));
+
+    public static final RegistryObject<Block> APEADERO_SIGNAL_SHORT =
+        BLOCKS.register("apeadero_signal_short",
+            () -> new RailSignBlock(signProps(), RailSignType.LTV_END, true));
+
+    // Señal de silbato (sin texto): mismas props que el fin de LTV. Full + short.
+    public static final RegistryObject<Block> SILBATO_SIGNAL =
+        BLOCKS.register("silbato_signal",
+            () -> new RailSignBlock(signProps(), RailSignType.LTV_END));
+
+    public static final RegistryObject<Block> SILBATO_SIGNAL_SHORT =
+        BLOCKS.register("silbato_signal_short",
+            () -> new RailSignBlock(signProps(), RailSignType.LTV_END, true));
+
+    // Señal de detencion inmediata (sin texto): mismas props que el fin de LTV. Full + short.
+    public static final RegistryObject<Block> STOP_SIGNAL =
+        BLOCKS.register("stop_signal",
+            () -> new RailSignBlock(signProps(), RailSignType.LTV_END));
+
+    public static final RegistryObject<Block> STOP_SIGNAL_SHORT =
+        BLOCKS.register("stop_signal_short",
+            () -> new RailSignBlock(signProps(), RailSignType.LTV_END, true));
 
     // --- Registro de items ---
 
@@ -152,17 +203,61 @@ public class ModBlocks {
         ITEMS.register("speed_limit",
             () -> new BlockItem(SPEED_LIMIT.get(), new Item.Properties()));
 
-    public static final RegistryObject<Item> LVT_ITEM =
-        ITEMS.register("lvt",
-            () -> new BlockItem(LVT.get(), new Item.Properties()));
+    public static final RegistryObject<Item> LTV_ITEM =
+        ITEMS.register("ltv",
+            () -> new BlockItem(LTV.get(), new Item.Properties()));
 
-    public static final RegistryObject<Item> LVT_END_ITEM =
-        ITEMS.register("lvt_end",
-            () -> new BlockItem(LVT_END.get(), new Item.Properties()));
+    public static final RegistryObject<Item> LTV_END_ITEM =
+        ITEMS.register("ltv_end",
+            () -> new BlockItem(LTV_END.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> NORMAL_SIGNAL_ITEM =
         ITEMS.register("normal_signal",
             () -> new BlockItem(NORMAL_SIGNAL.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> SPEED_LIMIT_SHORT_ITEM =
+        ITEMS.register("speed_limit_short",
+            () -> new BlockItem(SPEED_LIMIT_SHORT.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> LTV_SHORT_ITEM =
+        ITEMS.register("ltv_short",
+            () -> new BlockItem(LTV_SHORT.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> LTV_END_SHORT_ITEM =
+        ITEMS.register("ltv_end_short",
+            () -> new BlockItem(LTV_END_SHORT.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> NORMAL_SIGNAL_SHORT_ITEM =
+        ITEMS.register("normal_signal_short",
+            () -> new BlockItem(NORMAL_SIGNAL_SHORT.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> APEADERO_SIGNAL_ITEM =
+        ITEMS.register("apeadero_signal",
+            () -> new BlockItem(APEADERO_SIGNAL.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> APEADERO_SIGNAL_SHORT_ITEM =
+        ITEMS.register("apeadero_signal_short",
+            () -> new BlockItem(APEADERO_SIGNAL_SHORT.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> BASE_ITEM =
+        ITEMS.register("base",
+            () -> new BlockItem(BASE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> SILBATO_SIGNAL_ITEM =
+        ITEMS.register("silbato_signal",
+            () -> new BlockItem(SILBATO_SIGNAL.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> SILBATO_SIGNAL_SHORT_ITEM =
+        ITEMS.register("silbato_signal_short",
+            () -> new BlockItem(SILBATO_SIGNAL_SHORT.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> STOP_SIGNAL_ITEM =
+        ITEMS.register("stop_signal",
+            () -> new BlockItem(STOP_SIGNAL.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> STOP_SIGNAL_SHORT_ITEM =
+        ITEMS.register("stop_signal_short",
+            () -> new BlockItem(STOP_SIGNAL_SHORT.get(), new Item.Properties()));
 
     // --- Creative Tab ---
 
@@ -183,9 +278,20 @@ public class ModBlocks {
                 output.accept(STATION_SIGNAL_PLAIN_ITEM.get());
                 output.accept(PLATFORM_NUMBER_SIGNAL_ITEM.get());
                 output.accept(SPEED_LIMIT_ITEM.get());
-                output.accept(LVT_ITEM.get());
-                output.accept(LVT_END_ITEM.get());
+                output.accept(LTV_ITEM.get());
+                output.accept(LTV_END_ITEM.get());
                 output.accept(NORMAL_SIGNAL_ITEM.get());
+                output.accept(SPEED_LIMIT_SHORT_ITEM.get());
+                output.accept(LTV_SHORT_ITEM.get());
+                output.accept(LTV_END_SHORT_ITEM.get());
+                output.accept(NORMAL_SIGNAL_SHORT_ITEM.get());
+                output.accept(APEADERO_SIGNAL_ITEM.get());
+                output.accept(APEADERO_SIGNAL_SHORT_ITEM.get());
+                output.accept(SILBATO_SIGNAL_ITEM.get());
+                output.accept(SILBATO_SIGNAL_SHORT_ITEM.get());
+                output.accept(STOP_SIGNAL_ITEM.get());
+                output.accept(STOP_SIGNAL_SHORT_ITEM.get());
+                output.accept(BASE_ITEM.get());
             })
             .build());
 }

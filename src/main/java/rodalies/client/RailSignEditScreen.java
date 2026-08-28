@@ -19,13 +19,15 @@ public class RailSignEditScreen extends Screen {
 
     private final RailSignBlockEntity sign;
     private final RailSignType type;
+    private final int slot; // 0 = señal principal (texto); 1 = señal inferior de una velocidad doble
     private EditBox line1;
     private EditBox line2; // solo en señales de 2 lineas
 
-    public RailSignEditScreen(RailSignBlockEntity sign) {
+    public RailSignEditScreen(RailSignBlockEntity sign, int slot) {
         super(Component.translatable("screen.rodalies.rail_sign"));
         this.sign = sign;
         this.type = sign.getSignType();
+        this.slot = slot;
     }
 
     @Override
@@ -33,7 +35,12 @@ public class RailSignEditScreen extends Screen {
         int cx = this.width / 2;
         int cy = this.height / 2;
 
-        String[] parts = sign.getText().split("\n", -1);
+        String current = switch (slot) {
+            case 1 -> sign.getText2();
+            case 2 -> sign.getText3();
+            default -> sign.getText();
+        };
+        String[] parts = current.split("\n", -1);
 
         if (type.multiline) {
             int per = Math.max(1, type.maxChars / 2);
@@ -64,7 +71,7 @@ public class RailSignEditScreen extends Screen {
 
     private void confirmAndClose() {
         String text = line2 != null ? (line1.getValue() + "\n" + line2.getValue()) : line1.getValue();
-        ModNetwork.CHANNEL.sendToServer(new RailSignUpdatePacket(sign.getBlockPos(), text));
+        ModNetwork.CHANNEL.sendToServer(new RailSignUpdatePacket(sign.getBlockPos(), text, slot));
         onClose();
     }
 

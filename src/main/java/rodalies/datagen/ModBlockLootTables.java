@@ -26,9 +26,20 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(ModBlocks.STATION_SIGNAL_PLAIN.get());
         dropSelf(ModBlocks.PLATFORM_NUMBER_SIGNAL.get());
         dropSelf(ModBlocks.SPEED_LIMIT.get());
-        dropSelf(ModBlocks.LVT.get());
-        dropSelf(ModBlocks.LVT_END.get());
+        dropSelf(ModBlocks.LTV.get());
+        dropSelf(ModBlocks.LTV_END.get());
         dropSelf(ModBlocks.NORMAL_SIGNAL.get());
+        dropSelf(ModBlocks.SPEED_LIMIT_SHORT.get());
+        dropSelf(ModBlocks.LTV_SHORT.get());
+        dropSelf(ModBlocks.LTV_END_SHORT.get());
+        dropSelf(ModBlocks.NORMAL_SIGNAL_SHORT.get());
+        dropSelf(ModBlocks.APEADERO_SIGNAL.get());
+        dropSelf(ModBlocks.APEADERO_SIGNAL_SHORT.get());
+        dropSelf(ModBlocks.SILBATO_SIGNAL.get());
+        dropSelf(ModBlocks.SILBATO_SIGNAL_SHORT.get());
+        dropSelf(ModBlocks.STOP_SIGNAL.get());
+        dropSelf(ModBlocks.STOP_SIGNAL_SHORT.get());
+        dropSelf(ModBlocks.BASE.get());
     }
 
     @Override
@@ -40,8 +51,19 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                 ModBlocks.STATION_SIGNAL_PLAIN.get(),
                 ModBlocks.PLATFORM_NUMBER_SIGNAL.get(),
                 ModBlocks.SPEED_LIMIT.get(),
-                ModBlocks.LVT.get(),
-                ModBlocks.LVT_END.get(),
-                ModBlocks.NORMAL_SIGNAL.get());
+                ModBlocks.LTV.get(),
+                ModBlocks.LTV_END.get(),
+                ModBlocks.NORMAL_SIGNAL.get(),
+                ModBlocks.SPEED_LIMIT_SHORT.get(),
+                ModBlocks.LTV_SHORT.get(),
+                ModBlocks.LTV_END_SHORT.get(),
+                ModBlocks.NORMAL_SIGNAL_SHORT.get(),
+                ModBlocks.APEADERO_SIGNAL.get(),
+                ModBlocks.APEADERO_SIGNAL_SHORT.get(),
+                ModBlocks.SILBATO_SIGNAL.get(),
+                ModBlocks.SILBATO_SIGNAL_SHORT.get(),
+                ModBlocks.STOP_SIGNAL.get(),
+                ModBlocks.STOP_SIGNAL_SHORT.get(),
+                ModBlocks.BASE.get());
     }
 }

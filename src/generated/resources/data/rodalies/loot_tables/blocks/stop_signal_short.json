@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rodalies:stop_signal_short"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "rodalies:blocks/stop_signal_short"
+}

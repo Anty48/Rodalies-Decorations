@@ -13,7 +13,7 @@ public class ClientHooks {
         Minecraft.getInstance().setScreen(new StationSignalEditScreen(sign));
     }
 
-    public static void openRailSignScreen(RailSignBlockEntity sign) {
-        Minecraft.getInstance().setScreen(new RailSignEditScreen(sign));
+    public static void openRailSignScreen(RailSignBlockEntity sign, int slot) {
+        Minecraft.getInstance().setScreen(new RailSignEditScreen(sign, slot));
     }
 }

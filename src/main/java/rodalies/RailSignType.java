@@ -10,12 +10,12 @@ public enum RailSignType {
     PLATFORM_NUMBER(3, false),
     /** Señal de velocidad permanente (rombo blanco): hasta 3 digitos, negro, un solo lado. */
     SPEED_LIMIT(3, false),
-    /** LVT (rombo amarillo temporal): hasta 3 digitos, negro, un solo lado. */
-    LVT(3, false),
+    /** LTV = Limitacion Temporal de Velocidad (rombo amarillo): hasta 3 digitos, negro, un solo lado. */
+    LTV(3, false),
     /** Cartel de señales (cuadrado blanco): hasta 2 lineas de texto que se adaptan, un solo lado. */
     NORMAL(40, true),
-    /** Fin de LVT (cuadrado amarillo): sin texto. */
-    LVT_END(0, false);
+    /** Fin de LTV (cuadrado amarillo): sin texto. */
+    LTV_END(0, false);
 
     /** Numero maximo de caracteres editables (0 = sin texto / no editable). */
     public final int maxChars;

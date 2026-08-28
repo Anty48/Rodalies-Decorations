@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "rodalies:base"
+    },
+    "C": {
+      "item": "minecraft:red_dye"
+    },
+    "L": {
+      "item": "minecraft:white_dye"
+    },
+    "R": {
+      "item": "minecraft:white_dye"
+    }
+  },
+  "pattern": [
+    "LCR",
+    " B "
+  ],
+  "result": {
+    "count": 2,
+    "item": "rodalies:stop_signal_short"
+  },
+  "show_notification": true
+}

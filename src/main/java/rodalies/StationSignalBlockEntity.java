@@ -8,6 +8,7 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 
 /**
  * Guarda el texto (una linea) del cartel de estacion y lo sincroniza al cliente
@@ -23,6 +24,15 @@ public class StationSignalBlockEntity extends BlockEntity {
 
     public String getText() {
         return text;
+    }
+
+    /**
+     * Caja de render ampliada: el panel del cartel sobresale de la celda del BlockEntity, asi que
+     * sin ampliar la caja el texto "desaparece" cuando la celda base sale del frustum al moverte.
+     */
+    @Override
+    public AABB getRenderBoundingBox() {
+        return new AABB(getBlockPos()).inflate(2.0);
     }
 
     /** Cambia el texto y fuerza el guardado + sincronizacion a los clientes (llamar en el servidor). */

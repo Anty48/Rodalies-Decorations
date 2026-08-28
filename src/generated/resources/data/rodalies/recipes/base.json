@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": [
+      {
+        "item": "minecraft:gray_concrete"
+      },
+      {
+        "item": "minecraft:gray_concrete_powder"
+      }
+    ],
+    "I": {
+      "item": "minecraft:iron_bars"
+    }
+  },
+  "pattern": [
+    "I",
+    "C"
+  ],
+  "result": {
+    "item": "rodalies:base"
+  },
+  "show_notification": true
+}

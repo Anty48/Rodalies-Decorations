@@ -18,20 +18,24 @@ public class RailSignUpdatePacket {
 
     private final BlockPos pos;
     private final String text;
+    private final int slot; // 0 = señal principal; 1 = señal inferior (velocidad doble)
 
-    public RailSignUpdatePacket(BlockPos pos, String text) {
+    public RailSignUpdatePacket(BlockPos pos, String text, int slot) {
         this.pos = pos;
         this.text = text;
+        this.slot = slot;
     }
 
     public RailSignUpdatePacket(FriendlyByteBuf buf) {
         this.pos = buf.readBlockPos();
         this.text = buf.readUtf(256);
+        this.slot = buf.readVarInt();
     }
 
     public void encode(FriendlyByteBuf buf) {
         buf.writeBlockPos(pos);
         buf.writeUtf(text, 256);
+        buf.writeVarInt(slot);
     }
 
     public void handle(Supplier<NetworkEvent.Context> ctxSupplier) {
@@ -51,7 +55,11 @@ public class RailSignUpdatePacket {
             }
             BlockEntity be = level.getBlockEntity(pos);
             if (be instanceof RailSignBlockEntity sign) {
-                sign.setText(text);
+                switch (slot) {
+                    case 1 -> sign.setText2(text);
+                    case 2 -> sign.setText3(text);
+                    default -> sign.setText(text);
+                }
             }
         });
         ctx.setPacketHandled(true);

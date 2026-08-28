@@ -2,19 +2,26 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "D": {
+    "B": {
+      "item": "rodalies:base"
+    },
+    "C": {
       "item": "minecraft:white_dye"
     },
     "L": {
-      "item": "minecraft:iron_ingot"
+      "item": "minecraft:white_dye"
+    },
+    "R": {
+      "item": "minecraft:white_dye"
     }
   },
   "pattern": [
-    " D ",
-    "LLL",
-    " L "
+    "LCR",
+    " B ",
+    " B "
   ],
   "result": {
+    "count": 2,
     "item": "rodalies:speed_limit"
   },
   "show_notification": true
