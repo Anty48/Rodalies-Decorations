@@ -80,6 +80,17 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_iron_ingot", has(Items.IRON_INGOT))
                 .save(writer);
 
+        // Puerta corredera de tren: como una puerta vanilla (2 columnas, 3 de alto -> 3 puertas), pero
+        // terracota naranja (T) arriba y abajo con black stained glass (G) en medio (la ventanilla).
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModBlocks.SLIDING_TRAIN_DOOR.get(), 3)
+                .pattern("TT")
+                .pattern("GG")
+                .pattern("TT")
+                .define('T', Blocks.ORANGE_TERRACOTTA)
+                .define('G', Blocks.BLACK_STAINED_GLASS)
+                .unlockedBy("has_orange_terracotta", has(Blocks.ORANGE_TERRACOTTA))
+                .save(writer);
+
         // Base: una reja de hierro (I) encima de hormigon gris o su polvo (C), una sobre otra.
         ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModBlocks.BASE.get(), 1)
                 .pattern("I")

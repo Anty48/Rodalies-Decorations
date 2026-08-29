@@ -43,9 +43,13 @@
   "item.rodalies.stop_signal": "Senyal de detenció immediata",
   "block.rodalies.stop_signal_short": "Senyal de detenció immediata (curta)",
   "item.rodalies.stop_signal_short": "Senyal de detenció immediata (curta)",
+  "block.rodalies.sliding_train_door": "Porta corredissa de tren",
+  "item.rodalies.sliding_train_door": "Porta corredissa de tren",
   "block.rodalies.base": "Base de senyal",
   "item.rodalies.base": "Base de senyal",
   "screen.rodalies.station_signal": "Nom de l'estació",
   "screen.rodalies.rail_sign": "Text del senyal",
-  "itemGroup.rodalies": "Rodalies"
+  "itemGroup.rodalies": "Rodalies",
+  "itemGroup.rodalies_decor": "Rodalies: Blocs decoratius",
+  "itemGroup.rodalies_signals": "Rodalies: Senyals"
 }

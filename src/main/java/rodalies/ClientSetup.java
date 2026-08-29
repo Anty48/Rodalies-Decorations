@@ -8,6 +8,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import rodalies.client.RailSignRenderer;
+import rodalies.client.SlidingTrainDoorRenderer;
 import rodalies.client.StationSignalRenderer;
 
 /**
@@ -32,5 +33,7 @@ public class ClientSetup {
         event.registerBlockEntityRenderer(ModBlockEntities.STATION_SIGNAL_BE.get(), StationSignalRenderer::new);
         // Renderer del texto de las señales ferroviarias (via, velocidad, LVT, cartel).
         event.registerBlockEntityRenderer(ModBlockEntities.RAIL_SIGN_BE.get(), RailSignRenderer::new);
+        // Renderer que dibuja y anima las hojas de la puerta corredera.
+        event.registerBlockEntityRenderer(ModBlockEntities.SLIDING_TRAIN_DOOR_BE.get(), SlidingTrainDoorRenderer::new);
     }
 }

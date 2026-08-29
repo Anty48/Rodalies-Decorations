@@ -43,9 +43,13 @@
   "item.rodalies.stop_signal": "Immediate Stop Sign",
   "block.rodalies.stop_signal_short": "Immediate Stop Sign (short)",
   "item.rodalies.stop_signal_short": "Immediate Stop Sign (short)",
+  "block.rodalies.sliding_train_door": "Sliding Train Door",
+  "item.rodalies.sliding_train_door": "Sliding Train Door",
   "block.rodalies.base": "Sign Base",
   "item.rodalies.base": "Sign Base",
   "screen.rodalies.station_signal": "Station name",
   "screen.rodalies.rail_sign": "Sign text",
-  "itemGroup.rodalies": "Rodalies"
+  "itemGroup.rodalies": "Rodalies",
+  "itemGroup.rodalies_decor": "Rodalies: Decorative Blocks",
+  "itemGroup.rodalies_signals": "Rodalies: Signals"
 }

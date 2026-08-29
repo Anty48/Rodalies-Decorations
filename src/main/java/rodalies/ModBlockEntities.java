@@ -34,4 +34,12 @@ public class ModBlockEntities {
                     ModBlocks.LTV_SHORT.get(),
                     ModBlocks.NORMAL_SIGNAL_SHORT.get())
                 .build(null));
+
+    // Puerta corredera: guarda el progreso de la animacion (solo la celda LOWER lo lleva).
+    public static final RegistryObject<BlockEntityType<SlidingTrainDoorBlockEntity>> SLIDING_TRAIN_DOOR_BE =
+        BLOCK_ENTITIES.register("sliding_train_door",
+            () -> BlockEntityType.Builder.of(
+                    SlidingTrainDoorBlockEntity::new,
+                    ModBlocks.SLIDING_TRAIN_DOOR.get())
+                .build(null));
 }

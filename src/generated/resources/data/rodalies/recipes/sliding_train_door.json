@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "item": "minecraft:black_stained_glass"
+    },
+    "T": {
+      "item": "minecraft:orange_terracotta"
+    }
+  },
+  "pattern": [
+    "TT",
+    "GG",
+    "TT"
+  ],
+  "result": {
+    "count": 3,
+    "item": "rodalies:sliding_train_door"
+  },
+  "show_notification": true
+}

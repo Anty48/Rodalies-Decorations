@@ -91,10 +91,11 @@ public class ModBlocks {
     public static final RegistryObject<Block> BASE =
         BLOCKS.register("base", () -> new BaseBlock(signProps()));
 
-    // Cartel de numero de via: hasta 3 caracteres blancos, visible por ambos lados.
+    // Cartel de numero de via: hasta 3 caracteres blancos, visible por ambos lados. Clic derecho con
+    // otro cartel en mano lo convierte en la version DOBLE (dos paneles, un numero por lado).
     public static final RegistryObject<Block> PLATFORM_NUMBER_SIGNAL =
         BLOCKS.register("platform_number_signal",
-            () -> new RailSignBlock(signProps(), RailSignType.PLATFORM_NUMBER));
+            () -> new PlatformNumberSignBlock(signProps()));
 
     // Señal de velocidad permanente (rombo blanco): hasta 3 digitos negros, un lado. Admite el estado
     // "doble" (SpeedLimitBlock): clic derecho con otra señal de velocidad en mano apila una 2ª señal.
@@ -161,6 +162,15 @@ public class ModBlocks {
     public static final RegistryObject<Block> STOP_SIGNAL_SHORT =
         BLOCKS.register("stop_signal_short",
             () -> new RailSignBlock(signProps(), RailSignType.LTV_END, true));
+
+    // Puerta corredera de tren: 2 hojas que se abren por el centro (multiblock vertical de 2 celdas).
+    // noOcclusion porque las hojas son finas y al abrir dejan la celda casi vacia.
+    public static final RegistryObject<Block> SLIDING_TRAIN_DOOR =
+        BLOCKS.register("sliding_train_door",
+            () -> new SlidingTrainDoorBlock(BlockBehaviour.Properties.of()
+                .strength(1.5f, 10.0f)
+                .sound(SoundType.METAL)
+                .noOcclusion()));
 
     // --- Registro de items ---
 
@@ -259,14 +269,19 @@ public class ModBlocks {
         ITEMS.register("stop_signal_short",
             () -> new BlockItem(STOP_SIGNAL_SHORT.get(), new Item.Properties()));
 
+    public static final RegistryObject<Item> SLIDING_TRAIN_DOOR_ITEM =
+        ITEMS.register("sliding_train_door",
+            () -> new BlockItem(SLIDING_TRAIN_DOOR.get(), new Item.Properties()));
+
     // --- Creative Tab ---
 
     public static final DeferredRegister<CreativeModeTab> CREATIVE_TABS =
         DeferredRegister.create(Registries.CREATIVE_MODE_TAB, "rodalies");
 
-    public static final RegistryObject<CreativeModeTab> RODALIES_TAB =
-        CREATIVE_TABS.register("rodalies_tab", () -> CreativeModeTab.builder()
-            .title(Component.translatable("itemGroup.rodalies"))
+    // Pestaña 1: bloques decorativos (logos, parabrisas, carteles de estacion, puerta).
+    public static final RegistryObject<CreativeModeTab> DECOR_TAB =
+        CREATIVE_TABS.register("rodalies_decor", () -> CreativeModeTab.builder()
+            .title(Component.translatable("itemGroup.rodalies_decor"))
             .icon(() -> R_LOGO_ITEM.get().getDefaultInstance())
             .displayItems((params, output) -> {
                 output.accept(R_LOGO_ITEM.get());
@@ -276,20 +291,30 @@ public class ModBlocks {
                 output.accept(PARABRISAS_447_ITEM.get());
                 output.accept(STATION_SIGNAL_ITEM.get());
                 output.accept(STATION_SIGNAL_PLAIN_ITEM.get());
+                output.accept(SLIDING_TRAIN_DOOR_ITEM.get());
+            })
+            .build());
+
+    // Pestaña 2: señales ferroviarias (via, velocidad, LTV, carteles, apeadero/silbato/stop) + base.
+    public static final RegistryObject<CreativeModeTab> SIGNALS_TAB =
+        CREATIVE_TABS.register("rodalies_signals", () -> CreativeModeTab.builder()
+            .title(Component.translatable("itemGroup.rodalies_signals"))
+            .icon(() -> SPEED_LIMIT_ITEM.get().getDefaultInstance())
+            .displayItems((params, output) -> {
                 output.accept(PLATFORM_NUMBER_SIGNAL_ITEM.get());
                 output.accept(SPEED_LIMIT_ITEM.get());
                 output.accept(LTV_ITEM.get());
                 output.accept(LTV_END_ITEM.get());
                 output.accept(NORMAL_SIGNAL_ITEM.get());
+                output.accept(APEADERO_SIGNAL_ITEM.get());
+                output.accept(SILBATO_SIGNAL_ITEM.get());
+                output.accept(STOP_SIGNAL_ITEM.get());
                 output.accept(SPEED_LIMIT_SHORT_ITEM.get());
                 output.accept(LTV_SHORT_ITEM.get());
                 output.accept(LTV_END_SHORT_ITEM.get());
                 output.accept(NORMAL_SIGNAL_SHORT_ITEM.get());
-                output.accept(APEADERO_SIGNAL_ITEM.get());
                 output.accept(APEADERO_SIGNAL_SHORT_ITEM.get());
-                output.accept(SILBATO_SIGNAL_ITEM.get());
                 output.accept(SILBATO_SIGNAL_SHORT_ITEM.get());
-                output.accept(STOP_SIGNAL_ITEM.get());
                 output.accept(STOP_SIGNAL_SHORT_ITEM.get());
                 output.accept(BASE_ITEM.get());
             })

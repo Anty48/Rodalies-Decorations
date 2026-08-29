@@ -40,6 +40,12 @@ public class RailSignRenderer implements BlockEntityRenderer<RailSignBlockEntity
     private static final float VIA_FACE_W = 7f;  // cara oeste del panel
     private static final float VIA_MAX_W = 8f;   // ancho maximo del texto (~90% del panel de 9px)
     private static final float VIA_MAX_H = 6.5f; // alto maximo del texto (~70% del panel de 9px)
+    // Version DOBLE: dos paneles a y22..31 (centro 26.5, misma altura que el sencillo); el delantero a
+    // +Z (cz 13.5) y el trasero a -Z (cz 2.5). El delantero usa el texto principal (slot 0) y el
+    // trasero el texto 2 (slot 1).
+    private static final float VIA_DBL_CY = 26.5f;
+    private static final float VIA_DBL_CZ_FRONT = 13.5f;
+    private static final float VIA_DBL_CZ_BACK = 2.5f;
 
     // --- Rombos de velocidad (Speed_limit y LTV): cara frontal norte, texto horizontal centrado ---
     // Base en el poste (x=8) con medio pixel a la derecha del observador (-X) y 1px abajo (-Y).
@@ -76,7 +82,12 @@ public class RailSignRenderer implements BlockEntityRenderer<RailSignBlockEntity
         SpeedLimitBlock.Stack stack = type == RailSignType.SPEED_LIMIT
                 && be.getBlockState().hasProperty(SpeedLimitBlock.STACK)
                 ? be.getBlockState().getValue(SpeedLimitBlock.STACK) : SpeedLimitBlock.Stack.NONE;
-        boolean hasExtra = stack == SpeedLimitBlock.Stack.DOUBLE || stack == SpeedLimitBlock.Stack.TRIPLE;
+        // Cartel de via doble: tambien lleva un segundo texto (panel trasero) en text2.
+        boolean viaDoubled = type == RailSignType.PLATFORM_NUMBER
+                && be.getBlockState().hasProperty(rodalies.PlatformNumberSignBlock.DOUBLED)
+                && be.getBlockState().getValue(rodalies.PlatformNumberSignBlock.DOUBLED);
+        boolean hasExtra = stack == SpeedLimitBlock.Stack.DOUBLE || stack == SpeedLimitBlock.Stack.TRIPLE
+                || (viaDoubled && be.getText2() != null && !be.getText2().isEmpty());
         boolean hasMain = text != null && !text.isEmpty();
         if (!hasMain && !hasExtra) {
             return; // nada que dibujar
@@ -92,9 +103,18 @@ public class RailSignRenderer implements BlockEntityRenderer<RailSignBlockEntity
         switch (type) {
             case PLATFORM_NUMBER -> {
                 // Numero de via: blanco apagado y con luz natural (no emisivo) para que no "brille".
-                List<String> lines = List.of(firstLine(text));
-                drawOnXFace(pose, buffer, lines, VIA_CY, VIA_CZ, VIA_FACE_E, true, VIA_WHITE, packedLight, VIA_MAX_W, VIA_MAX_H);
-                drawOnXFace(pose, buffer, lines, VIA_CY, VIA_CZ, VIA_FACE_W, false, VIA_WHITE, packedLight, VIA_MAX_W, VIA_MAX_H);
+                if (viaDoubled) {
+                    // Panel delantero (+Z): texto principal. Panel trasero (-Z): texto 2.
+                    if (hasMain) {
+                        drawViaPanel(pose, buffer, firstLine(text), VIA_DBL_CY, VIA_DBL_CZ_FRONT, packedLight);
+                    }
+                    String back = be.getText2();
+                    if (back != null && !back.isEmpty()) {
+                        drawViaPanel(pose, buffer, firstLine(back), VIA_DBL_CY, VIA_DBL_CZ_BACK, packedLight);
+                    }
+                } else if (hasMain) {
+                    drawViaPanel(pose, buffer, firstLine(text), VIA_CY, VIA_CZ, packedLight);
+                }
             }
             case SPEED_LIMIT -> {
                 if (stack == SpeedLimitBlock.Stack.TRIPLE) {
@@ -153,6 +173,14 @@ public class RailSignRenderer implements BlockEntityRenderer<RailSignBlockEntity
         }
         drawLinesCentered(pose, buffer, lines, color, light, maxWpx, maxHpx);
         pose.popPose();
+    }
+
+    /** Dibuja un numero de via en ambas caras (±X) de un panel colgante centrado en cy/cz. */
+    private void drawViaPanel(PoseStack pose, MultiBufferSource buffer, String number,
+                             float cy, float cz, int packedLight) {
+        List<String> lines = List.of(number);
+        drawOnXFace(pose, buffer, lines, cy, cz, VIA_FACE_E, true, VIA_WHITE, packedLight, VIA_MAX_W, VIA_MAX_H);
+        drawOnXFace(pose, buffer, lines, cy, cz, VIA_FACE_W, false, VIA_WHITE, packedLight, VIA_MAX_W, VIA_MAX_H);
     }
 
     /** Texto en una cara lateral (±X): panel del cartel de via, visible por ambos lados. */
