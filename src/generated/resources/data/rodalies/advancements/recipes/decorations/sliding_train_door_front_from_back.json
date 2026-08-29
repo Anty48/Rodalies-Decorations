@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_sliding_train_door_back": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "rodalies:sliding_train_door_back"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "rodalies:sliding_train_door_front_from_back"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_sliding_train_door_back",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "rodalies:sliding_train_door_front_from_back"
+    ]
+  },
+  "sends_telemetry_event": false
+}

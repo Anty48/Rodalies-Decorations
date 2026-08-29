@@ -40,6 +40,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(ModBlocks.STOP_SIGNAL.get());
         dropSelf(ModBlocks.STOP_SIGNAL_SHORT.get());
         dropSelf(ModBlocks.SLIDING_TRAIN_DOOR.get());
+        dropSelf(ModBlocks.SLIDING_TRAIN_DOOR_BACK.get());
         dropSelf(ModBlocks.BASE.get());
     }
 
@@ -66,6 +67,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                 ModBlocks.STOP_SIGNAL.get(),
                 ModBlocks.STOP_SIGNAL_SHORT.get(),
                 ModBlocks.SLIDING_TRAIN_DOOR.get(),
+                ModBlocks.SLIDING_TRAIN_DOOR_BACK.get(),
                 ModBlocks.BASE.get());
     }
 }

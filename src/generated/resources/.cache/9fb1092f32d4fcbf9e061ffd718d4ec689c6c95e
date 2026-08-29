@@ -1,4 +1,4 @@
-// 1.20.1	2026-08-29T16:02:19.9140427	Recipes
+// 1.20.1	2026-08-29T19:44:49.0624614	Recipes
 a5bed5f63ff52525984cb128709157e23e7cf97b data/rodalies/advancements/recipes/building_blocks/cercanias_logo.json
 a5992b9b0b1b876ed17e587f1bb4e6106821199b data/rodalies/advancements/recipes/decorations/apeadero_signal.json
 a17e24e7a2dc7702171acf8348ce690b7cb99252 data/rodalies/advancements/recipes/decorations/apeadero_signal_short.json
@@ -14,6 +14,8 @@ f4591426e0f53c2e32800959c0d86e96dff77af7 data/rodalies/advancements/recipes/deco
 01f21e93426afa81ce732003eef13058c0506e96 data/rodalies/advancements/recipes/decorations/silbato_signal.json
 e029cd3c70bda594b875d44b31aeda7e7e562872 data/rodalies/advancements/recipes/decorations/silbato_signal_short.json
 12139dadbc2183d1feba8840e9f31393162486da data/rodalies/advancements/recipes/decorations/sliding_train_door.json
+7428b4681fb414717806e9a47164f03606b1e8ef data/rodalies/advancements/recipes/decorations/sliding_train_door_back_from_front.json
+7ea0175a7eafb11610b23e9a3d6f310a2a838e69 data/rodalies/advancements/recipes/decorations/sliding_train_door_front_from_back.json
 a77edf53fc7a179d7ea94b96550bf1dbbe663913 data/rodalies/advancements/recipes/decorations/speed_limit.json
 fd7e74236ae4ee561c7a17b2a5cc6bfba3c0e446 data/rodalies/advancements/recipes/decorations/speed_limit_short.json
 63c79072f5f78fc4ba8cca73492e6da31d18de0c data/rodalies/advancements/recipes/decorations/station_signal.json
@@ -35,6 +37,8 @@ ac2bd7d7310412a88ee488265670c3d30106885e data/rodalies/recipes/platform_number_s
 9c4d40f1f7bbde590987cab607a6c5bafd961fcb data/rodalies/recipes/silbato_signal.json
 efe54eef90750ea968edff36197d75d4dd16cab7 data/rodalies/recipes/silbato_signal_short.json
 616b7530c13155e0bbbdefda3872c4807a4d33b1 data/rodalies/recipes/sliding_train_door.json
+6285b4addb6170b3b1f81f5abf6bf9610207d473 data/rodalies/recipes/sliding_train_door_back_from_front.json
+b41c9eb78834bdaa89684db9dc1519f3b70c301f data/rodalies/recipes/sliding_train_door_front_from_back.json
 778b7a178e586ef79116b1f6b88f84765635e6c2 data/rodalies/recipes/speed_limit.json
 c7dc4a43a6ebff9faa5b732b4cf27156820de623 data/rodalies/recipes/speed_limit_short.json
 0903c22b26ea5faf70cf7872f5e49918f88ef7f0 data/rodalies/recipes/station_signal.json

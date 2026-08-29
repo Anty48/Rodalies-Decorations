@@ -1,3 +1,7 @@
 {
-  "parent": "rodalies:block/speed_limit_short"
+  "comment": "Poste recortado como en la señal grande (hereda de item/speed_limit), pero conservando el tamaño (escala) del icono corto.",
+  "parent": "rodalies:item/speed_limit",
+  "display": {
+    "gui": { "rotation": [30, 135, 0], "translation": [0, -5, 0], "scale": [0.34, 0.34, 0.34] }
+  }
 }

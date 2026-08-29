@@ -30,6 +30,7 @@ import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
@@ -54,15 +55,29 @@ public class SlidingTrainDoorBlock extends HorizontalDirectionalBlock implements
     public static final EnumProperty<DoubleBlockHalf> HALF = EnumProperty.create("half", DoubleBlockHalf.class);
 
     // Losa fina pegada al borde norte de la celda (se rota segun el facing). Se usa siempre, abierta
-    // o cerrada, tanto para colision como para el contorno de seleccion.
+    // o cerrada, para el contorno de seleccion; y como COLISION solo cuando esta cerrada.
     private static final VoxelShape DOOR_NORTH = Block.box(0, 0, 0, 16, 16, 2);
 
-    public SlidingTrainDoorBlock(Properties properties) {
+    /**
+     * Si true, la puerta al abrir se desplaza un poco hacia ADELANTE (-Z, hacia el jugador que la
+     * coloco) antes de correrse a los lados; si false, hacia ATRAS (+Z). Las dos variantes (bloques
+     * distintos) son por lo demas identicas y se intercambian en la mesa de crafteo sin gastar
+     * materiales. Solo afecta al render (lo lee {@code SlidingTrainDoorRenderer}).
+     */
+    private final boolean openForward;
+
+    public SlidingTrainDoorBlock(Properties properties, boolean openForward) {
         super(properties);
+        this.openForward = openForward;
         registerDefaultState(stateDefinition.any()
                 .setValue(FACING, Direction.NORTH)
                 .setValue(OPEN, false)
                 .setValue(HALF, DoubleBlockHalf.LOWER));
+    }
+
+    /** true = se abre hacia adelante; false = hacia atras. Lo consulta el renderer. */
+    public boolean isOpenForward() {
+        return openForward;
     }
 
     @Override
@@ -77,8 +92,20 @@ public class SlidingTrainDoorBlock extends HorizontalDirectionalBlock implements
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext ctx) {
-        // Constante: la caja de la puerta cerrada, abierta o no (asi siempre se puede clicar y cerrar).
+        // Contorno de SELECCION: constante (la caja de la puerta cerrada), abierta o no, para que
+        // siempre se pueda apuntar al hueco y volver a clicar para cerrarla.
         return RailSignBlock.rotateToFacing(DOOR_NORTH, state.getValue(FACING));
+    }
+
+    @Override
+    public VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext ctx) {
+        // COLISION: al abrir, las hojas se corren a las celdas vecinas y dejan el hueco libre -> sin
+        // colision, se puede pasar por la puerta. Cerrada, bloquea con la losa de siempre.
+        // (Minecraft solo colisiona dentro de la propia celda de forma fiable, por eso el hueco se
+        //  vacia en vez de intentar colisionar donde quedan visualmente las hojas, en las vecinas.)
+        return state.getValue(OPEN)
+                ? Shapes.empty()
+                : RailSignBlock.rotateToFacing(DOOR_NORTH, state.getValue(FACING));
     }
 
     @Nullable

@@ -30,9 +30,13 @@ public class SlidingTrainDoorRenderer implements BlockEntityRenderer<SlidingTrai
     private static final ResourceLocation TEX_LEFT = new ResourceLocation("rodalies", "block/door_left");
     private static final ResourceLocation TEX_RIGHT = new ResourceLocation("rodalies", "block/door_right");
 
-    // Cuanto se abren las hojas (en unidades de bloque): a los lados y un poco hacia adelante.
+    // Cuanto se abren las hojas (en unidades de bloque): a los lados y un poco hacia adelante/atras.
     private static final float SLIDE = 8f / 16f;   // desplazamiento lateral maximo
-    private static final float FORWARD = 3f / 16f; // salida hacia adelante (-Z local) maxima
+    private static final float FORWARD = 3f / 16f; // salida en Z (adelante o atras) maxima
+
+    // Reparto de la animacion: primero sale en Z (0..FWD_PHASE del progreso), luego corre a los lados
+    // (FWD_PHASE..1). Al cerrar se recorre al reves (recoge los lados y luego mete la hoja en Z).
+    private static final float FWD_PHASE = 0.35f;
 
     public SlidingTrainDoorRenderer(BlockEntityRendererProvider.Context ctx) {
     }
@@ -41,9 +45,14 @@ public class SlidingTrainDoorRenderer implements BlockEntityRenderer<SlidingTrai
     public void render(SlidingTrainDoorBlockEntity be, float partialTick, PoseStack pose,
                        MultiBufferSource buffer, int packedLight, int packedOverlay) {
         Direction facing = be.getBlockState().getValue(SlidingTrainDoorBlock.FACING);
+        // Sentido del pequeño desplazamiento en Z: adelante (-Z, hacia el frente) o atras (+Z).
+        boolean forward = !(be.getBlockState().getBlock() instanceof SlidingTrainDoorBlock d) || d.isOpenForward();
+
         float p = be.getRenderProgress(partialTick);
-        float slide = p * SLIDE;
-        float fwd = p * FORWARD;
+        // Fase 1: salida en Z hasta completar en FWD_PHASE. Fase 2: deslizamiento lateral despues.
+        float fwd = Math.min(p / FWD_PHASE, 1f) * FORWARD;
+        float slide = p <= FWD_PHASE ? 0f : (p - FWD_PHASE) / (1f - FWD_PHASE) * SLIDE;
+        float zShift = forward ? -fwd : fwd; // -Z = adelante, +Z = atras
 
         pose.pushPose();
         // Orientar como la blockstate (north=0, east=90, south=180, west=270), igual que las señales.
@@ -51,15 +60,17 @@ public class SlidingTrainDoorRenderer implements BlockEntityRenderer<SlidingTrai
         pose.mulPose(Axis.YP.rotationDegrees(-blockstateY(facing)));
         pose.translate(-0.5, -0.5, -0.5);
 
-        VertexConsumer vc = buffer.getBuffer(RenderType.entityCutoutNoCull(TextureAtlas.LOCATION_BLOCKS));
+        // Translucido y SIN culling (como el cutout original, para no depender del sentido de giro de
+        // las caras): la textura lleva alfa en la ventanilla (cristal tintado) -> se ve a traves.
+        VertexConsumer vc = buffer.getBuffer(RenderType.entityTranslucent(TextureAtlas.LOCATION_BLOCKS));
         TextureAtlasSprite spriteLeft = sprite(TEX_LEFT);
         TextureAtlasSprite spriteRight = sprite(TEX_RIGHT);
 
-        // Hoja derecha: cerrada en x[0..0.5]; se desliza hacia -X y un poco hacia -Z (adelante).
-        addLeaf(pose, vc, 0f - slide, 0f, 0f - fwd, 0.5f - slide, 2f, 0.125f - fwd,
+        // Hoja derecha: cerrada en x[0..0.5]; se desliza hacia -X y un poco en Z.
+        addLeaf(pose, vc, 0f - slide, 0f, 0f + zShift, 0.5f - slide, 2f, 0.125f + zShift,
                 spriteRight, packedLight, packedOverlay);
-        // Hoja izquierda: cerrada en x[0.5..1]; se desliza hacia +X y un poco hacia -Z.
-        addLeaf(pose, vc, 0.5f + slide, 0f, 0f - fwd, 1f + slide, 2f, 0.125f - fwd,
+        // Hoja izquierda: cerrada en x[0.5..1]; se desliza hacia +X y un poco en Z.
+        addLeaf(pose, vc, 0.5f + slide, 0f, 0f + zShift, 1f + slide, 2f, 0.125f + zShift,
                 spriteLeft, packedLight, packedOverlay);
 
         pose.popPose();

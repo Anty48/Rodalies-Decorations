@@ -5,6 +5,8 @@ import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -90,6 +92,18 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('G', Blocks.BLACK_STAINED_GLASS)
                 .unlockedBy("has_orange_terracotta", has(Blocks.ORANGE_TERRACOTTA))
                 .save(writer);
+
+        // Intercambio de sentido de apertura (adelante <-> atras) sin gastar materiales: una puerta
+        // se convierte en la otra en la mesa de crafteo, y viceversa, infinitamente. IDs explicitos
+        // para no chocar con la receta principal de la puerta de arriba.
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.DECORATIONS, ModBlocks.SLIDING_TRAIN_DOOR_BACK.get(), 1)
+                .requires(ModBlocks.SLIDING_TRAIN_DOOR.get())
+                .unlockedBy("has_sliding_train_door", has(ModBlocks.SLIDING_TRAIN_DOOR.get()))
+                .save(writer, new ResourceLocation("rodalies", "sliding_train_door_back_from_front"));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.DECORATIONS, ModBlocks.SLIDING_TRAIN_DOOR.get(), 1)
+                .requires(ModBlocks.SLIDING_TRAIN_DOOR_BACK.get())
+                .unlockedBy("has_sliding_train_door_back", has(ModBlocks.SLIDING_TRAIN_DOOR_BACK.get()))
+                .save(writer, new ResourceLocation("rodalies", "sliding_train_door_front_from_back"));
 
         // Base: una reja de hierro (I) encima de hormigon gris o su polvo (C), una sobre otra.
         ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModBlocks.BASE.get(), 1)

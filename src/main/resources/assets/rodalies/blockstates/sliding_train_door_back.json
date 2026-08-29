@@ -1,0 +1,6 @@
+{
+  "comment": "Variante que abre hacia atras. Igual que sliding_train_door: modelo vacio, las hojas las dibuja y anima el BlockEntityRenderer (SlidingTrainDoorRenderer).",
+  "variants": {
+    "": { "model": "rodalies:block/sliding_train_door_empty" }
+  }
+}

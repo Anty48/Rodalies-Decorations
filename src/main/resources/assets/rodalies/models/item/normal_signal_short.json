@@ -1,3 +1,7 @@
 {
-  "parent": "rodalies:block/normal_signal_short"
+  "comment": "Poste recortado como en la señal grande (hereda de item/normal_signal), pero conservando el tamaño del icono corto.",
+  "parent": "rodalies:item/normal_signal",
+  "display": {
+    "gui": { "rotation": [30, 135, 0], "translation": [0, -5, 0], "scale": [0.34, 0.34, 0.34] }
+  }
 }

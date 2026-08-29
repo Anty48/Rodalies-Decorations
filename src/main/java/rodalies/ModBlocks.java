@@ -165,12 +165,20 @@ public class ModBlocks {
 
     // Puerta corredera de tren: 2 hojas que se abren por el centro (multiblock vertical de 2 celdas).
     // noOcclusion porque las hojas son finas y al abrir dejan la celda casi vacia.
+    // Dos variantes identicas salvo el sentido del pequeño desplazamiento en Z al abrir:
+    // FRONT (adelante, por defecto) y BACK (atras). Se intercambian en la mesa de crafteo (receta
+    // shapeless 1:1, sin gastar materiales).
+    private static BlockBehaviour.Properties doorProps() {
+        return BlockBehaviour.Properties.of().strength(1.5f, 10.0f).sound(SoundType.METAL).noOcclusion();
+    }
+
     public static final RegistryObject<Block> SLIDING_TRAIN_DOOR =
         BLOCKS.register("sliding_train_door",
-            () -> new SlidingTrainDoorBlock(BlockBehaviour.Properties.of()
-                .strength(1.5f, 10.0f)
-                .sound(SoundType.METAL)
-                .noOcclusion()));
+            () -> new SlidingTrainDoorBlock(doorProps(), true));  // abre hacia adelante
+
+    public static final RegistryObject<Block> SLIDING_TRAIN_DOOR_BACK =
+        BLOCKS.register("sliding_train_door_back",
+            () -> new SlidingTrainDoorBlock(doorProps(), false)); // abre hacia atras
 
     // --- Registro de items ---
 
@@ -273,6 +281,10 @@ public class ModBlocks {
         ITEMS.register("sliding_train_door",
             () -> new BlockItem(SLIDING_TRAIN_DOOR.get(), new Item.Properties()));
 
+    public static final RegistryObject<Item> SLIDING_TRAIN_DOOR_BACK_ITEM =
+        ITEMS.register("sliding_train_door_back",
+            () -> new BlockItem(SLIDING_TRAIN_DOOR_BACK.get(), new Item.Properties()));
+
     // --- Creative Tab ---
 
     public static final DeferredRegister<CreativeModeTab> CREATIVE_TABS =
@@ -292,6 +304,7 @@ public class ModBlocks {
                 output.accept(STATION_SIGNAL_ITEM.get());
                 output.accept(STATION_SIGNAL_PLAIN_ITEM.get());
                 output.accept(SLIDING_TRAIN_DOOR_ITEM.get());
+                output.accept(SLIDING_TRAIN_DOOR_BACK_ITEM.get());
             })
             .build());
 

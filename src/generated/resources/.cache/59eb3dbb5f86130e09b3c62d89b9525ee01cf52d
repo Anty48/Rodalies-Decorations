@@ -1,4 +1,4 @@
-// 1.20.1	2026-08-29T15:40:49.7573226	Loot Tables
+// 1.20.1	2026-08-29T19:39:13.8945579	Loot Tables
 f4bbf98525ea925dc88532f51796d0eb41e3fd55 data/rodalies/loot_tables/blocks/apeadero_signal.json
 7372fea34db50ff4756abeac1df2d40d13dd24c3 data/rodalies/loot_tables/blocks/apeadero_signal_short.json
 f6cfb5dfd881134ee03f0122810c9a5df03d8e00 data/rodalies/loot_tables/blocks/base.json
@@ -14,6 +14,7 @@ a31194e5363250e722ed1d2c3141c48e3d018b32 data/rodalies/loot_tables/blocks/platfo
 963db605ad95ee51aebbda9248965aade87dd17e data/rodalies/loot_tables/blocks/silbato_signal.json
 1ee25dde7bdf3150ebcc55333f5d67f83f9be05d data/rodalies/loot_tables/blocks/silbato_signal_short.json
 f150d99993f161172a4af8c870583c67fcf42018 data/rodalies/loot_tables/blocks/sliding_train_door.json
+d4fae72098c80d1e2efef7b1c04700f6ae6afad2 data/rodalies/loot_tables/blocks/sliding_train_door_back.json
 da7264564d74ca1296e9b5a08ae4598fe75769db data/rodalies/loot_tables/blocks/speed_limit.json
 16855cbcdd4237d43369221e3267363bec073871 data/rodalies/loot_tables/blocks/speed_limit_short.json
 bbd9c0163b282f900c604bd94eb5ff25e0d59579 data/rodalies/loot_tables/blocks/station_signal.json

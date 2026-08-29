@@ -40,6 +40,7 @@ public class ModBlockEntities {
         BLOCK_ENTITIES.register("sliding_train_door",
             () -> BlockEntityType.Builder.of(
                     SlidingTrainDoorBlockEntity::new,
-                    ModBlocks.SLIDING_TRAIN_DOOR.get())
+                    ModBlocks.SLIDING_TRAIN_DOOR.get(),
+                    ModBlocks.SLIDING_TRAIN_DOOR_BACK.get())
                 .build(null));
 }
