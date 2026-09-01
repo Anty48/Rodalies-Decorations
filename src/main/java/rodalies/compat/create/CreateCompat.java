@@ -10,9 +10,12 @@ import rodalies.ModBlocks;
  * Integracion OPCIONAL con Create. TODAS las referencias a clases de Create viven en este paquete
  * ({@code rodalies.compat.create}); nunca se cargan si Create no esta instalado.
  *
- * {@link #register()} solo debe llamarse tras comprobar {@code ModList.get().isLoaded("create")}
- * (ver {@code RodaliesMod}). Da a la puerta corredera la <b>apertura automatica al parar en estacion</b>
- * registrando el propio {@link SlidingDoorMovementBehaviour} de Create para nuestra puerta.
+ * {@link #register()} solo debe llamarse tras comprobar que Create esta cargado <b>y es version 6.0+</b>
+ * (ver {@code RodaliesMod#isCreate6OrNewer}): esta clase importa API de Create 6.0
+ * ({@link MovementBehaviour#REGISTRY}, {@link SlidingDoorMovementBehaviour}) que en Create 0.5.x/5.x no
+ * existe en ese paquete, asi que con 5.x no debe cargarse siquiera. Da a la puerta corredera la
+ * <b>apertura automatica al parar en estacion</b> registrando el propio {@link SlidingDoorMovementBehaviour}
+ * de Create para nuestra puerta.
  *
  * <b>Por que funciona y es seguro</b>: ese MovementBehaviour de Create es generico para cualquier
  * {@code DoorBlock} — su {@code tickOpen} consulta el {@code DoorControlBehaviour} de la estacion y
