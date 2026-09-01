@@ -14,10 +14,8 @@ Mod de Minecraft (**Forge 1.20.1**) con bloques decorativos de temática ferrovi
 
 ## Wiki
 
-- 📖 **[Crafteos](docs/Crafteos.md)** — cómo se fabrica cada bloque
-- 🧩 **[Acumular señales](docs/Acumular-senales.md)** — señales dobles/triples y combinadas
-
-(índice completo en [`docs/`](docs/README.md))
+📖 Documentación completa (instalación, bloques, señales, crafteos, integración con Create e
+historial) en la **[wiki del proyecto](https://github.com/Anty48/Rodalies-Decorations/wiki)**.
 
 ## Desarrollo
 

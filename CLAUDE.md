@@ -109,6 +109,19 @@ Usa el wrapper `.\gradlew`:
 
 Si Gradle se queja de red y las dependencias ya están cacheadas: añade `--offline`.
 
+## Carpeta `things_for_claude/` (área de staging)
+
+Todo lo que el usuario deja para que Claude copie/instale va en **`things_for_claude/`** (carpeta
+**ignorada por git**, local). Subcarpetas:
+
+- `blockbench_models/` — exports `.json` de Blockbench (fuente de los modelos; se instalan a mano
+  en `models/block/` con las rutas de textura corregidas a `rodalies:block/...`).
+- `textures/` — texturas fuente sueltas antes de colocarlas en `assets/rodalies/textures/block/`.
+- `screenshots/` — capturas del juego (las "buenas" para la wiki y las de prueba del runClient).
+- `create_jars/` — jars de Create dejados para pruebas en runtime.
+
+Si el usuario dice "te he dejado algo", está aquí. No versionar esta carpeta.
+
 ## Notas / deuda técnica conocida
 
 - En `ModBlocks.java` los bloques antiguos definen una subclase vacía por bloque

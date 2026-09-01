@@ -27,8 +27,7 @@ forge*changelog.txt
 
 # Jars de dependencias de dev de Create (compileOnly via flatDir 'libs'); no se versionan.
 libs
-/create-*.jar
 
-# Basura suelta en la raiz (capturas del runClient, exports de Blockbench, texturas de prueba).
-/*.png
-/Station signal_*.json
+# Area de staging: cosas que el usuario deja para que Claude copie (exports de Blockbench,
+# texturas fuente, capturas, jars de Create). Local, no se versiona. Ver CLAUDE.md.
+things_for_claude
