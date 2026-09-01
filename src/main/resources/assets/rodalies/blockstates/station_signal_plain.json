@@ -1,28 +1,193 @@
 {
   "variants": {
-    "facing=north,part=mid": { "model": "rodalies:block/station_signal_plain" },
-    "facing=east,part=mid":  { "model": "rodalies:block/station_signal_plain", "y": 90 },
-    "facing=south,part=mid": { "model": "rodalies:block/station_signal_plain", "y": 180 },
-    "facing=west,part=mid":  { "model": "rodalies:block/station_signal_plain", "y": 270 },
-
-    "facing=north,part=base": { "model": "rodalies:block/station_signal_plain_empty" },
-    "facing=east,part=base":  { "model": "rodalies:block/station_signal_plain_empty" },
-    "facing=south,part=base": { "model": "rodalies:block/station_signal_plain_empty" },
-    "facing=west,part=base":  { "model": "rodalies:block/station_signal_plain_empty" },
-
-    "facing=north,part=top": { "model": "rodalies:block/station_signal_plain_empty" },
-    "facing=east,part=top":  { "model": "rodalies:block/station_signal_plain_empty" },
-    "facing=south,part=top": { "model": "rodalies:block/station_signal_plain_empty" },
-    "facing=west,part=top":  { "model": "rodalies:block/station_signal_plain_empty" },
-
-    "facing=north,part=top_left": { "model": "rodalies:block/station_signal_plain_empty" },
-    "facing=east,part=top_left":  { "model": "rodalies:block/station_signal_plain_empty" },
-    "facing=south,part=top_left": { "model": "rodalies:block/station_signal_plain_empty" },
-    "facing=west,part=top_left":  { "model": "rodalies:block/station_signal_plain_empty" },
-
-    "facing=north,part=top_right": { "model": "rodalies:block/station_signal_plain_empty" },
-    "facing=east,part=top_right":  { "model": "rodalies:block/station_signal_plain_empty" },
-    "facing=south,part=top_right": { "model": "rodalies:block/station_signal_plain_empty" },
-    "facing=west,part=top_right":  { "model": "rodalies:block/station_signal_plain_empty" }
+    "facing=north,mount=floor,part=base": {
+      "model": "rodalies:block/station_signal_plain_empty"
+    },
+    "facing=north,mount=floor,part=mid": {
+      "model": "rodalies:block/station_signal_plain"
+    },
+    "facing=north,mount=floor,part=top": {
+      "model": "rodalies:block/station_signal_plain_empty"
+    },
+    "facing=north,mount=floor,part=top_left": {
+      "model": "rodalies:block/station_signal_plain_empty"
+    },
+    "facing=north,mount=floor,part=top_right": {
+      "model": "rodalies:block/station_signal_plain_empty"
+    },
+    "facing=north,mount=wall,part=base": {
+      "model": "rodalies:block/station_signal_plain_empty"
+    },
+    "facing=north,mount=wall,part=mid": {
+      "model": "rodalies:block/station_signal_plain_wall"
+    },
+    "facing=north,mount=wall,part=top": {
+      "model": "rodalies:block/station_signal_plain_empty"
+    },
+    "facing=north,mount=wall,part=top_left": {
+      "model": "rodalies:block/station_signal_plain_empty"
+    },
+    "facing=north,mount=wall,part=top_right": {
+      "model": "rodalies:block/station_signal_plain_empty"
+    },
+    "facing=north,mount=air,part=base": {
+      "model": "rodalies:block/station_signal_plain_empty"
+    },
+    "facing=north,mount=air,part=mid": {
+      "model": "rodalies:block/station_signal_plain_air"
+    },
+    "facing=north,mount=air,part=top": {
+      "model": "rodalies:block/station_signal_plain_empty"
+    },
+    "facing=north,mount=air,part=top_left": {
+      "model": "rodalies:block/station_signal_plain_empty"
+    },
+    "facing=north,mount=air,part=top_right": {
+      "model": "rodalies:block/station_signal_plain_empty"
+    },
+    "facing=east,mount=floor,part=base": {
+      "model": "rodalies:block/station_signal_plain_empty"
+    },
+    "facing=east,mount=floor,part=mid": {
+      "model": "rodalies:block/station_signal_plain",
+      "y": 90
+    },
+    "facing=east,mount=floor,part=top": {
+      "model": "rodalies:block/station_signal_plain_empty"
+    },
+    "facing=east,mount=floor,part=top_left": {
+      "model": "rodalies:block/station_signal_plain_empty"
+    },
+    "facing=east,mount=floor,part=top_right": {
+      "model": "rodalies:block/station_signal_plain_empty"
+    },
+    "facing=east,mount=wall,part=base": {
+      "model": "rodalies:block/station_signal_plain_empty"
+    },
+    "facing=east,mount=wall,part=mid": {
+      "model": "rodalies:block/station_signal_plain_wall",
+      "y": 90
+    },
+    "facing=east,mount=wall,part=top": {
+      "model": "rodalies:block/station_signal_plain_empty"
+    },
+    "facing=east,mount=wall,part=top_left": {
+      "model": "rodalies:block/station_signal_plain_empty"
+    },
+    "facing=east,mount=wall,part=top_right": {
+      "model": "rodalies:block/station_signal_plain_empty"
+    },
+    "facing=east,mount=air,part=base": {
+      "model": "rodalies:block/station_signal_plain_empty"
+    },
+    "facing=east,mount=air,part=mid": {
+      "model": "rodalies:block/station_signal_plain_air",
+      "y": 90
+    },
+    "facing=east,mount=air,part=top": {
+      "model": "rodalies:block/station_signal_plain_empty"
+    },
+    "facing=east,mount=air,part=top_left": {
+      "model": "rodalies:block/station_signal_plain_empty"
+    },
+    "facing=east,mount=air,part=top_right": {
+      "model": "rodalies:block/station_signal_plain_empty"
+    },
+    "facing=south,mount=floor,part=base": {
+      "model": "rodalies:block/station_signal_plain_empty"
+    },
+    "facing=south,mount=floor,part=mid": {
+      "model": "rodalies:block/station_signal_plain",
+      "y": 180
+    },
+    "facing=south,mount=floor,part=top": {
+      "model": "rodalies:block/station_signal_plain_empty"
+    },
+    "facing=south,mount=floor,part=top_left": {
+      "model": "rodalies:block/station_signal_plain_empty"
+    },
+    "facing=south,mount=floor,part=top_right": {
+      "model": "rodalies:block/station_signal_plain_empty"
+    },
+    "facing=south,mount=wall,part=base": {
+      "model": "rodalies:block/station_signal_plain_empty"
+    },
+    "facing=south,mount=wall,part=mid": {
+      "model": "rodalies:block/station_signal_plain_wall",
+      "y": 180
+    },
+    "facing=south,mount=wall,part=top": {
+      "model": "rodalies:block/station_signal_plain_empty"
+    },
+    "facing=south,mount=wall,part=top_left": {
+      "model": "rodalies:block/station_signal_plain_empty"
+    },
+    "facing=south,mount=wall,part=top_right": {
+      "model": "rodalies:block/station_signal_plain_empty"
+    },
+    "facing=south,mount=air,part=base": {
+      "model": "rodalies:block/station_signal_plain_empty"
+    },
+    "facing=south,mount=air,part=mid": {
+      "model": "rodalies:block/station_signal_plain_air",
+      "y": 180
+    },
+    "facing=south,mount=air,part=top": {
+      "model": "rodalies:block/station_signal_plain_empty"
+    },
+    "facing=south,mount=air,part=top_left": {
+      "model": "rodalies:block/station_signal_plain_empty"
+    },
+    "facing=south,mount=air,part=top_right": {
+      "model": "rodalies:block/station_signal_plain_empty"
+    },
+    "facing=west,mount=floor,part=base": {
+      "model": "rodalies:block/station_signal_plain_empty"
+    },
+    "facing=west,mount=floor,part=mid": {
+      "model": "rodalies:block/station_signal_plain",
+      "y": 270
+    },
+    "facing=west,mount=floor,part=top": {
+      "model": "rodalies:block/station_signal_plain_empty"
+    },
+    "facing=west,mount=floor,part=top_left": {
+      "model": "rodalies:block/station_signal_plain_empty"
+    },
+    "facing=west,mount=floor,part=top_right": {
+      "model": "rodalies:block/station_signal_plain_empty"
+    },
+    "facing=west,mount=wall,part=base": {
+      "model": "rodalies:block/station_signal_plain_empty"
+    },
+    "facing=west,mount=wall,part=mid": {
+      "model": "rodalies:block/station_signal_plain_wall",
+      "y": 270
+    },
+    "facing=west,mount=wall,part=top": {
+      "model": "rodalies:block/station_signal_plain_empty"
+    },
+    "facing=west,mount=wall,part=top_left": {
+      "model": "rodalies:block/station_signal_plain_empty"
+    },
+    "facing=west,mount=wall,part=top_right": {
+      "model": "rodalies:block/station_signal_plain_empty"
+    },
+    "facing=west,mount=air,part=base": {
+      "model": "rodalies:block/station_signal_plain_empty"
+    },
+    "facing=west,mount=air,part=mid": {
+      "model": "rodalies:block/station_signal_plain_air",
+      "y": 270
+    },
+    "facing=west,mount=air,part=top": {
+      "model": "rodalies:block/station_signal_plain_empty"
+    },
+    "facing=west,mount=air,part=top_left": {
+      "model": "rodalies:block/station_signal_plain_empty"
+    },
+    "facing=west,mount=air,part=top_right": {
+      "model": "rodalies:block/station_signal_plain_empty"
+    }
   }
 }

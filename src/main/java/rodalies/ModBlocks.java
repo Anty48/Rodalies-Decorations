@@ -53,6 +53,24 @@ public class ModBlocks {
         BLOCKS.register("cercanias_logo",
             () -> new Block(BlockBehaviour.Properties.of().strength(0.8f)));
 
+    // --- Variantes "de una cara" (logo/franja solo en la cara donde lo colocas). Se craftean 1:1 con su
+    //     hermano de caras iguales y viceversa (recetas shapeless hand-written). Ver DirectionalLogoBlock. ---
+    public static final RegistryObject<Block> R_LOGO_DIRECTIONAL =
+        BLOCKS.register("r_logo_directional",
+            () -> new DirectionalLogoBlock(BlockBehaviour.Properties.of().strength(2.0f)));
+
+    public static final RegistryObject<Block> RENFE_LOGO_DIRECTIONAL =
+        BLOCKS.register("renfe_logo_directional",
+            () -> new DirectionalLogoBlock(BlockBehaviour.Properties.of().strength(2.0f)));
+
+    public static final RegistryObject<Block> PURPLE_SIDE_DIRECTIONAL =
+        BLOCKS.register("purple_side_directional",
+            () -> new DirectionalLogoBlock(BlockBehaviour.Properties.of().strength(2.0f)));
+
+    public static final RegistryObject<Block> CERCANIAS_LOGO_DIRECTIONAL =
+        BLOCKS.register("cercanias_logo_directional",
+            () -> new DirectionalLogoBlock(BlockBehaviour.Properties.of().strength(0.8f)));
+
     // Parabrisas del 447: multiblock 3x1x1 con cristal tintado (render translucido en ClientSetup).
     public static final RegistryObject<Block> PARABRISAS_447 =
         BLOCKS.register("parabrisas_447",
@@ -201,6 +219,22 @@ public class ModBlocks {
         ITEMS.register("cercanias_logo",
             () -> new BlockItem(CERCANIAS_LOGO.get(), new Item.Properties()));
 
+    public static final RegistryObject<Item> R_LOGO_DIRECTIONAL_ITEM =
+        ITEMS.register("r_logo_directional",
+            () -> new BlockItem(R_LOGO_DIRECTIONAL.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> RENFE_LOGO_DIRECTIONAL_ITEM =
+        ITEMS.register("renfe_logo_directional",
+            () -> new BlockItem(RENFE_LOGO_DIRECTIONAL.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> PURPLE_SIDE_DIRECTIONAL_ITEM =
+        ITEMS.register("purple_side_directional",
+            () -> new BlockItem(PURPLE_SIDE_DIRECTIONAL.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> CERCANIAS_LOGO_DIRECTIONAL_ITEM =
+        ITEMS.register("cercanias_logo_directional",
+            () -> new BlockItem(CERCANIAS_LOGO_DIRECTIONAL.get(), new Item.Properties()));
+
     public static final RegistryObject<Item> PARABRISAS_447_ITEM =
         ITEMS.register("parabrisas_447",
             () -> new BlockItem(PARABRISAS_447.get(), new Item.Properties()));
@@ -297,9 +331,13 @@ public class ModBlocks {
             .icon(() -> R_LOGO_ITEM.get().getDefaultInstance())
             .displayItems((params, output) -> {
                 output.accept(R_LOGO_ITEM.get());
+                output.accept(R_LOGO_DIRECTIONAL_ITEM.get());
                 output.accept(RENFE_LOGO_ITEM.get());
+                output.accept(RENFE_LOGO_DIRECTIONAL_ITEM.get());
                 output.accept(PURPLE_SIDE_ITEM.get());
+                output.accept(PURPLE_SIDE_DIRECTIONAL_ITEM.get());
                 output.accept(CERCANIAS_LOGO_ITEM.get());
+                output.accept(CERCANIAS_LOGO_DIRECTIONAL_ITEM.get());
                 output.accept(PARABRISAS_447_ITEM.get());
                 output.accept(STATION_SIGNAL_ITEM.get());
                 output.accept(STATION_SIGNAL_PLAIN_ITEM.get());

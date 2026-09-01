@@ -24,6 +24,8 @@ public class ClientSetup {
             // El cristal tintado necesita render translucido; sin esto Forge trata el bloque
             // como solido y "recorta" lo que hay detras.
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.PARABRISAS_447.get(), RenderType.translucent());
+            // Las puertas correderas se dibujan siempre por su BER (nunca en el mesh del chunk), asi que no
+            // necesitan render layer aqui; el BER ya pinta el cristal en la capa translucida de bloque.
         });
     }
 
@@ -33,7 +35,7 @@ public class ClientSetup {
         event.registerBlockEntityRenderer(ModBlockEntities.STATION_SIGNAL_BE.get(), StationSignalRenderer::new);
         // Renderer del texto de las señales ferroviarias (via, velocidad, LVT, cartel).
         event.registerBlockEntityRenderer(ModBlockEntities.RAIL_SIGN_BE.get(), RailSignRenderer::new);
-        // Renderer que dibuja y anima las hojas de la puerta corredera.
+        // Anima el deslizamiento de las hojas de la puerta en el mundo (con VISIBLE=false).
         event.registerBlockEntityRenderer(ModBlockEntities.SLIDING_TRAIN_DOOR_BE.get(), SlidingTrainDoorRenderer::new);
     }
 }

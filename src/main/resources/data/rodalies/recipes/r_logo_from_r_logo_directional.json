@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "rodalies:r_logo_directional"
+    }
+  ],
+  "result": {
+    "item": "rodalies:r_logo"
+  }
+}

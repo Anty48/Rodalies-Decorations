@@ -39,8 +39,11 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(ModBlocks.SILBATO_SIGNAL_SHORT.get());
         dropSelf(ModBlocks.STOP_SIGNAL.get());
         dropSelf(ModBlocks.STOP_SIGNAL_SHORT.get());
-        dropSelf(ModBlocks.SLIDING_TRAIN_DOOR.get());
-        dropSelf(ModBlocks.SLIDING_TRAIN_DOOR_BACK.get());
+        // Puerta: loot de puerta vanilla (createDoorTable) -> la condicion half=lower hace que dropee
+        // EXACTAMENTE 1 (al romper una puerta las 2 mitades pasan por dropResources; la condicion
+        // suprime el duplicado). Con dropSelf normal dropaba 2.
+        add(ModBlocks.SLIDING_TRAIN_DOOR.get(), createDoorTable(ModBlocks.SLIDING_TRAIN_DOOR.get()));
+        add(ModBlocks.SLIDING_TRAIN_DOOR_BACK.get(), createDoorTable(ModBlocks.SLIDING_TRAIN_DOOR_BACK.get()));
         dropSelf(ModBlocks.BASE.get());
     }
 

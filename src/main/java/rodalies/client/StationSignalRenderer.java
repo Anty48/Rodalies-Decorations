@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.Direction;
+import net.minecraft.world.level.block.state.BlockState;
 import org.joml.Matrix4f;
 import rodalies.StationSignalBlock;
 import rodalies.StationSignalBlockEntity;
@@ -51,9 +52,16 @@ public class StationSignalRenderer implements BlockEntityRenderer<StationSignalB
     private static final float CENTER_PLAIN_X = ((PANEL_MIN_X + PANEL_MAX_X) / 2f) / 16f; // = 0.5
     private static final float PLAIN_MAX_WIDTH = (PANEL_MAX_X - PANEL_MIN_X - 2f * MARGIN_EDGE) / 16f;
 
-    private static final float PANEL_CENTER_Y = 27.5f / 16f;
-    private static final float FRONT_Z = 7f / 16f;          // cara norte (frontal)
-    private static final float BACK_Z = 9f / 16f;           // cara sur (trasera)
+    // Posicion del panel segun el modo de montaje (ver StationSignalBlock.Mount):
+    //  - FLOOR: panel alto (y23..32 -> centro 27.5), profundidad z7..9.
+    //  - AIR:   panel bajo centrado (y4..13 -> centro 8.5), profundidad z7..9.
+    //  - WALL:  panel bajo pegado a la pared trasera (y4..13, z14..16).
+    private static final float FLOOR_CENTER_Y = 27.5f / 16f;
+    private static final float MOUNTED_CENTER_Y = 8.5f / 16f; // wall y air (panel a y4..13)
+    private static final float PANEL_FRONT_Z = 7f / 16f;      // cara norte (frontal) del panel centrado
+    private static final float PANEL_BACK_Z = 9f / 16f;       // cara sur (trasera) del panel centrado
+    private static final float WALL_FRONT_Z = 14f / 16f;      // cara norte del panel pegado a pared
+    private static final float WALL_BACK_Z = 16f / 16f;       // cara sur (contra la pared)
     private static final float Z_OFFSET = 0.01f;            // separa el texto del panel (evita z-fighting)
 
     private static final float BASE_SCALE = 0.055f;         // tamanno base de la letra (mas alto = mas grande)
@@ -75,9 +83,18 @@ public class StationSignalRenderer implements BlockEntityRenderer<StationSignalB
             return;
         }
 
-        Direction facing = be.getBlockState().getValue(StationSignalBlock.FACING);
+        BlockState blockState = be.getBlockState();
+        Direction facing = blockState.getValue(StationSignalBlock.FACING);
         // Los carteles sin logo (station_signal_plain) centran el texto; los de Rodalies lo desplazan.
-        boolean hasLogo = !(be.getBlockState().getBlock() instanceof StationSignalBlock ssb) || ssb.hasLogo();
+        boolean hasLogo = !(blockState.getBlock() instanceof StationSignalBlock ssb) || ssb.hasLogo();
+
+        // El panel esta a distinta altura/profundidad segun el modo de montaje.
+        StationSignalBlock.Mount mount = blockState.hasProperty(StationSignalBlock.MOUNT)
+                ? blockState.getValue(StationSignalBlock.MOUNT) : StationSignalBlock.Mount.FLOOR;
+        float centerY = mount == StationSignalBlock.Mount.FLOOR ? FLOOR_CENTER_Y : MOUNTED_CENTER_Y;
+        boolean wall = mount == StationSignalBlock.Mount.WALL;
+        float frontZ = wall ? WALL_FRONT_Z : PANEL_FRONT_Z;
+        float backZ = wall ? WALL_BACK_Z : PANEL_BACK_Z;
 
         pose.pushPose();
         // Orientar como en la blockstate (north=0, east=90, south=180, west=270 en sentido horario).
@@ -85,20 +102,20 @@ public class StationSignalRenderer implements BlockEntityRenderer<StationSignalB
         pose.mulPose(Axis.YP.rotationDegrees(-blockstateY(facing)));
         pose.translate(-0.5, -0.5, -0.5);
 
-        drawFace(text, pose, buffer, true, hasLogo);   // cara frontal (norte)
-        drawFace(text, pose, buffer, false, hasLogo);  // cara trasera (sur)
+        drawFace(text, pose, buffer, true, hasLogo, centerY, frontZ);   // cara frontal (norte)
+        drawFace(text, pose, buffer, false, hasLogo, centerY, backZ);   // cara trasera (sur)
 
         pose.popPose();
     }
 
-    private void drawFace(String text, PoseStack pose, MultiBufferSource buffer, boolean front, boolean hasLogo) {
+    private void drawFace(String text, PoseStack pose, MultiBufferSource buffer, boolean front,
+                          boolean hasLogo, float centerY, float z) {
         pose.pushPose();
 
-        float z = front ? FRONT_Z : BACK_Z;
         // Con logo el texto se desplaza al lado libre (distinto por cara); sin logo va centrado.
         float centerX = hasLogo ? (front ? CENTER_FRONT_X : CENTER_BACK_X) : CENTER_PLAIN_X;
         float maxWidth = hasLogo ? LOGO_MAX_WIDTH : PLAIN_MAX_WIDTH;
-        pose.translate(centerX, PANEL_CENTER_Y, z);
+        pose.translate(centerX, centerY, z);
         if (front) {
             // La cara norte mira a -Z; la fuente por defecto mira a +Z, asi que la giramos 180.
             pose.mulPose(Axis.YP.rotationDegrees(180f));

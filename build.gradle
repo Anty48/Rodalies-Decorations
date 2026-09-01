@@ -115,11 +115,12 @@ repositories {
     // Put repositories for dependencies here
     // ForgeGradle automatically adds the Forge maven and Maven Central for you
 
-    // If you have mod jar dependencies in ./libs, you can declare them as a repository like so.
-    // See https://docs.gradle.org/current/userguide/declaring_repositories.html#sub:flat_dir_resolver
-    // flatDir {
-    //     dir 'libs'
-    // }
+    // Jars locales de Create en ./libs, SOLO para compilar contra su API (integracion OPCIONAL:
+    // apertura de puertas al parar en estacion via su MovementBehaviour). Hace falta flatDir para que
+    // fg.deobf pueda remapearlos. En runtime Create es opcional (ver dependencies + mods.toml).
+    flatDir {
+        dir 'libs'
+    }
 }
 
 dependencies {
@@ -129,6 +130,17 @@ dependencies {
     // If the group id is "net.minecraft" and the artifact id is one of ["client", "server", "joined"],
     // then special handling is done to allow a setup of a vanilla dependency without the use of an external repository.
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+
+    // Create: SOLO en compilacion (compileOnly), OPCIONAL en runtime. Lo esencial de la puerta NO depende
+    // de Create: es un DoorBlock en #minecraft:wooden_doors (Create la abre a mano en el tren) y su
+    // animacion la dibuja nuestro BlockEntity/BER (Create renderiza los BE viajeros). La UNICA cosa que
+    // usa la API de Create es la apertura automatica al parar en estacion: registramos su propio
+    // SlidingDoorMovementBehaviour para nuestra puerta (rodalies.compat.create), guardado con
+    // isLoaded("create") + try/catch. Sin Create, o con otra version, esa funcion no se activa y la puerta
+    // sigue funcionando (abrir a mano + animacion). fg.deobf remapea SRG->oficial (via flatDir libs).
+    compileOnly fg.deobf("createlibs:create:6.0.8")
+    compileOnly fg.deobf("createlibs:registrate:1.3.3")
+    compileOnly fg.deobf("createlibs:flywheel:1.0.5")
 
     // Example mod dependency with JEI - using fg.deobf() ensures the dependency is remapped to your development mappings
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime

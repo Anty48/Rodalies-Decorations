@@ -35,7 +35,8 @@ public class ModBlockEntities {
                     ModBlocks.NORMAL_SIGNAL_SHORT.get())
                 .build(null));
 
-    // Puerta corredera: guarda el progreso de la animacion (solo la celda LOWER lo lleva).
+    // Puerta corredera: BlockEntity (solo LOWER) para la animacion de deslizamiento EN EL MUNDO
+    // (temporizador de VISIBLE en el servidor + progreso del BER en el cliente).
     public static final RegistryObject<BlockEntityType<SlidingTrainDoorBlockEntity>> SLIDING_TRAIN_DOOR_BE =
         BLOCK_ENTITIES.register("sliding_train_door",
             () -> BlockEntityType.Builder.of(

@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "rodalies:purple_side_directional"
+    }
+  ],
+  "result": {
+    "item": "rodalies:purple_side"
+  }
+}

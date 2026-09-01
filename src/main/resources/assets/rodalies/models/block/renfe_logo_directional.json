@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "rodalies:block/purpleside_top_bottom",
+    "down": "rodalies:block/purpleside_top_bottom",
+    "up": "rodalies:block/purpleside_top_bottom",
+    "north": "rodalies:block/renfe_logo",
+    "south": "rodalies:block/purpleside_top_bottom",
+    "east": "rodalies:block/purpleside_top_bottom",
+    "west": "rodalies:block/purpleside_top_bottom"
+  }
+}

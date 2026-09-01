@@ -1,6 +1,58 @@
 {
-  "comment": "Todas las variantes usan el modelo vacio: las dos hojas las dibuja el BlockEntityRenderer (SlidingTrainDoorRenderer) para poder animar el deslizamiento.",
   "variants": {
-    "": { "model": "rodalies:block/sliding_train_door_empty" }
+    "facing=north,half=lower,open=false": {
+      "model": "rodalies:block/sliding_train_door_closed"
+    },
+    "facing=north,half=lower,open=true": {
+      "model": "rodalies:block/sliding_train_door_closed"
+    },
+    "facing=north,half=upper,open=false": {
+      "model": "rodalies:block/sliding_train_door_empty"
+    },
+    "facing=north,half=upper,open=true": {
+      "model": "rodalies:block/sliding_train_door_empty"
+    },
+    "facing=east,half=lower,open=false": {
+      "model": "rodalies:block/sliding_train_door_closed",
+      "y": 90
+    },
+    "facing=east,half=lower,open=true": {
+      "model": "rodalies:block/sliding_train_door_closed",
+      "y": 90
+    },
+    "facing=east,half=upper,open=false": {
+      "model": "rodalies:block/sliding_train_door_empty"
+    },
+    "facing=east,half=upper,open=true": {
+      "model": "rodalies:block/sliding_train_door_empty"
+    },
+    "facing=south,half=lower,open=false": {
+      "model": "rodalies:block/sliding_train_door_closed",
+      "y": 180
+    },
+    "facing=south,half=lower,open=true": {
+      "model": "rodalies:block/sliding_train_door_closed",
+      "y": 180
+    },
+    "facing=south,half=upper,open=false": {
+      "model": "rodalies:block/sliding_train_door_empty"
+    },
+    "facing=south,half=upper,open=true": {
+      "model": "rodalies:block/sliding_train_door_empty"
+    },
+    "facing=west,half=lower,open=false": {
+      "model": "rodalies:block/sliding_train_door_closed",
+      "y": 270
+    },
+    "facing=west,half=lower,open=true": {
+      "model": "rodalies:block/sliding_train_door_closed",
+      "y": 270
+    },
+    "facing=west,half=upper,open=false": {
+      "model": "rodalies:block/sliding_train_door_empty"
+    },
+    "facing=west,half=upper,open=true": {
+      "model": "rodalies:block/sliding_train_door_empty"
+    }
   }
 }

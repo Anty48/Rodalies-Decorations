@@ -65,6 +65,16 @@ description='''${mod_description}'''
     versionRange="${minecraft_version_range}"
     ordering="NONE"
     side="BOTH"
+# Create es OPCIONAL: el mod NO lo necesita. Solo se declara con ordering=AFTER para que, si esta
+# presente (cualquier version), cargue antes que este mod. La puerta corredera se abre y anima sobre los
+# trenes de Create sin ninguna dependencia (es un DoorBlock del tag #minecraft:wooden_doors y su
+# animacion la dibuja nuestro propio BlockEntity/BER). Sin Create el mod funciona igual.
+[[dependencies.${mod_id}]]
+    modId="create"
+    mandatory=false
+    versionRange="[0.5,)"
+    ordering="AFTER"
+    side="BOTH"
 
 # Features are specific properties of the game environment, that you may want to declare you require. This example declares
 # that your mod requires GL version 3.2 or higher. Other features will be added. They are side aware so declaring this won't

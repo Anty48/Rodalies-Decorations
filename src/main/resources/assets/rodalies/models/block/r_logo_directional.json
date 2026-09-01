@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "minecraft:block/orange_terracotta",
+    "down": "minecraft:block/orange_terracotta",
+    "up": "minecraft:block/orange_terracotta",
+    "north": "rodalies:block/r_logo",
+    "south": "minecraft:block/orange_terracotta",
+    "east": "minecraft:block/orange_terracotta",
+    "west": "minecraft:block/orange_terracotta"
+  }
+}

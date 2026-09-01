@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "rodalies:cercanias_logo"
+    }
+  ],
+  "result": {
+    "item": "rodalies:cercanias_logo_directional"
+  }
+}
