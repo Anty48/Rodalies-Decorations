@@ -71,6 +71,17 @@ public class ModBlocks {
         BLOCKS.register("cercanias_logo_directional",
             () -> new DirectionalLogoBlock(BlockBehaviour.Properties.of().strength(0.8f)));
 
+    // Franja naranja+morada sobre cuarzo: las 4 caras laterales llevan la franja (naranja arriba,
+    // morada abajo); top/bottom son smooth quartz. Decorativo simple (cubeBottomTop via datagen).
+    public static final RegistryObject<Block> ORANGE_PURPLE_LINES =
+        BLOCKS.register("orange_purple_lines",
+            () -> new Block(BlockBehaviour.Properties.of().strength(0.8f)));
+
+    // Variante "de una cara": la franja SOLO en la cara frontal (DirectionalLogoBlock), resto smooth quartz.
+    public static final RegistryObject<Block> ORANGE_PURPLE_LINES_DIRECTIONAL =
+        BLOCKS.register("orange_purple_lines_directional",
+            () -> new DirectionalLogoBlock(BlockBehaviour.Properties.of().strength(0.8f)));
+
     // Parabrisas del 447: multiblock 3x1x1 con cristal tintado (render translucido en ClientSetup).
     public static final RegistryObject<Block> PARABRISAS_447 =
         BLOCKS.register("parabrisas_447",
@@ -181,6 +192,18 @@ public class ModBlocks {
         BLOCKS.register("stop_signal_short",
             () -> new RailSignBlock(signProps(), RailSignType.LTV_END, true));
 
+    // Bloque de cuarzo con la señal de velocidad maxima (rombo) en la cara frontal; el resto smooth
+    // quartz. Lleva texto editable de hasta 4 caracteres centrado en el rombo (BlockEntity + renderer).
+    public static final RegistryObject<Block> TRAIN_MAX_SPEED =
+        BLOCKS.register("train_max_speed",
+            () -> new TrainMaxSpeedBlock(BlockBehaviour.Properties.of().strength(0.8f)));
+
+    // Señal de hectometro: poste de diorita con placa (modelo 3D que sobresale 1 celda hacia arriba).
+    // Multiblock vertical de 2 celdas; texto editable en 2 filas (arriba grande, abajo pequeña).
+    public static final RegistryObject<Block> HECTOMETER_SIGNAL =
+        BLOCKS.register("hectometer_signal",
+            () -> new HectometerSignBlock(signProps()));
+
     // Puerta corredera de tren: 2 hojas que se abren por el centro (multiblock vertical de 2 celdas).
     // noOcclusion porque las hojas son finas y al abrir dejan la celda casi vacia.
     // Dos variantes identicas salvo el sentido del pequeño desplazamiento en Z al abrir:
@@ -234,6 +257,22 @@ public class ModBlocks {
     public static final RegistryObject<Item> CERCANIAS_LOGO_DIRECTIONAL_ITEM =
         ITEMS.register("cercanias_logo_directional",
             () -> new BlockItem(CERCANIAS_LOGO_DIRECTIONAL.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> ORANGE_PURPLE_LINES_ITEM =
+        ITEMS.register("orange_purple_lines",
+            () -> new BlockItem(ORANGE_PURPLE_LINES.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> ORANGE_PURPLE_LINES_DIRECTIONAL_ITEM =
+        ITEMS.register("orange_purple_lines_directional",
+            () -> new BlockItem(ORANGE_PURPLE_LINES_DIRECTIONAL.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> TRAIN_MAX_SPEED_ITEM =
+        ITEMS.register("train_max_speed",
+            () -> new BlockItem(TRAIN_MAX_SPEED.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> HECTOMETER_SIGNAL_ITEM =
+        ITEMS.register("hectometer_signal",
+            () -> new BlockItem(HECTOMETER_SIGNAL.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> PARABRISAS_447_ITEM =
         ITEMS.register("parabrisas_447",
@@ -338,6 +377,9 @@ public class ModBlocks {
                 output.accept(PURPLE_SIDE_DIRECTIONAL_ITEM.get());
                 output.accept(CERCANIAS_LOGO_ITEM.get());
                 output.accept(CERCANIAS_LOGO_DIRECTIONAL_ITEM.get());
+                output.accept(ORANGE_PURPLE_LINES_ITEM.get());
+                output.accept(ORANGE_PURPLE_LINES_DIRECTIONAL_ITEM.get());
+                output.accept(TRAIN_MAX_SPEED_ITEM.get());
                 output.accept(PARABRISAS_447_ITEM.get());
                 output.accept(STATION_SIGNAL_ITEM.get());
                 output.accept(STATION_SIGNAL_PLAIN_ITEM.get());
@@ -353,6 +395,7 @@ public class ModBlocks {
             .icon(() -> SPEED_LIMIT_ITEM.get().getDefaultInstance())
             .displayItems((params, output) -> {
                 output.accept(PLATFORM_NUMBER_SIGNAL_ITEM.get());
+                output.accept(HECTOMETER_SIGNAL_ITEM.get());
                 output.accept(SPEED_LIMIT_ITEM.get());
                 output.accept(LTV_ITEM.get());
                 output.accept(LTV_END_ITEM.get());

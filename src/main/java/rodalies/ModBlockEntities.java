@@ -35,6 +35,22 @@ public class ModBlockEntities {
                     ModBlocks.NORMAL_SIGNAL_SHORT.get())
                 .build(null));
 
+    // Bloque de velocidad maxima (cubo de cuarzo): guarda su texto de hasta 4 caracteres.
+    public static final RegistryObject<BlockEntityType<TrainMaxSpeedBlockEntity>> TRAIN_MAX_SPEED_BE =
+        BLOCK_ENTITIES.register("train_max_speed",
+            () -> BlockEntityType.Builder.of(
+                    TrainMaxSpeedBlockEntity::new,
+                    ModBlocks.TRAIN_MAX_SPEED.get())
+                .build(null));
+
+    // Señal de hectometro (celda BOTTOM): guarda las 2 filas de texto.
+    public static final RegistryObject<BlockEntityType<HectometerSignBlockEntity>> HECTOMETER_BE =
+        BLOCK_ENTITIES.register("hectometer_signal",
+            () -> BlockEntityType.Builder.of(
+                    HectometerSignBlockEntity::new,
+                    ModBlocks.HECTOMETER_SIGNAL.get())
+                .build(null));
+
     // Puerta corredera: BlockEntity (solo LOWER) para la animacion de deslizamiento EN EL MUNDO
     // (temporizador de VISIBLE en el servidor + progreso del BER en el cliente).
     public static final RegistryObject<BlockEntityType<SlidingTrainDoorBlockEntity>> SLIDING_TRAIN_DOOR_BE =

@@ -21,6 +21,10 @@ public class ModBlockLootTables extends BlockLootSubProvider {
     @Override
     protected void generate() {
         dropSelf(ModBlocks.CERCANIAS_LOGO.get());
+        dropSelf(ModBlocks.ORANGE_PURPLE_LINES.get());
+        dropSelf(ModBlocks.ORANGE_PURPLE_LINES_DIRECTIONAL.get());
+        dropSelf(ModBlocks.TRAIN_MAX_SPEED.get());
+        dropSelf(ModBlocks.HECTOMETER_SIGNAL.get());
         dropSelf(ModBlocks.PARABRISAS_447.get());
         dropSelf(ModBlocks.STATION_SIGNAL.get());
         dropSelf(ModBlocks.STATION_SIGNAL_PLAIN.get());
@@ -51,6 +55,10 @@ public class ModBlockLootTables extends BlockLootSubProvider {
     protected Iterable<Block> getKnownBlocks() {
         return List.of(
                 ModBlocks.CERCANIAS_LOGO.get(),
+                ModBlocks.ORANGE_PURPLE_LINES.get(),
+                ModBlocks.ORANGE_PURPLE_LINES_DIRECTIONAL.get(),
+                ModBlocks.TRAIN_MAX_SPEED.get(),
+                ModBlocks.HECTOMETER_SIGNAL.get(),
                 ModBlocks.PARABRISAS_447.get(),
                 ModBlocks.STATION_SIGNAL.get(),
                 ModBlocks.STATION_SIGNAL_PLAIN.get(),

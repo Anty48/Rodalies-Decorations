@@ -1,14 +1,17 @@
-// 1.20.1	2026-08-31T12:17:11.2764821	Loot Tables
+// 1.20.1	2026-09-07T16:38:20.2928028	Loot Tables
 f4bbf98525ea925dc88532f51796d0eb41e3fd55 data/rodalies/loot_tables/blocks/apeadero_signal.json
 7372fea34db50ff4756abeac1df2d40d13dd24c3 data/rodalies/loot_tables/blocks/apeadero_signal_short.json
 f6cfb5dfd881134ee03f0122810c9a5df03d8e00 data/rodalies/loot_tables/blocks/base.json
 10c973a7ee0c409d83a429def0ce27536657d3ed data/rodalies/loot_tables/blocks/cercanias_logo.json
+c4ce29b8b51e38a7a7fa2d02768907d43097a50a data/rodalies/loot_tables/blocks/hectometer_signal.json
 92ba8f2446419d830ce46323033194ee39c0e7c5 data/rodalies/loot_tables/blocks/ltv.json
 03b4b103414b63054f0d14b18f74c3b4f3087ac0 data/rodalies/loot_tables/blocks/ltv_end.json
 d00354f745bdac892cd7dd33b3f98a411cb10129 data/rodalies/loot_tables/blocks/ltv_end_short.json
 7ee30c97f35530d03711dc5a0ec38efad9dcf2e4 data/rodalies/loot_tables/blocks/ltv_short.json
 9b15c0dcf07a0b8fbcf0b7cd9cdf8707ae2fe63e data/rodalies/loot_tables/blocks/normal_signal.json
 1dc830837d3533a68f07a9fd2e3057cf7d39f654 data/rodalies/loot_tables/blocks/normal_signal_short.json
+371c239bfc5aebb6e0097c87da9d06594fea7787 data/rodalies/loot_tables/blocks/orange_purple_lines.json
+28692f51ba9af3d2474be9449ad1b99f11548cb1 data/rodalies/loot_tables/blocks/orange_purple_lines_directional.json
 cf93f00662b76caf2dca3732871df559f2b67bb1 data/rodalies/loot_tables/blocks/parabrisas_447.json
 a31194e5363250e722ed1d2c3141c48e3d018b32 data/rodalies/loot_tables/blocks/platform_number_signal.json
 963db605ad95ee51aebbda9248965aade87dd17e data/rodalies/loot_tables/blocks/silbato_signal.json
@@ -21,3 +24,4 @@ bbd9c0163b282f900c604bd94eb5ff25e0d59579 data/rodalies/loot_tables/blocks/statio
 0c4915cf19e1e9aa1effabbea4164868c8e1c7ae data/rodalies/loot_tables/blocks/station_signal_plain.json
 5faaa89ab26a482bcff91a76f609e3c0009bccca data/rodalies/loot_tables/blocks/stop_signal.json
 ff270f501728d72945155f5e4375c7f564ba9b56 data/rodalies/loot_tables/blocks/stop_signal_short.json
+859cffd1181df3dd922e17141af47375e9d29ff7 data/rodalies/loot_tables/blocks/train_max_speed.json

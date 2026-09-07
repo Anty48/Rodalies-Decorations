@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_orange_purple_lines_directional": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "rodalies:orange_purple_lines_directional"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "rodalies:orange_purple_lines_from_orange_purple_lines_directional"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_orange_purple_lines_directional",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "rodalies:orange_purple_lines_from_orange_purple_lines_directional"
+    ]
+  },
+  "sends_telemetry_event": false
+}

@@ -29,5 +29,10 @@ public class ModNetwork {
                 .decoder(RailSignUpdatePacket::new)
                 .consumerMainThread(RailSignUpdatePacket::handle)
                 .add();
+        CHANNEL.messageBuilder(SignTextPacket.class, id++)
+                .encoder(SignTextPacket::encode)
+                .decoder(SignTextPacket::new)
+                .consumerMainThread(SignTextPacket::handle)
+                .add();
     }
 }

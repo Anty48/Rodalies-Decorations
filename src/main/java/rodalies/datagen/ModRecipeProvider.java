@@ -42,6 +42,42 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_smooth_quartz", has(Blocks.SMOOTH_QUARTZ))
                 .save(writer);
 
+        // Franja naranja+morada: cuarzo normal + tinte naranja + tinte lila (en cualquier disposicion).
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.ORANGE_PURPLE_LINES.get(), 1)
+                .requires(Blocks.QUARTZ_BLOCK)
+                .requires(Items.ORANGE_DYE)
+                .requires(Items.PURPLE_DYE)
+                .unlockedBy("has_quartz_block", has(Blocks.QUARTZ_BLOCK))
+                .save(writer);
+
+        // Conversion 1:1 franja de 4 caras <-> franja de 1 cara (sin gastar materiales), como los logos.
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.ORANGE_PURPLE_LINES_DIRECTIONAL.get(), 1)
+                .requires(ModBlocks.ORANGE_PURPLE_LINES.get())
+                .unlockedBy("has_orange_purple_lines", has(ModBlocks.ORANGE_PURPLE_LINES.get()))
+                .save(writer, new ResourceLocation("rodalies", "orange_purple_lines_directional_from_orange_purple_lines"));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.ORANGE_PURPLE_LINES.get(), 1)
+                .requires(ModBlocks.ORANGE_PURPLE_LINES_DIRECTIONAL.get())
+                .unlockedBy("has_orange_purple_lines_directional", has(ModBlocks.ORANGE_PURPLE_LINES_DIRECTIONAL.get()))
+                .save(writer, new ResourceLocation("rodalies", "orange_purple_lines_from_orange_purple_lines_directional"));
+
+        // Bloque de velocidad maxima: cuarzo normal (Q) con un tinte negro (D) encima (el rombo).
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModBlocks.TRAIN_MAX_SPEED.get(), 1)
+                .pattern("D")
+                .pattern("Q")
+                .define('D', Items.BLACK_DYE)
+                .define('Q', Blocks.QUARTZ_BLOCK)
+                .unlockedBy("has_quartz_block", has(Blocks.QUARTZ_BLOCK))
+                .save(writer);
+
+        // Señal de hectometro: 3 dioritas en columna.
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModBlocks.HECTOMETER_SIGNAL.get(), 1)
+                .pattern("D")
+                .pattern("D")
+                .pattern("D")
+                .define('D', Blocks.DIORITE)
+                .unlockedBy("has_diorite", has(Blocks.DIORITE))
+                .save(writer);
+
         // Parabrisas 447: lingote de hierro (L) arriba, fila de 3 cristales tintados negros (C).
         ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModBlocks.PARABRISAS_447.get(), 1)
                 .pattern(" L ")

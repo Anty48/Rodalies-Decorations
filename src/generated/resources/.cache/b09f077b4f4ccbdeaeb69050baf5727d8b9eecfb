@@ -1,4 +1,7 @@
-// 1.20.1	2026-07-21T20:53:13.0273445	Block States: rodalies
+// 1.20.1	2026-09-07T16:38:20.2917916	Block States: rodalies
 f7f941c04c9669fd9c65410f306fb540cbb14684 assets/rodalies/blockstates/cercanias_logo.json
+a75c5f62db06cf1e95069206b298dfbf6f2cacc8 assets/rodalies/blockstates/orange_purple_lines.json
 7854513b86211847aa19fda2c02d4d1a4162d4a3 assets/rodalies/models/block/cercanias_logo.json
+f77148434b8077ab304d91d0a60c5825f30c2187 assets/rodalies/models/block/orange_purple_lines.json
 b3f02f7b048633a52d223197823cb909cb7bece7 assets/rodalies/models/item/cercanias_logo.json
+e8cde0b427f0efee0e18860b1d681a4bbc00ca7e assets/rodalies/models/item/orange_purple_lines.json

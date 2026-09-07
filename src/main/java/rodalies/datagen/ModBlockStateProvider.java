@@ -27,5 +27,12 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 "cercanias_logo", side, topBottom, topBottom);
 
         simpleBlockWithItem(ModBlocks.CERCANIAS_LOGO.get(), cercaniasModel);
+
+        // Franja naranja+morada: laterales con la franja, top/bottom smooth quartz (cube_bottom_top).
+        // Nota: el cuarzo liso reutiliza la textura quartz_block_bottom (no existe smooth_quartz.png).
+        ResourceLocation smoothQuartz = mcLoc("block/quartz_block_bottom");
+        ModelFile linesModel = models().cubeBottomTop(
+                "orange_purple_lines", modLoc("block/orange_purple_lines"), smoothQuartz, smoothQuartz);
+        simpleBlockWithItem(ModBlocks.ORANGE_PURPLE_LINES.get(), linesModel);
     }
 }

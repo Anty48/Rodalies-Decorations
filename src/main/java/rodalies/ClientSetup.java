@@ -7,9 +7,11 @@ import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import rodalies.client.HectometerSignRenderer;
 import rodalies.client.RailSignRenderer;
 import rodalies.client.SlidingTrainDoorRenderer;
 import rodalies.client.StationSignalRenderer;
+import rodalies.client.TrainMaxSpeedRenderer;
 
 /**
  * Configuracion solo-cliente. Aqui asignamos el render layer de los bloques que lo necesitan
@@ -35,6 +37,10 @@ public class ClientSetup {
         event.registerBlockEntityRenderer(ModBlockEntities.STATION_SIGNAL_BE.get(), StationSignalRenderer::new);
         // Renderer del texto de las señales ferroviarias (via, velocidad, LVT, cartel).
         event.registerBlockEntityRenderer(ModBlockEntities.RAIL_SIGN_BE.get(), RailSignRenderer::new);
+        // Texto (<=4) del bloque de velocidad maxima, centrado en el rombo.
+        event.registerBlockEntityRenderer(ModBlockEntities.TRAIN_MAX_SPEED_BE.get(), TrainMaxSpeedRenderer::new);
+        // Dos filas de texto de la señal de hectometro.
+        event.registerBlockEntityRenderer(ModBlockEntities.HECTOMETER_BE.get(), HectometerSignRenderer::new);
         // Anima el deslizamiento de las hojas de la puerta en el mundo (con VISIBLE=false).
         event.registerBlockEntityRenderer(ModBlockEntities.SLIDING_TRAIN_DOOR_BE.get(), SlidingTrainDoorRenderer::new);
     }

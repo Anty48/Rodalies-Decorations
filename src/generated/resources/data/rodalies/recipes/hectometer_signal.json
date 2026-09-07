@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "item": "minecraft:diorite"
+    }
+  },
+  "pattern": [
+    "D",
+    "D",
+    "D"
+  ],
+  "result": {
+    "item": "rodalies:hectometer_signal"
+  },
+  "show_notification": true
+}
