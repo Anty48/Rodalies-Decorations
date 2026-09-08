@@ -6,6 +6,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.registries.DeferredRegister;
@@ -81,6 +82,47 @@ public class ModBlocks {
     public static final RegistryObject<Block> ORANGE_PURPLE_LINES_DIRECTIONAL =
         BLOCKS.register("orange_purple_lines_directional",
             () -> new DirectionalLogoBlock(BlockBehaviour.Properties.of().strength(0.8f)));
+
+    // Variante "bottom": misma idea que orange_purple_lines pero con la franja pegada abajo (naranja
+    // encima de morada, en el tercio inferior). Caras laterales con textura propia; top/bottom smooth quartz.
+    public static final RegistryObject<Block> ORANGE_PURPLE_LINES_BOTTOM =
+        BLOCKS.register("orange_purple_lines_bottom",
+            () -> new Block(BlockBehaviour.Properties.of().strength(0.8f)));
+
+    // "Bottom" de una cara: la franja inferior SOLO en la cara frontal (DirectionalLogoBlock).
+    public static final RegistryObject<Block> ORANGE_PURPLE_LINES_BOTTOM_DIRECTIONAL =
+        BLOCKS.register("orange_purple_lines_bottom_directional",
+            () -> new DirectionalLogoBlock(BlockBehaviour.Properties.of().strength(0.8f)));
+
+    // Franja doble sobre hormigon gris: caras laterales con la franja, cara superior gray concrete y
+    // cara inferior smooth quartz. Solo existe en version de caras iguales (sin variante de una cara).
+    public static final RegistryObject<Block> DOUBLE_LINES_GRAY_CONCRETE =
+        BLOCKS.register("double_lines_gray_concrete",
+            () -> new Block(BlockBehaviour.Properties.of().strength(0.8f)));
+
+    // Luz de tren: bloque luminoso (luz 15) con las mismas caracteristicas que la sea lantern (blando,
+    // sonido de cristal). Todas las caras iguales. Se craftea 4 con hierro en cruz + antorcha al centro.
+    public static final RegistryObject<Block> TRAIN_LIGHT =
+        BLOCKS.register("train_light",
+            () -> new Block(BlockBehaviour.Properties.of()
+                .strength(0.3f)
+                .sound(SoundType.GLASS)
+                .lightLevel(s -> 15)));
+
+    // Luz frontal de tren: bloque tipo hormigon gris que tambien ilumina (luz 15). Caras laterales con
+    // la textura de faros frontales; top/bottom gray concrete. NO confundir con la luz de tren.
+    public static final RegistryObject<Block> FRONT_LIGHT =
+        BLOCKS.register("front_light",
+            () -> new Block(BlockBehaviour.Properties.of()
+                .strength(1.8f)
+                .lightLevel(s -> 15)));
+
+    // Ventana de tren: bloque de cristal (todas las propiedades del cristal vanilla) con las caras
+    // laterales de train_window (cristal tintado semitransparente) y top/bottom smooth quartz. Render
+    // translucido en ClientSetup + noOcclusion para que no recorte lo de detras.
+    public static final RegistryObject<Block> TRAIN_WINDOW =
+        BLOCKS.register("train_window",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.GLASS).noOcclusion()));
 
     // Parabrisas del 447: multiblock 3x1x1 con cristal tintado (render translucido en ClientSetup).
     public static final RegistryObject<Block> PARABRISAS_447 =
@@ -266,6 +308,26 @@ public class ModBlocks {
         ITEMS.register("orange_purple_lines_directional",
             () -> new BlockItem(ORANGE_PURPLE_LINES_DIRECTIONAL.get(), new Item.Properties()));
 
+    public static final RegistryObject<Item> ORANGE_PURPLE_LINES_BOTTOM_ITEM =
+        ITEMS.register("orange_purple_lines_bottom",
+            () -> new BlockItem(ORANGE_PURPLE_LINES_BOTTOM.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> ORANGE_PURPLE_LINES_BOTTOM_DIRECTIONAL_ITEM =
+        ITEMS.register("orange_purple_lines_bottom_directional",
+            () -> new BlockItem(ORANGE_PURPLE_LINES_BOTTOM_DIRECTIONAL.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> DOUBLE_LINES_GRAY_CONCRETE_ITEM =
+        ITEMS.register("double_lines_gray_concrete",
+            () -> new BlockItem(DOUBLE_LINES_GRAY_CONCRETE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> TRAIN_LIGHT_ITEM =
+        ITEMS.register("train_light",
+            () -> new BlockItem(TRAIN_LIGHT.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> FRONT_LIGHT_ITEM =
+        ITEMS.register("front_light",
+            () -> new BlockItem(FRONT_LIGHT.get(), new Item.Properties()));
+
     public static final RegistryObject<Item> TRAIN_MAX_SPEED_ITEM =
         ITEMS.register("train_max_speed",
             () -> new BlockItem(TRAIN_MAX_SPEED.get(), new Item.Properties()));
@@ -273,6 +335,10 @@ public class ModBlocks {
     public static final RegistryObject<Item> HECTOMETER_SIGNAL_ITEM =
         ITEMS.register("hectometer_signal",
             () -> new BlockItem(HECTOMETER_SIGNAL.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> TRAIN_WINDOW_ITEM =
+        ITEMS.register("train_window",
+            () -> new BlockItem(TRAIN_WINDOW.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> PARABRISAS_447_ITEM =
         ITEMS.register("parabrisas_447",
@@ -379,7 +445,13 @@ public class ModBlocks {
                 output.accept(CERCANIAS_LOGO_DIRECTIONAL_ITEM.get());
                 output.accept(ORANGE_PURPLE_LINES_ITEM.get());
                 output.accept(ORANGE_PURPLE_LINES_DIRECTIONAL_ITEM.get());
+                output.accept(ORANGE_PURPLE_LINES_BOTTOM_ITEM.get());
+                output.accept(ORANGE_PURPLE_LINES_BOTTOM_DIRECTIONAL_ITEM.get());
+                output.accept(DOUBLE_LINES_GRAY_CONCRETE_ITEM.get());
+                output.accept(TRAIN_LIGHT_ITEM.get());
+                output.accept(FRONT_LIGHT_ITEM.get());
                 output.accept(TRAIN_MAX_SPEED_ITEM.get());
+                output.accept(TRAIN_WINDOW_ITEM.get());
                 output.accept(PARABRISAS_447_ITEM.get());
                 output.accept(STATION_SIGNAL_ITEM.get());
                 output.accept(STATION_SIGNAL_PLAIN_ITEM.get());

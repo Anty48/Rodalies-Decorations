@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "render_type": "minecraft:translucent",
+  "textures": {
+    "bottom": "minecraft:block/quartz_block_bottom",
+    "side": "rodalies:block/train_window",
+    "top": "minecraft:block/quartz_block_bottom"
+  }
+}

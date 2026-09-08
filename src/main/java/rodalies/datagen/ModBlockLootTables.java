@@ -23,6 +23,12 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(ModBlocks.CERCANIAS_LOGO.get());
         dropSelf(ModBlocks.ORANGE_PURPLE_LINES.get());
         dropSelf(ModBlocks.ORANGE_PURPLE_LINES_DIRECTIONAL.get());
+        dropSelf(ModBlocks.ORANGE_PURPLE_LINES_BOTTOM.get());
+        dropSelf(ModBlocks.ORANGE_PURPLE_LINES_BOTTOM_DIRECTIONAL.get());
+        dropSelf(ModBlocks.DOUBLE_LINES_GRAY_CONCRETE.get());
+        dropSelf(ModBlocks.TRAIN_LIGHT.get());
+        dropSelf(ModBlocks.FRONT_LIGHT.get());
+        dropSelf(ModBlocks.TRAIN_WINDOW.get());
         dropSelf(ModBlocks.TRAIN_MAX_SPEED.get());
         dropSelf(ModBlocks.HECTOMETER_SIGNAL.get());
         dropSelf(ModBlocks.PARABRISAS_447.get());
@@ -57,6 +63,12 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                 ModBlocks.CERCANIAS_LOGO.get(),
                 ModBlocks.ORANGE_PURPLE_LINES.get(),
                 ModBlocks.ORANGE_PURPLE_LINES_DIRECTIONAL.get(),
+                ModBlocks.ORANGE_PURPLE_LINES_BOTTOM.get(),
+                ModBlocks.ORANGE_PURPLE_LINES_BOTTOM_DIRECTIONAL.get(),
+                ModBlocks.DOUBLE_LINES_GRAY_CONCRETE.get(),
+                ModBlocks.TRAIN_LIGHT.get(),
+                ModBlocks.FRONT_LIGHT.get(),
+                ModBlocks.TRAIN_WINDOW.get(),
                 ModBlocks.TRAIN_MAX_SPEED.get(),
                 ModBlocks.HECTOMETER_SIGNAL.get(),
                 ModBlocks.PARABRISAS_447.get(),

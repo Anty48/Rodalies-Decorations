@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "rodalies:front_light"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_train_light": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "rodalies:train_light"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_train_light",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "rodalies:front_light"
+    ]
+  },
+  "sends_telemetry_event": false
+}

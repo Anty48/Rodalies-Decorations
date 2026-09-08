@@ -5,6 +5,9 @@ Mod de Minecraft (**Forge 1.20.1**) con bloques decorativos de temática ferrovi
 ## Bloques
 
 - Logos (R de Rodalies, Renfe, Cercanías) y cuarzo con línea púrpura
+- Franjas decorativas (naranja+morada centrada/inferior, doble sobre hormigón gris), con
+  variantes *de una cara*
+- Luces de tren (luz de tren y faro frontal) y **ventana de tren** (cristal translúcido)
 - Parabrisas de tren (multiblock 3×1 con modelo 3D y cristal translúcido)
 - Carteles de estación (Rodalies y genérico) y de número de vía, con texto editable
 - **Señales ferroviarias** con texto editable y versiones *short*: velocidad, LTV, fin de LTV,

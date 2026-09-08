@@ -26,6 +26,8 @@ public class ClientSetup {
             // El cristal tintado necesita render translucido; sin esto Forge trata el bloque
             // como solido y "recorta" lo que hay detras.
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.PARABRISAS_447.get(), RenderType.translucent());
+            // Ventana de tren: cristal tintado semitransparente -> capa translucida.
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.TRAIN_WINDOW.get(), RenderType.translucent());
             // Las puertas correderas se dibujan siempre por su BER (nunca en el mesh del chunk), asi que no
             // necesitan render layer aqui; el BER ya pinta el cristal en la capa translucida de bloque.
         });

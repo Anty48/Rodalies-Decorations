@@ -42,11 +42,27 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_smooth_quartz", has(Blocks.SMOOTH_QUARTZ))
                 .save(writer);
 
-        // Franja naranja+morada: cuarzo normal + tinte naranja + tinte lila (en cualquier disposicion).
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.ORANGE_PURPLE_LINES.get(), 1)
-                .requires(Blocks.QUARTZ_BLOCK)
-                .requires(Items.ORANGE_DYE)
-                .requires(Items.PURPLE_DYE)
+        // Franja naranja+morada CENTRADA: columna vertical de cuarzo (abajo) + 2 tintes encima. Leida de
+        // abajo arriba es cuarzo-naranja-morada; asi se distingue de la variante "bottom" (columna al reves).
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.ORANGE_PURPLE_LINES.get(), 1)
+                .pattern("O")
+                .pattern("P")
+                .pattern("Q")
+                .define('O', Items.ORANGE_DYE)
+                .define('P', Items.PURPLE_DYE)
+                .define('Q', Blocks.QUARTZ_BLOCK)
+                .unlockedBy("has_quartz_block", has(Blocks.QUARTZ_BLOCK))
+                .save(writer);
+
+        // Franja naranja+morada BOTTOM: la misma columna al reves (tinte-tinte-cuarzo leido de abajo arriba),
+        // es decir cuarzo arriba y los tintes debajo. Rinde la version con la franja pegada abajo.
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.ORANGE_PURPLE_LINES_BOTTOM.get(), 1)
+                .pattern("Q")
+                .pattern("O")
+                .pattern("P")
+                .define('O', Items.ORANGE_DYE)
+                .define('P', Items.PURPLE_DYE)
+                .define('Q', Blocks.QUARTZ_BLOCK)
                 .unlockedBy("has_quartz_block", has(Blocks.QUARTZ_BLOCK))
                 .save(writer);
 
@@ -59,6 +75,47 @@ public class ModRecipeProvider extends RecipeProvider {
                 .requires(ModBlocks.ORANGE_PURPLE_LINES_DIRECTIONAL.get())
                 .unlockedBy("has_orange_purple_lines_directional", has(ModBlocks.ORANGE_PURPLE_LINES_DIRECTIONAL.get()))
                 .save(writer, new ResourceLocation("rodalies", "orange_purple_lines_from_orange_purple_lines_directional"));
+
+        // Conversion 1:1 de la variante "bottom" (4 caras <-> 1 cara).
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.ORANGE_PURPLE_LINES_BOTTOM_DIRECTIONAL.get(), 1)
+                .requires(ModBlocks.ORANGE_PURPLE_LINES_BOTTOM.get())
+                .unlockedBy("has_orange_purple_lines_bottom", has(ModBlocks.ORANGE_PURPLE_LINES_BOTTOM.get()))
+                .save(writer, new ResourceLocation("rodalies", "orange_purple_lines_bottom_directional_from_orange_purple_lines_bottom"));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.ORANGE_PURPLE_LINES_BOTTOM.get(), 1)
+                .requires(ModBlocks.ORANGE_PURPLE_LINES_BOTTOM_DIRECTIONAL.get())
+                .unlockedBy("has_orange_purple_lines_bottom_directional", has(ModBlocks.ORANGE_PURPLE_LINES_BOTTOM_DIRECTIONAL.get()))
+                .save(writer, new ResourceLocation("rodalies", "orange_purple_lines_bottom_from_orange_purple_lines_bottom_directional"));
+
+        // Franja doble sobre gray concrete: hormigon gris + franja "bottom" (en cualquier disposicion).
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.DOUBLE_LINES_GRAY_CONCRETE.get(), 1)
+                .requires(Blocks.GRAY_CONCRETE)
+                .requires(ModBlocks.ORANGE_PURPLE_LINES_BOTTOM.get())
+                .unlockedBy("has_orange_purple_lines_bottom", has(ModBlocks.ORANGE_PURPLE_LINES_BOTTOM.get()))
+                .save(writer);
+
+        // Luz de tren: 4 hierros en cruz con una antorcha al centro -> 4 luces.
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.TRAIN_LIGHT.get(), 4)
+                .pattern(" I ")
+                .pattern("ITI")
+                .pattern(" I ")
+                .define('I', Items.IRON_INGOT)
+                .define('T', Items.TORCH)
+                .unlockedBy("has_iron_ingot", has(Items.IRON_INGOT))
+                .save(writer);
+
+        // Luz frontal de tren: hormigon gris + luz de tren (en cualquier disposicion).
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.FRONT_LIGHT.get(), 1)
+                .requires(Blocks.GRAY_CONCRETE)
+                .requires(ModBlocks.TRAIN_LIGHT.get())
+                .unlockedBy("has_train_light", has(ModBlocks.TRAIN_LIGHT.get()))
+                .save(writer);
+
+        // Ventana de tren: 1 bloque de cuarzo + 1 cristal, en cualquier disposicion (shapeless).
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.TRAIN_WINDOW.get(), 1)
+                .requires(Blocks.QUARTZ_BLOCK)
+                .requires(Blocks.GLASS)
+                .unlockedBy("has_glass", has(Blocks.GLASS))
+                .save(writer);
 
         // Bloque de velocidad maxima: cuarzo normal (Q) con un tinte negro (D) encima (el rombo).
         ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModBlocks.TRAIN_MAX_SPEED.get(), 1)

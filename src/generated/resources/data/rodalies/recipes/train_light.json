@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "T": {
+      "item": "minecraft:torch"
+    }
+  },
+  "pattern": [
+    " I ",
+    "ITI",
+    " I "
+  ],
+  "result": {
+    "count": 4,
+    "item": "rodalies:train_light"
+  },
+  "show_notification": true
+}

@@ -1,18 +1,24 @@
 {
-  "type": "minecraft:crafting_shapeless",
+  "type": "minecraft:crafting_shaped",
   "category": "building",
-  "ingredients": [
-    {
-      "item": "minecraft:quartz_block"
-    },
-    {
+  "key": {
+    "O": {
       "item": "minecraft:orange_dye"
     },
-    {
+    "P": {
       "item": "minecraft:purple_dye"
+    },
+    "Q": {
+      "item": "minecraft:quartz_block"
     }
+  },
+  "pattern": [
+    "O",
+    "P",
+    "Q"
   ],
   "result": {
     "item": "rodalies:orange_purple_lines"
-  }
+  },
+  "show_notification": true
 }
