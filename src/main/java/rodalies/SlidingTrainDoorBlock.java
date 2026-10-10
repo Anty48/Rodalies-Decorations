@@ -2,6 +2,7 @@ package rodalies;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -91,16 +92,36 @@ public class SlidingTrainDoorBlock extends DoorBlock implements EntityBlock {
     // o cerrada, para el contorno de seleccion; y como COLISION solo cuando esta cerrada.
     private static final VoxelShape DOOR_NORTH = Block.box(0, 0, 0, 16, 16, 2);
 
+    /** Texturas por defecto de las hojas (puerta naranja original): izquierda y derecha distintas. */
+    private static final ResourceLocation DEFAULT_TEX_LEFT = new ResourceLocation("rodalies", "block/door_left");
+    private static final ResourceLocation DEFAULT_TEX_RIGHT = new ResourceLocation("rodalies", "block/door_right");
+    /** Textura por defecto del techo (cara up): hormigon gris para la puerta naranja original. */
+    private static final ResourceLocation DEFAULT_TEX_TOP = new ResourceLocation("minecraft", "block/gray_concrete");
+
     /**
      * Si true, la puerta al abrir se desplaza un poco hacia ADELANTE (-Z, hacia el jugador que la
      * coloco) antes de correrse a los lados; si false, hacia ATRAS (+Z). Solo afecta al render.
      */
     private final boolean openForward;
 
+    /** Texturas de las hojas izquierda/derecha; las lee el BER. Permiten reskinear la misma puerta. */
+    private final ResourceLocation texLeft;
+    private final ResourceLocation texRight;
+    /** Textura del techo (cara up), independiente de las hojas; la lee el BER. */
+    private final ResourceLocation texTop;
+
     public SlidingTrainDoorBlock(Properties properties, boolean openForward) {
+        this(properties, openForward, DEFAULT_TEX_LEFT, DEFAULT_TEX_RIGHT, DEFAULT_TEX_TOP);
+    }
+
+    public SlidingTrainDoorBlock(Properties properties, boolean openForward,
+                                 ResourceLocation texLeft, ResourceLocation texRight, ResourceLocation texTop) {
         // TRAIN_DOOR_SET: metalica pero abrible a mano -> se abre con clic derecho tambien sobre un tren.
         super(properties, TRAIN_DOOR_SET);
         this.openForward = openForward;
+        this.texLeft = texLeft;
+        this.texRight = texRight;
+        this.texTop = texTop;
         registerDefaultState(stateDefinition.any()
                 .setValue(FACING, Direction.NORTH)
                 .setValue(OPEN, false)
@@ -112,6 +133,21 @@ public class SlidingTrainDoorBlock extends DoorBlock implements EntityBlock {
     /** true = se abre hacia adelante; false = hacia atras. Lo consulta el renderer. */
     public boolean isOpenForward() {
         return openForward;
+    }
+
+    /** Textura de la hoja izquierda. La lee el BER (misma puerta, distinto skin). */
+    public ResourceLocation getTexLeft() {
+        return texLeft;
+    }
+
+    /** Textura de la hoja derecha. La lee el BER. */
+    public ResourceLocation getTexRight() {
+        return texRight;
+    }
+
+    /** Textura del techo (cara up). La lee el BER. */
+    public ResourceLocation getTexTop() {
+        return texTop;
     }
 
     @Override

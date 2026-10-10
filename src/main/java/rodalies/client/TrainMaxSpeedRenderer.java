@@ -3,11 +3,12 @@ package rodalies.client;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.renderer.LightTexture;
+import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.Direction;
+import net.minecraft.world.level.Level;
 import org.joml.Matrix4f;
 import rodalies.TrainMaxSpeedBlock;
 import rodalies.TrainMaxSpeedBlockEntity;
@@ -20,7 +21,7 @@ import rodalies.TrainMaxSpeedBlockEntity;
 public class TrainMaxSpeedRenderer implements BlockEntityRenderer<TrainMaxSpeedBlockEntity> {
 
     private static final float Z_OFFSET = 0.02f;
-    // Gris del contorno del rombo. Aclarado un poco a peticion del usuario (antes se veia muy negro).
+    // Gris del contorno del rombo (mismo hex que la textura); se sombrea/ilumina como la cara.
     private static final int TEXT_COLOR = 0xFF8E8D8C;
 
     // Centro del rombo en la cara frontal. Analizando la textura, el rombo esta centrado en x=8 y
@@ -53,14 +54,30 @@ public class TrainMaxSpeedRenderer implements BlockEntityRenderer<TrainMaxSpeedB
         pose.mulPose(Axis.YP.rotationDegrees(-blockstateY(facing)));
         pose.translate(-0.5, -0.5, -0.5);
 
-        // Dibujar a brillo pleno para que el hex TEXT_COLOR se aplique EXACTAMENTE, sin que la luz del
-        // entorno (packedLight) lo oscurezca hasta verse casi negro. Texto en la cara norte, centrado.
+        // Iluminar el texto igual que la cara frontal del cubo: con la luz de la celda de DELANTE (la del
+        // propio cubo solido es 0 -> por eso packedLight lo dejaba casi negro) y con el sombreado que
+        // Minecraft aplica a esa cara (0.8 norte/sur, 0.6 este/oeste). A brillo pleno el gris "brillaba".
+        int light = packedLight;
+        int color = TEXT_COLOR;
+        Level level = be.getLevel();
+        if (level != null) {
+            light = LevelRenderer.getLightColor(level, be.getBlockPos().relative(facing));
+            color = shaded(TEXT_COLOR, level.getShade(facing, true));
+        }
         pose.translate(CX / 16f, CY / 16f, FACE_Z / 16f);
         pose.mulPose(Axis.YP.rotationDegrees(180f)); // la fuente mira a +Z; girar para mirar al norte
         pose.translate(0, 0, Z_OFFSET);
-        drawCentered(pose, buffer, text, TEXT_COLOR, LightTexture.FULL_BRIGHT);
+        drawCentered(pose, buffer, text, color, light);
 
         pose.popPose();
+    }
+
+    /** Multiplica los canales RGB de un ARGB por 'shade' (como hace el render de bloques con cada cara). */
+    private static int shaded(int argb, float shade) {
+        int r = Math.round(((argb >> 16) & 0xFF) * shade);
+        int g = Math.round(((argb >> 8) & 0xFF) * shade);
+        int b = Math.round((argb & 0xFF) * shade);
+        return (argb & 0xFF000000) | (r << 16) | (g << 8) | b;
     }
 
     private void drawCentered(PoseStack pose, MultiBufferSource buffer, String line, int color, int light) {

@@ -32,12 +32,14 @@ public final class CreateCompat {
 
     private CreateCompat() {}
 
-    /** Registra el MovementBehaviour de estacion de Create para nuestras dos puertas. */
+    /** Registra el MovementBehaviour de estacion de Create para todas nuestras puertas (naranjas y blancas). */
     public static void register() {
         try {
             SlidingDoorMovementBehaviour behaviour = new SlidingDoorMovementBehaviour();
             MovementBehaviour.REGISTRY.register(ModBlocks.SLIDING_TRAIN_DOOR.get(), behaviour);
             MovementBehaviour.REGISTRY.register(ModBlocks.SLIDING_TRAIN_DOOR_BACK.get(), behaviour);
+            MovementBehaviour.REGISTRY.register(ModBlocks.WHITE_SLIDING_TRAIN_DOOR.get(), behaviour);
+            MovementBehaviour.REGISTRY.register(ModBlocks.WHITE_SLIDING_TRAIN_DOOR_BACK.get(), behaviour);
             LOGGER.info("[rodalies] Create detectado: la puerta corredera se abrira al parar en estacion.");
         } catch (Throwable t) {
             LOGGER.warn("[rodalies] No se pudo activar la apertura en estacion de la puerta (version de "

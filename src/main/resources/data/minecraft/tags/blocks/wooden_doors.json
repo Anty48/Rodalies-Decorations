@@ -2,6 +2,8 @@
   "replace": false,
   "values": [
     "rodalies:sliding_train_door",
-    "rodalies:sliding_train_door_back"
+    "rodalies:sliding_train_door_back",
+    "rodalies:white_sliding_train_door",
+    "rodalies:white_sliding_train_door_back"
   ]
 }

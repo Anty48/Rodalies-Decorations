@@ -6,6 +6,7 @@ import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
@@ -54,7 +55,11 @@ public class RailSignBlockEntity extends BlockEntity {
 
     /** El tipo de señal (de que bloque cuelga este BE), para saber limites de texto y estilo. */
     public RailSignType getSignType() {
-        return getBlockState().getBlock() instanceof RailSignBlock b ? b.getSignType() : RailSignType.NORMAL;
+        Block block = getBlockState().getBlock();
+        if (block instanceof RailSignBlock b) {
+            return b.getSignType();
+        }
+        return block instanceof RailSignWallBlock w ? w.getSignType() : RailSignType.NORMAL;
     }
 
     /** Cambia el texto y fuerza guardado + sincronizacion a los clientes (llamar en el servidor). */

@@ -12,6 +12,7 @@ import org.joml.Matrix4f;
 import rodalies.RailSignBlock;
 import rodalies.RailSignBlockEntity;
 import rodalies.RailSignType;
+import rodalies.RailSignWallBlock;
 import rodalies.SpeedLimitBlock;
 
 import java.util.ArrayList;
@@ -48,16 +49,21 @@ public class RailSignRenderer implements BlockEntityRenderer<RailSignBlockEntity
     private static final float VIA_DBL_CZ_BACK = 2.5f;
 
     // --- Rombos de velocidad (Speed_limit y LTV): cara frontal norte, texto horizontal centrado ---
-    // Base en el poste (x=8) con medio pixel a la derecha del observador (-X) y 1px abajo (-Y).
-    private static final float DIAMOND_CX = 7.5f;
+    // Centro del rombo en x=8.02 (centrado en el poste); el texto va ~0.4px a la derecha del
+    // observador (-X) y 0.75px por debajo del centro, como estaba ajustado a ojo.
+    private static final float DIAMOND_CX = 7.6f;
     private static final float DIAMOND_CY = 25.614f;  // centro vertical de la LTV (subido 0.25px)
     private static final float SPEED_CY = 25.614f;    // velocidad normal (bajada 0.25px respecto a antes)
     private static final float DIAMOND_FACE_Z = 6f;  // cara frontal (norte)
-    // En la triple la señal central se movio 0.6px hacia atras (evita z-fighting): su texto tambien.
-    private static final float DIAMOND_FACE_Z_BACK = 6.6f;
-    // Reducidos un 15% respecto al panel: con 2 digitos el texto se veia demasiado grande.
-    private static final float DIAMOND_MAX_W = 9.35f;
-    private static final float DIAMOND_MAX_H = 6.8f;
+    // En la triple la señal central esta 0.05px hacia atras (evita z-fighting): su texto tambien.
+    private static final float DIAMOND_FACE_Z_BACK = 6.05f;
+    // Rombos reducidos (velocidad 15->14px, LTV 13->12px): el texto se escala igual (~x0.93).
+    private static final float DIAMOND_MAX_W = 8.7f;
+    private static final float DIAMOND_MAX_H = 6.3f;
+
+    // --- Versiones de pared: el modelo baja 1 celda y se pega a z=16 (+ el hueco hasta el soporte) ---
+    private static final float WALL_DZ_DIAMOND = 8.4f; // velocidad y LTV (trasera en z=7.6)
+    private static final float WALL_DZ_NORMAL = 8.5f;  // cartel cuadrado (trasera en z=7.5)
     private static final float DIAMOND_TEXT_ROT = 0f; // 45/-45 si se quisiera el texto inclinado
 
     // --- Cartel normal (cuadrado blanco, hasta 2 lineas): base en el poste + 0.5px derecha / 1px abajo ---
@@ -99,6 +105,12 @@ public class RailSignRenderer implements BlockEntityRenderer<RailSignBlockEntity
         pose.translate(0.5, 0.5, 0.5);
         pose.mulPose(Axis.YP.rotationDegrees(-blockstateY(facing)));
         pose.translate(-0.5, -0.5, -0.5);
+        if (be.getBlockState().getBlock() instanceof RailSignWallBlock) {
+            // Misma geometria que en el poste, movida igual que el modelo de pared (+ offset en 1/2 px).
+            float dz = (type == RailSignType.NORMAL ? WALL_DZ_NORMAL : WALL_DZ_DIAMOND)
+                    + be.getBlockState().getValue(RailSignWallBlock.OFFSET) / 2f;
+            pose.translate(0, -1, dz / 16f);
+        }
 
         switch (type) {
             case PLATFORM_NUMBER -> {
@@ -118,20 +130,20 @@ public class RailSignRenderer implements BlockEntityRenderer<RailSignBlockEntity
             }
             case SPEED_LIMIT -> {
                 if (stack == SpeedLimitBlock.Stack.TRIPLE) {
-                    // Triple: la de arriba sube 1px respecto a la normal; desde esa referencia la
-                    // central va -17 (movida 0.6 atras por z-fighting) y la inferior -33.
-                    float triTop = SPEED_CY + 1f;
+                    // Triple: la de arriba sube 2px respecto a la normal; desde esa referencia la
+                    // central va -17 (movida 0.05 atras por z-fighting) y la inferior -34.
+                    float triTop = SPEED_CY + 2f;
                     drawExtraSpeed(pose, buffer, text, triTop, DIAMOND_FACE_Z);
                     drawExtraSpeed(pose, buffer, be.getText2(), triTop - 17f, DIAMOND_FACE_Z_BACK);
-                    drawExtraSpeed(pose, buffer, be.getText3(), triTop - 33f, DIAMOND_FACE_Z);
+                    drawExtraSpeed(pose, buffer, be.getText3(), triTop - 34f, DIAMOND_FACE_Z);
                 } else {
                     if (hasMain) {
                         drawOnNorthFace(pose, buffer, List.of(firstLine(text)), DIAMOND_CX, SPEED_CY,
                                 DIAMOND_FACE_Z, BLACK, FULL_BRIGHT, DIAMOND_MAX_W, DIAMOND_MAX_H, DIAMOND_TEXT_ROT);
                     }
                     if (stack == SpeedLimitBlock.Stack.DOUBLE) {
-                        // Segunda velocidad: 22px por debajo (editable aparte).
-                        drawExtraSpeed(pose, buffer, be.getText2(), SPEED_CY - 22f, DIAMOND_FACE_Z);
+                        // Segunda velocidad: 21px por debajo (editable aparte).
+                        drawExtraSpeed(pose, buffer, be.getText2(), SPEED_CY - 21f, DIAMOND_FACE_Z);
                     }
                 }
             }

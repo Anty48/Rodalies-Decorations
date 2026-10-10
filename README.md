@@ -13,6 +13,9 @@ Mod de Minecraft (**Forge 1.20.1**) con bloques decorativos de temática ferrovi
 - **Señales ferroviarias** con texto editable y versiones *short*: velocidad, LTV, fin de LTV,
   cartel de señales, apeadero, silbato y detención inmediata
 - Señales de velocidad **apilables** (doble, triple, o velocidad + fin de LTV)
+- **Modo pared** de las señales simples: clic en la cara de un bloque mirándola de frente y la señal
+  se coloca sin poste, pegada al bloque (se ajusta sola a postes finos, vallas, muros...)
+- Puertas correderas de tren (naranja y blanca), con apertura automática en estación con Create
 - Bloque **base**, pieza con la que se fabrican las señales
 
 ## Wiki

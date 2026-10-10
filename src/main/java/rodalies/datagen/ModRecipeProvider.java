@@ -198,6 +198,28 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_sliding_train_door_back", has(ModBlocks.SLIDING_TRAIN_DOOR_BACK.get()))
                 .save(writer, new ResourceLocation("rodalies", "sliding_train_door_front_from_back"));
 
+        // Puerta corredera BLANCA: 2 columnas iguales de cuarzo (Q) arriba y abajo con cristal (G) en
+        // medio -> 3 puertas. Misma forma que una puerta vanilla pero de cuarzo+cristal.
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModBlocks.WHITE_SLIDING_TRAIN_DOOR.get(), 3)
+                .pattern("QQ")
+                .pattern("GG")
+                .pattern("QQ")
+                .define('Q', Blocks.QUARTZ_BLOCK)
+                .define('G', Blocks.GLASS)
+                .unlockedBy("has_quartz_block", has(Blocks.QUARTZ_BLOCK))
+                .save(writer);
+
+        // Intercambio de sentido de apertura de la puerta blanca (adelante <-> atras), sin gastar
+        // materiales, igual que la naranja. IDs explicitos para no chocar con la receta principal.
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.DECORATIONS, ModBlocks.WHITE_SLIDING_TRAIN_DOOR_BACK.get(), 1)
+                .requires(ModBlocks.WHITE_SLIDING_TRAIN_DOOR.get())
+                .unlockedBy("has_white_sliding_train_door", has(ModBlocks.WHITE_SLIDING_TRAIN_DOOR.get()))
+                .save(writer, new ResourceLocation("rodalies", "white_sliding_train_door_back_from_front"));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.DECORATIONS, ModBlocks.WHITE_SLIDING_TRAIN_DOOR.get(), 1)
+                .requires(ModBlocks.WHITE_SLIDING_TRAIN_DOOR_BACK.get())
+                .unlockedBy("has_white_sliding_train_door_back", has(ModBlocks.WHITE_SLIDING_TRAIN_DOOR_BACK.get()))
+                .save(writer, new ResourceLocation("rodalies", "white_sliding_train_door_front_from_back"));
+
         // Base: una reja de hierro (I) encima de hormigon gris o su polvo (C), una sobre otra.
         ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModBlocks.BASE.get(), 1)
                 .pattern("I")
@@ -225,6 +247,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 Items.GRAY_DYE, Items.WHITE_DYE, Items.GRAY_DYE);
         signRecipes(writer, ModBlocks.STOP_SIGNAL.get(), ModBlocks.STOP_SIGNAL_SHORT.get(),
                 Items.WHITE_DYE, Items.RED_DYE, Items.WHITE_DYE);
+
     }
 
     /**

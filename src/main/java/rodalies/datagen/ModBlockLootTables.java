@@ -49,11 +49,29 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(ModBlocks.SILBATO_SIGNAL_SHORT.get());
         dropSelf(ModBlocks.STOP_SIGNAL.get());
         dropSelf(ModBlocks.STOP_SIGNAL_SHORT.get());
+        // Modo pared: sin item propio; RailSignItem los asocia a su item normal/short, asi que dropSelf
+        // devuelve el item con el que se coloco.
+        dropSelf(ModBlocks.SPEED_LIMIT_WALL.get());
+        dropSelf(ModBlocks.SPEED_LIMIT_SHORT_WALL.get());
+        dropSelf(ModBlocks.LTV_WALL.get());
+        dropSelf(ModBlocks.LTV_SHORT_WALL.get());
+        dropSelf(ModBlocks.LTV_END_WALL.get());
+        dropSelf(ModBlocks.LTV_END_SHORT_WALL.get());
+        dropSelf(ModBlocks.NORMAL_SIGNAL_WALL.get());
+        dropSelf(ModBlocks.NORMAL_SIGNAL_SHORT_WALL.get());
+        dropSelf(ModBlocks.APEADERO_SIGNAL_WALL.get());
+        dropSelf(ModBlocks.APEADERO_SIGNAL_SHORT_WALL.get());
+        dropSelf(ModBlocks.SILBATO_SIGNAL_WALL.get());
+        dropSelf(ModBlocks.SILBATO_SIGNAL_SHORT_WALL.get());
+        dropSelf(ModBlocks.STOP_SIGNAL_WALL.get());
+        dropSelf(ModBlocks.STOP_SIGNAL_SHORT_WALL.get());
         // Puerta: loot de puerta vanilla (createDoorTable) -> la condicion half=lower hace que dropee
         // EXACTAMENTE 1 (al romper una puerta las 2 mitades pasan por dropResources; la condicion
         // suprime el duplicado). Con dropSelf normal dropaba 2.
         add(ModBlocks.SLIDING_TRAIN_DOOR.get(), createDoorTable(ModBlocks.SLIDING_TRAIN_DOOR.get()));
         add(ModBlocks.SLIDING_TRAIN_DOOR_BACK.get(), createDoorTable(ModBlocks.SLIDING_TRAIN_DOOR_BACK.get()));
+        add(ModBlocks.WHITE_SLIDING_TRAIN_DOOR.get(), createDoorTable(ModBlocks.WHITE_SLIDING_TRAIN_DOOR.get()));
+        add(ModBlocks.WHITE_SLIDING_TRAIN_DOOR_BACK.get(), createDoorTable(ModBlocks.WHITE_SLIDING_TRAIN_DOOR_BACK.get()));
         dropSelf(ModBlocks.BASE.get());
     }
 
@@ -89,8 +107,24 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                 ModBlocks.SILBATO_SIGNAL_SHORT.get(),
                 ModBlocks.STOP_SIGNAL.get(),
                 ModBlocks.STOP_SIGNAL_SHORT.get(),
+                ModBlocks.SPEED_LIMIT_WALL.get(),
+                ModBlocks.SPEED_LIMIT_SHORT_WALL.get(),
+                ModBlocks.LTV_WALL.get(),
+                ModBlocks.LTV_SHORT_WALL.get(),
+                ModBlocks.LTV_END_WALL.get(),
+                ModBlocks.LTV_END_SHORT_WALL.get(),
+                ModBlocks.NORMAL_SIGNAL_WALL.get(),
+                ModBlocks.NORMAL_SIGNAL_SHORT_WALL.get(),
+                ModBlocks.APEADERO_SIGNAL_WALL.get(),
+                ModBlocks.APEADERO_SIGNAL_SHORT_WALL.get(),
+                ModBlocks.SILBATO_SIGNAL_WALL.get(),
+                ModBlocks.SILBATO_SIGNAL_SHORT_WALL.get(),
+                ModBlocks.STOP_SIGNAL_WALL.get(),
+                ModBlocks.STOP_SIGNAL_SHORT_WALL.get(),
                 ModBlocks.SLIDING_TRAIN_DOOR.get(),
                 ModBlocks.SLIDING_TRAIN_DOOR_BACK.get(),
+                ModBlocks.WHITE_SLIDING_TRAIN_DOOR.get(),
+                ModBlocks.WHITE_SLIDING_TRAIN_DOOR_BACK.get(),
                 ModBlocks.BASE.get());
     }
 }

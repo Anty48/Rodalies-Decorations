@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "rodalies:block/apeadero_signal_wall" },
+    "facing=east":  { "model": "rodalies:block/apeadero_signal_wall", "y": 90 },
+    "facing=south": { "model": "rodalies:block/apeadero_signal_wall", "y": 180 },
+    "facing=west":  { "model": "rodalies:block/apeadero_signal_wall", "y": 270 }
+  }
+}

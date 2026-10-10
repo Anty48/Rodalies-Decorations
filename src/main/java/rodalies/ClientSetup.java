@@ -2,16 +2,28 @@ package rodalies;
 
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.block.BlockModelShaper;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.ModelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.registries.RegistryObject;
 import rodalies.client.HectometerSignRenderer;
+import rodalies.client.OffsetSignModel;
 import rodalies.client.RailSignRenderer;
 import rodalies.client.SlidingTrainDoorRenderer;
 import rodalies.client.StationSignalRenderer;
 import rodalies.client.TrainMaxSpeedRenderer;
+
+import java.util.Map;
 
 /**
  * Configuracion solo-cliente. Aqui asignamos el render layer de los bloques que lo necesitan
@@ -45,5 +57,31 @@ public class ClientSetup {
         event.registerBlockEntityRenderer(ModBlockEntities.HECTOMETER_BE.get(), HectometerSignRenderer::new);
         // Anima el deslizamiento de las hojas de la puerta en el mundo (con VISIBLE=false).
         event.registerBlockEntityRenderer(ModBlockEntities.SLIDING_TRAIN_DOOR_BE.get(), SlidingTrainDoorRenderer::new);
+    }
+
+    /**
+     * Señales de pared: cada estado con offset > 0 usa su modelo envuelto en {@link OffsetSignModel},
+     * que lo desplaza hacia el soporte (offset en medios pixeles) sin necesitar un JSON por distancia.
+     */
+    @SubscribeEvent
+    public static void onModifyBakingResult(ModelEvent.ModifyBakingResult event) {
+        Map<ResourceLocation, BakedModel> models = event.getModels();
+        for (RegistryObject<Block> entry : ModBlocks.BLOCKS.getEntries()) {
+            Block block = entry.get();
+            if (!(block instanceof RailSignWallBlock)) {
+                continue;
+            }
+            for (BlockState state : block.getStateDefinition().getPossibleStates()) {
+                int offset = state.getValue(RailSignWallBlock.OFFSET);
+                if (offset == 0) {
+                    continue;
+                }
+                Direction toSupport = state.getValue(RailSignWallBlock.FACING).getOpposite();
+                float dist = offset / 32f;
+                ModelResourceLocation mrl = BlockModelShaper.stateToModelLocation(state);
+                models.computeIfPresent(mrl, (k, model) ->
+                        new OffsetSignModel(model, toSupport.getStepX() * dist, toSupport.getStepZ() * dist));
+            }
+        }
     }
 }

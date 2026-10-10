@@ -32,7 +32,13 @@ public class ModBlockEntities {
                     ModBlocks.NORMAL_SIGNAL.get(),
                     ModBlocks.SPEED_LIMIT_SHORT.get(),
                     ModBlocks.LTV_SHORT.get(),
-                    ModBlocks.NORMAL_SIGNAL_SHORT.get())
+                    ModBlocks.NORMAL_SIGNAL_SHORT.get(),
+                    ModBlocks.SPEED_LIMIT_WALL.get(),
+                    ModBlocks.SPEED_LIMIT_SHORT_WALL.get(),
+                    ModBlocks.LTV_WALL.get(),
+                    ModBlocks.LTV_SHORT_WALL.get(),
+                    ModBlocks.NORMAL_SIGNAL_WALL.get(),
+                    ModBlocks.NORMAL_SIGNAL_SHORT_WALL.get())
                 .build(null));
 
     // Bloque de velocidad maxima (cubo de cuarzo): guarda su texto de hasta 4 caracteres.
@@ -58,6 +64,8 @@ public class ModBlockEntities {
             () -> BlockEntityType.Builder.of(
                     SlidingTrainDoorBlockEntity::new,
                     ModBlocks.SLIDING_TRAIN_DOOR.get(),
-                    ModBlocks.SLIDING_TRAIN_DOOR_BACK.get())
+                    ModBlocks.SLIDING_TRAIN_DOOR_BACK.get(),
+                    ModBlocks.WHITE_SLIDING_TRAIN_DOOR.get(),
+                    ModBlocks.WHITE_SLIDING_TRAIN_DOOR_BACK.get())
                 .build(null));
 }

@@ -1,4 +1,4 @@
-// 1.20.1	2026-09-08T22:22:13.9949739	Recipes
+// 1.20.1	2026-10-11T01:21:36.485033	Recipes
 a5bed5f63ff52525984cb128709157e23e7cf97b data/rodalies/advancements/recipes/building_blocks/cercanias_logo.json
 087ea20f3c808514b1f44fe34d196a29900b7abd data/rodalies/advancements/recipes/building_blocks/double_lines_gray_concrete.json
 6ba14625f38ef02e32534aa22a08ba415dfa3bc5 data/rodalies/advancements/recipes/building_blocks/front_light.json
@@ -34,6 +34,9 @@ fd7e74236ae4ee561c7a17b2a5cc6bfba3c0e446 data/rodalies/advancements/recipes/deco
 7e1db6c1bbb066a5bc45bb52b2e1339e8016dfd9 data/rodalies/advancements/recipes/decorations/stop_signal.json
 e90f1d8fd830e96c1b8d5aad8ba70b4b8ddc04cd data/rodalies/advancements/recipes/decorations/stop_signal_short.json
 c30fb97dd6707cc03fb76fbfb1ed4576a3009690 data/rodalies/advancements/recipes/decorations/train_max_speed.json
+7ee001ffef51e0cac45b4812ec0cbb2ab4d16fdd data/rodalies/advancements/recipes/decorations/white_sliding_train_door.json
+b8afbc3122ef076b665e7ef6d4d3f8832712bac9 data/rodalies/advancements/recipes/decorations/white_sliding_train_door_back_from_front.json
+28f8ae8133baaf59b770de14c8e22214f521c6cf data/rodalies/advancements/recipes/decorations/white_sliding_train_door_front_from_back.json
 4d8c8b158d3ad318d838358546a83d8b9884952d data/rodalies/recipes/apeadero_signal.json
 5eb981f2631d6fdce566846ebe050949478dac4c data/rodalies/recipes/apeadero_signal_short.json
 d2b8e7333a4ebe3af1caaeeb0b966d1520548fcf data/rodalies/recipes/base.json
@@ -69,3 +72,6 @@ c7dc4a43a6ebff9faa5b732b4cf27156820de623 data/rodalies/recipes/speed_limit_short
 8bb7b079a809bf60025c5f0a60a6f31343c8c9c5 data/rodalies/recipes/train_light.json
 84f1b1e7ad9d971ece67199d1985071e7f3705f1 data/rodalies/recipes/train_max_speed.json
 2072940ddc939fb1a865430f39ecc31ba9e20559 data/rodalies/recipes/train_window.json
+57b1c0d1faf21890b158a77a53823f19f46880d1 data/rodalies/recipes/white_sliding_train_door.json
+013686717a89ba98841b5095f24c54daad30b8ac data/rodalies/recipes/white_sliding_train_door_back_from_front.json
+222224a3507fd134699331e2158204a25a69f20c data/rodalies/recipes/white_sliding_train_door_front_from_back.json

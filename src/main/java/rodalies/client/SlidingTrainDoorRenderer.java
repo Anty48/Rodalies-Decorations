@@ -54,9 +54,6 @@ import java.util.WeakHashMap;
  */
 public class SlidingTrainDoorRenderer implements BlockEntityRenderer<SlidingTrainDoorBlockEntity> {
 
-    private static final ResourceLocation TEX_LEFT = new ResourceLocation("rodalies", "block/door_left");
-    private static final ResourceLocation TEX_RIGHT = new ResourceLocation("rodalies", "block/door_right");
-
     private static final float SLIDE = 8f / 16f;     // desplazamiento lateral maximo de cada hoja (8px)
     private static final float FORWARD = 3.5f / 16f; // salida en Z maxima (3,5px)
     private static final float FWD_PHASE = 0.35f;    // reparto: 0..FWD_PHASE sale en Z; FWD_PHASE..1 a los lados
@@ -90,7 +87,8 @@ public class SlidingTrainDoorRenderer implements BlockEntityRenderer<SlidingTrai
         Direction facing = state.getValue(SlidingTrainDoorBlock.FACING);
         boolean open = state.getValue(SlidingTrainDoorBlock.OPEN);
         drawLeaves(pose, buffer, facing, door.isOpenForward(),
-                progress(be.getLevel(), be.getBlockPos(), open), packedLight);
+                progress(be.getLevel(), be.getBlockPos(), open), packedLight,
+                door.getTexLeft(), door.getTexRight(), door.getTexTop());
     }
 
     /**
@@ -128,7 +126,8 @@ public class SlidingTrainDoorRenderer implements BlockEntityRenderer<SlidingTrai
      * del bloque. Es {@code static} y publico por si otra parte quiere reutilizarlo.
      */
     public static void drawLeaves(PoseStack pose, MultiBufferSource buffer, Direction facing,
-                                  boolean forward, float p, int light) {
+                                  boolean forward, float p, int light,
+                                  ResourceLocation texLeft, ResourceLocation texRight, ResourceLocation texTop) {
         // Fase 1 (0..FWD_PHASE): sale en Z. Fase 2 (FWD_PHASE..1): se corre a los lados.
         float fwd = Math.min(p / FWD_PHASE, 1f) * FORWARD;
         float slide = p <= FWD_PHASE ? 0f : (p - FWD_PHASE) / (1f - FWD_PHASE) * SLIDE;
@@ -141,12 +140,13 @@ public class SlidingTrainDoorRenderer implements BlockEntityRenderer<SlidingTrai
         pose.translate(-0.5, -0.5, -0.5);
 
         VertexConsumer vc = buffer.getBuffer(RenderType.translucent());
-        TextureAtlasSprite spriteLeft = sprite(TEX_LEFT);
-        TextureAtlasSprite spriteRight = sprite(TEX_RIGHT);
+        TextureAtlasSprite spriteLeft = sprite(texLeft);
+        TextureAtlasSprite spriteRight = sprite(texRight);
+        TextureAtlasSprite spriteTop = sprite(texTop);
 
         // Hoja derecha: cerrada en x[0..0.5], se desliza a -X. Izquierda: x[0.5..1] -> +X. Ambas + zShift.
-        addLeaf(pose, vc, 0f - slide, 0f, 0f + zShift, 0.5f - slide, 2f, 0.125f + zShift, spriteRight, light);
-        addLeaf(pose, vc, 0.5f + slide, 0f, 0f + zShift, 1f + slide, 2f, 0.125f + zShift, spriteLeft, light);
+        addLeaf(pose, vc, 0f - slide, 0f, 0f + zShift, 0.5f - slide, 2f, 0.125f + zShift, spriteRight, spriteTop, light);
+        addLeaf(pose, vc, 0.5f + slide, 0f, 0f + zShift, 1f + slide, 2f, 0.125f + zShift, spriteLeft, spriteTop, light);
 
         pose.popPose();
     }
@@ -164,11 +164,12 @@ public class SlidingTrainDoorRenderer implements BlockEntityRenderer<SlidingTrai
      * se emite con el bobinado (winding) CCW hacia AFUERA (la normal). Antes se usaba una capa de entidad
      * SIN culling y el bobinado daba igual, pero eso mostraba las 2 caras del cristal a la vez (doble capa
      * de alfa -> se veia mas opaco en movimiento). Con culling correcto se ve UNA capa, igual que el
-     * modelo baked. Las caras arriba/abajo se OMITEN: nunca son visibles (van pegadas al techo/suelo) y
-     * dibujarlas provoca z-fighting con el bloque de debajo (el suelo).
+     * modelo baked. La cara ARRIBA (techo) SI se dibuja: es la cara estrecha que mira al cielo y quedaba
+     * sin textura; se pinta con una franja del panel solido de la textura (color de la puerta). La cara
+     * ABAJO se OMITE: va pegada al suelo y dibujarla provoca z-fighting con el bloque de debajo.
      */
     private static void addLeaf(PoseStack pose, VertexConsumer vc, float x0, float y0, float z0,
-                                float x1, float y1, float z1, TextureAtlasSprite s, int light) {
+                                float x1, float y1, float z1, TextureAtlasSprite s, TextureAtlasSprite sTop, int light) {
         Matrix4f m = pose.last().pose();
         Matrix3f nm = pose.last().normal();
         float u0 = s.getU(0), u16 = s.getU(16), u14 = s.getU(14);
@@ -185,6 +186,12 @@ public class SlidingTrainDoorRenderer implements BlockEntityRenderer<SlidingTrai
         // Este (+X): canto
         face(vc, m, nm, SHADE_EW, 1, 0, 0,
                 x1, y0, z0, u14, v16,  x1, y1, z0, u14, v0,  x1, y1, z1, u16, v0,  x1, y0, z1, u16, v16, light);
+        // Techo (up, +Y): la cara estrecha que mira al cielo. Usa su PROPIA textura (sTop: gray concrete en
+        // la naranja, cuarzo en la blanca) muestreando su zona central, para que no quede sin textura.
+        // Winding CCW hacia +Y.
+        float uT0 = sTop.getU(6), uT1 = sTop.getU(10), vT0 = sTop.getV(6), vT1 = sTop.getV(10);
+        face(vc, m, nm, 1.0f, 0, 1, 0,
+                x0, y1, z0, uT0, vT0,  x0, y1, z1, uT0, vT1,  x1, y1, z1, uT1, vT1,  x1, y1, z0, uT1, vT0, light);
     }
 
     /** Una cara (quad) en formato BLOCK, con winding CCW hacia afuera (respetando el culling). */

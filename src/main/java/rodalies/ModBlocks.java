@@ -234,6 +234,68 @@ public class ModBlocks {
         BLOCKS.register("stop_signal_short",
             () -> new RailSignBlock(signProps(), RailSignType.LTV_END, true));
 
+    // --- Modo PARED de las señales simples (sin poste, 1 celda). No tienen item propio: los coloca el
+    // item normal/short (RailSignItem) al hacer clic en la cara de un bloque mirandola de frente, como el
+    // cartel de estacion. Hay uno por item (normal y short) para que al romperlo devuelva el mismo item.
+    // Se pegan al bloque de detras y, si es un poste fino (p.ej. de Pantographs & Wires), se meten hasta
+    // tocarlo (RailSignWallBlock). La forma es la de la señal mirando al norte con la trasera en z=16. ---
+
+    public static final RegistryObject<Block> SPEED_LIMIT_WALL =
+        BLOCKS.register("speed_limit_wall",
+            () -> new RailSignWallBlock(signProps(), RailSignType.SPEED_LIMIT, Block.box(0, 0.5, 13.9, 16, 16, 16)));
+
+    public static final RegistryObject<Block> SPEED_LIMIT_SHORT_WALL =
+        BLOCKS.register("speed_limit_short_wall",
+            () -> new RailSignWallBlock(signProps(), RailSignType.SPEED_LIMIT, Block.box(0, 0.5, 13.9, 16, 16, 16)));
+
+    public static final RegistryObject<Block> LTV_WALL =
+        BLOCKS.register("ltv_wall",
+            () -> new RailSignWallBlock(signProps(), RailSignType.LTV, Block.box(0, 0, 13.9, 16, 16, 16)));
+
+    public static final RegistryObject<Block> LTV_SHORT_WALL =
+        BLOCKS.register("ltv_short_wall",
+            () -> new RailSignWallBlock(signProps(), RailSignType.LTV, Block.box(0, 0, 13.9, 16, 16, 16)));
+
+    public static final RegistryObject<Block> LTV_END_WALL =
+        BLOCKS.register("ltv_end_wall",
+            () -> new RailSignWallBlock(signProps(), RailSignType.LTV_END, Block.box(1.5, 2, 14, 14.5, 15, 16)));
+
+    public static final RegistryObject<Block> LTV_END_SHORT_WALL =
+        BLOCKS.register("ltv_end_short_wall",
+            () -> new RailSignWallBlock(signProps(), RailSignType.LTV_END, Block.box(1.5, 2, 14, 14.5, 15, 16)));
+
+    public static final RegistryObject<Block> NORMAL_SIGNAL_WALL =
+        BLOCKS.register("normal_signal_wall",
+            () -> new RailSignWallBlock(signProps(), RailSignType.NORMAL, Block.box(1.5, 3, 14, 14.5, 16, 16)));
+
+    public static final RegistryObject<Block> NORMAL_SIGNAL_SHORT_WALL =
+        BLOCKS.register("normal_signal_short_wall",
+            () -> new RailSignWallBlock(signProps(), RailSignType.NORMAL, Block.box(1.5, 3, 14, 14.5, 16, 16)));
+
+    public static final RegistryObject<Block> APEADERO_SIGNAL_WALL =
+        BLOCKS.register("apeadero_signal_wall",
+            () -> new RailSignWallBlock(signProps(), RailSignType.LTV_END, Block.box(2, 0, 15, 14, 16, 16)));
+
+    public static final RegistryObject<Block> APEADERO_SIGNAL_SHORT_WALL =
+        BLOCKS.register("apeadero_signal_short_wall",
+            () -> new RailSignWallBlock(signProps(), RailSignType.LTV_END, Block.box(2, 0, 15, 14, 16, 16)));
+
+    public static final RegistryObject<Block> SILBATO_SIGNAL_WALL =
+        BLOCKS.register("silbato_signal_wall",
+            () -> new RailSignWallBlock(signProps(), RailSignType.LTV_END, Block.box(2, 0, 15, 14, 16, 16)));
+
+    public static final RegistryObject<Block> SILBATO_SIGNAL_SHORT_WALL =
+        BLOCKS.register("silbato_signal_short_wall",
+            () -> new RailSignWallBlock(signProps(), RailSignType.LTV_END, Block.box(2, 0, 15, 14, 16, 16)));
+
+    public static final RegistryObject<Block> STOP_SIGNAL_WALL =
+        BLOCKS.register("stop_signal_wall",
+            () -> new RailSignWallBlock(signProps(), RailSignType.LTV_END, Block.box(0, 0, 15, 16, 16, 16)));
+
+    public static final RegistryObject<Block> STOP_SIGNAL_SHORT_WALL =
+        BLOCKS.register("stop_signal_short_wall",
+            () -> new RailSignWallBlock(signProps(), RailSignType.LTV_END, Block.box(0, 0, 15, 16, 16, 16)));
+
     // Bloque de cuarzo con la señal de velocidad maxima (rombo) en la cara frontal; el resto smooth
     // quartz. Lleva texto editable de hasta 4 caracteres centrado en el rombo (BlockEntity + renderer).
     public static final RegistryObject<Block> TRAIN_MAX_SPEED =
@@ -262,6 +324,23 @@ public class ModBlocks {
     public static final RegistryObject<Block> SLIDING_TRAIN_DOOR_BACK =
         BLOCKS.register("sliding_train_door_back",
             () -> new SlidingTrainDoorBlock(doorProps(), false)); // abre hacia atras
+
+    // Puerta corredera de tren BLANCA: retexturizacion de la anterior (mismo tipo de puerta, animacion,
+    // colision y compat con Create). Unica diferencia: ambas hojas usan la textura white_train_door
+    // (izquierda = derecha). Igual que la naranja, tiene variante FRONT y BACK intercambiables.
+    private static final net.minecraft.resources.ResourceLocation WHITE_DOOR_TEX =
+        new net.minecraft.resources.ResourceLocation("rodalies", "block/white_train_door");
+    // Techo (cara up) de la puerta blanca: cuarzo (la naranja usa gray concrete por defecto).
+    private static final net.minecraft.resources.ResourceLocation WHITE_DOOR_TOP =
+        new net.minecraft.resources.ResourceLocation("minecraft", "block/quartz_block_top");
+
+    public static final RegistryObject<Block> WHITE_SLIDING_TRAIN_DOOR =
+        BLOCKS.register("white_sliding_train_door",
+            () -> new SlidingTrainDoorBlock(doorProps(), true, WHITE_DOOR_TEX, WHITE_DOOR_TEX, WHITE_DOOR_TOP));
+
+    public static final RegistryObject<Block> WHITE_SLIDING_TRAIN_DOOR_BACK =
+        BLOCKS.register("white_sliding_train_door_back",
+            () -> new SlidingTrainDoorBlock(doorProps(), false, WHITE_DOOR_TEX, WHITE_DOOR_TEX, WHITE_DOOR_TOP));
 
     // --- Registro de items ---
 
@@ -358,43 +437,43 @@ public class ModBlocks {
 
     public static final RegistryObject<Item> SPEED_LIMIT_ITEM =
         ITEMS.register("speed_limit",
-            () -> new BlockItem(SPEED_LIMIT.get(), new Item.Properties()));
+            () -> new RailSignItem(SPEED_LIMIT.get(), SPEED_LIMIT_WALL.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> LTV_ITEM =
         ITEMS.register("ltv",
-            () -> new BlockItem(LTV.get(), new Item.Properties()));
+            () -> new RailSignItem(LTV.get(), LTV_WALL.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> LTV_END_ITEM =
         ITEMS.register("ltv_end",
-            () -> new BlockItem(LTV_END.get(), new Item.Properties()));
+            () -> new RailSignItem(LTV_END.get(), LTV_END_WALL.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> NORMAL_SIGNAL_ITEM =
         ITEMS.register("normal_signal",
-            () -> new BlockItem(NORMAL_SIGNAL.get(), new Item.Properties()));
+            () -> new RailSignItem(NORMAL_SIGNAL.get(), NORMAL_SIGNAL_WALL.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> SPEED_LIMIT_SHORT_ITEM =
         ITEMS.register("speed_limit_short",
-            () -> new BlockItem(SPEED_LIMIT_SHORT.get(), new Item.Properties()));
+            () -> new RailSignItem(SPEED_LIMIT_SHORT.get(), SPEED_LIMIT_SHORT_WALL.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> LTV_SHORT_ITEM =
         ITEMS.register("ltv_short",
-            () -> new BlockItem(LTV_SHORT.get(), new Item.Properties()));
+            () -> new RailSignItem(LTV_SHORT.get(), LTV_SHORT_WALL.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> LTV_END_SHORT_ITEM =
         ITEMS.register("ltv_end_short",
-            () -> new BlockItem(LTV_END_SHORT.get(), new Item.Properties()));
+            () -> new RailSignItem(LTV_END_SHORT.get(), LTV_END_SHORT_WALL.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> NORMAL_SIGNAL_SHORT_ITEM =
         ITEMS.register("normal_signal_short",
-            () -> new BlockItem(NORMAL_SIGNAL_SHORT.get(), new Item.Properties()));
+            () -> new RailSignItem(NORMAL_SIGNAL_SHORT.get(), NORMAL_SIGNAL_SHORT_WALL.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> APEADERO_SIGNAL_ITEM =
         ITEMS.register("apeadero_signal",
-            () -> new BlockItem(APEADERO_SIGNAL.get(), new Item.Properties()));
+            () -> new RailSignItem(APEADERO_SIGNAL.get(), APEADERO_SIGNAL_WALL.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> APEADERO_SIGNAL_SHORT_ITEM =
         ITEMS.register("apeadero_signal_short",
-            () -> new BlockItem(APEADERO_SIGNAL_SHORT.get(), new Item.Properties()));
+            () -> new RailSignItem(APEADERO_SIGNAL_SHORT.get(), APEADERO_SIGNAL_SHORT_WALL.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> BASE_ITEM =
         ITEMS.register("base",
@@ -402,19 +481,19 @@ public class ModBlocks {
 
     public static final RegistryObject<Item> SILBATO_SIGNAL_ITEM =
         ITEMS.register("silbato_signal",
-            () -> new BlockItem(SILBATO_SIGNAL.get(), new Item.Properties()));
+            () -> new RailSignItem(SILBATO_SIGNAL.get(), SILBATO_SIGNAL_WALL.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> SILBATO_SIGNAL_SHORT_ITEM =
         ITEMS.register("silbato_signal_short",
-            () -> new BlockItem(SILBATO_SIGNAL_SHORT.get(), new Item.Properties()));
+            () -> new RailSignItem(SILBATO_SIGNAL_SHORT.get(), SILBATO_SIGNAL_SHORT_WALL.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> STOP_SIGNAL_ITEM =
         ITEMS.register("stop_signal",
-            () -> new BlockItem(STOP_SIGNAL.get(), new Item.Properties()));
+            () -> new RailSignItem(STOP_SIGNAL.get(), STOP_SIGNAL_WALL.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> STOP_SIGNAL_SHORT_ITEM =
         ITEMS.register("stop_signal_short",
-            () -> new BlockItem(STOP_SIGNAL_SHORT.get(), new Item.Properties()));
+            () -> new RailSignItem(STOP_SIGNAL_SHORT.get(), STOP_SIGNAL_SHORT_WALL.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> SLIDING_TRAIN_DOOR_ITEM =
         ITEMS.register("sliding_train_door",
@@ -423,6 +502,14 @@ public class ModBlocks {
     public static final RegistryObject<Item> SLIDING_TRAIN_DOOR_BACK_ITEM =
         ITEMS.register("sliding_train_door_back",
             () -> new BlockItem(SLIDING_TRAIN_DOOR_BACK.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> WHITE_SLIDING_TRAIN_DOOR_ITEM =
+        ITEMS.register("white_sliding_train_door",
+            () -> new BlockItem(WHITE_SLIDING_TRAIN_DOOR.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> WHITE_SLIDING_TRAIN_DOOR_BACK_ITEM =
+        ITEMS.register("white_sliding_train_door_back",
+            () -> new BlockItem(WHITE_SLIDING_TRAIN_DOOR_BACK.get(), new Item.Properties()));
 
     // --- Creative Tab ---
 
@@ -457,6 +544,8 @@ public class ModBlocks {
                 output.accept(STATION_SIGNAL_PLAIN_ITEM.get());
                 output.accept(SLIDING_TRAIN_DOOR_ITEM.get());
                 output.accept(SLIDING_TRAIN_DOOR_BACK_ITEM.get());
+                output.accept(WHITE_SLIDING_TRAIN_DOOR_ITEM.get());
+                output.accept(WHITE_SLIDING_TRAIN_DOOR_BACK_ITEM.get());
             })
             .build());
 
