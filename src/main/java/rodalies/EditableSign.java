@@ -4,7 +4,7 @@ import net.minecraft.core.BlockPos;
 
 /**
  * Contrato comun de los BlockEntity con texto editable que usan la pantalla generica
- * ({@code SignTextEditScreen}) y el paquete de red {@code SignTextPacket}. Cada slot es una linea:
+ * ({@code SignPreviewEditScreen}) y el paquete de red {@code SignTextPacket}. Cada slot es una linea:
  * los carteles de una linea solo usan el slot 0; el hectometro usa 0 (fila de arriba) y 1 (abajo).
  */
 public interface EditableSign {

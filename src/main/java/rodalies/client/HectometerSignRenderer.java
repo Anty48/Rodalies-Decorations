@@ -51,7 +51,8 @@ public class HectometerSignRenderer implements BlockEntityRenderer<HectometerSig
         String bottom = be.getBottom();
         boolean hasTop = top != null && !top.isEmpty();
         boolean hasBottom = bottom != null && !bottom.isEmpty();
-        if (!hasTop && !hasBottom) {
+        boolean preview = SignEditPreview.isTarget(be);
+        if (!hasTop && !hasBottom && !preview) {
             return;
         }
         Direction facing = be.getBlockState().getValue(HectometerSignBlock.FACING);
@@ -63,13 +64,13 @@ public class HectometerSignRenderer implements BlockEntityRenderer<HectometerSig
         pose.translate(-0.5, -0.5, -0.5);
 
         // Se dibuja en las dos caras de la placa (delante y detras) para que se lea por ambos lados.
-        if (hasTop) {
-            drawRow(pose, buffer, top, TOP_CY, TOP_MAX_W, TOP_MAX_H, false);
-            drawRow(pose, buffer, top, TOP_CY, TOP_MAX_W, TOP_MAX_H, true);
+        if (hasTop || preview) {
+            drawRow(pose, buffer, be, 0, top, TOP_CY, TOP_MAX_W, TOP_MAX_H, false);
+            drawRow(pose, buffer, be, 0, top, TOP_CY, TOP_MAX_W, TOP_MAX_H, true);
         }
-        if (hasBottom) {
-            drawRow(pose, buffer, bottom, BOT_CY, BOT_MAX_W, BOT_MAX_H, false);
-            drawRow(pose, buffer, bottom, BOT_CY, BOT_MAX_W, BOT_MAX_H, true);
+        if (hasBottom || preview) {
+            drawRow(pose, buffer, be, 1, bottom, BOT_CY, BOT_MAX_W, BOT_MAX_H, false);
+            drawRow(pose, buffer, be, 1, bottom, BOT_CY, BOT_MAX_W, BOT_MAX_H, true);
         }
 
         pose.popPose();
@@ -79,7 +80,7 @@ public class HectometerSignRenderer implements BlockEntityRenderer<HectometerSig
      * Dibuja una fila centrada en (CX, cy). {@code back=false} -> cara delantera (norte, z=6);
      * {@code back=true} -> cara trasera (sur, z=10), para que se lea tambien por el otro lado.
      */
-    private void drawRow(PoseStack pose, MultiBufferSource buffer, String line,
+    private void drawRow(PoseStack pose, MultiBufferSource buffer, HectometerSignBlockEntity be, int slot, String line,
                          float cy, float maxWpx, float maxHpx, boolean back) {
         pose.pushPose();
         pose.translate(CX / 16f, cy / 16f, (back ? BACK_Z : FRONT_Z) / 16f);
@@ -96,6 +97,8 @@ public class HectometerSignRenderer implements BlockEntityRenderer<HectometerSig
         Matrix4f matrix = pose.last().pose();
         font.drawInBatch(line, -font.width(line) / 2f, -lh / 2f, BLACK, false, matrix, buffer,
                 Font.DisplayMode.POLYGON_OFFSET, 0, FULL_BRIGHT);
+        SignEditPreview.drawCursor(font, be, slot, 0, line, -font.width(line) / 2f, -lh / 2f, BLACK, matrix, buffer,
+                FULL_BRIGHT);
         pose.popPose();
     }
 

@@ -95,7 +95,9 @@ public class RailSignRenderer implements BlockEntityRenderer<RailSignBlockEntity
         boolean hasExtra = stack == SpeedLimitBlock.Stack.DOUBLE || stack == SpeedLimitBlock.Stack.TRIPLE
                 || (viaDoubled && be.getText2() != null && !be.getText2().isEmpty());
         boolean hasMain = text != null && !text.isEmpty();
-        if (!hasMain && !hasExtra) {
+        // En la vista previa de la pantalla de edicion se dibuja aunque este vacio (para el cursor).
+        boolean preview = SignEditPreview.isTarget(be);
+        if (!hasMain && !hasExtra && !preview) {
             return; // nada que dibujar
         }
         Direction facing = be.getBlockState().getValue(RailSignBlock.FACING);
@@ -117,15 +119,15 @@ public class RailSignRenderer implements BlockEntityRenderer<RailSignBlockEntity
                 // Numero de via: blanco apagado y con luz natural (no emisivo) para que no "brille".
                 if (viaDoubled) {
                     // Panel delantero (+Z): texto principal. Panel trasero (-Z): texto 2.
-                    if (hasMain) {
-                        drawViaPanel(pose, buffer, firstLine(text), VIA_DBL_CY, VIA_DBL_CZ_FRONT, packedLight);
+                    if (hasMain || preview) {
+                        drawViaPanel(pose, buffer, be, 0, firstLine(text), VIA_DBL_CY, VIA_DBL_CZ_FRONT, packedLight);
                     }
                     String back = be.getText2();
-                    if (back != null && !back.isEmpty()) {
-                        drawViaPanel(pose, buffer, firstLine(back), VIA_DBL_CY, VIA_DBL_CZ_BACK, packedLight);
+                    if (back != null && (!back.isEmpty() || preview)) {
+                        drawViaPanel(pose, buffer, be, 1, firstLine(back), VIA_DBL_CY, VIA_DBL_CZ_BACK, packedLight);
                     }
-                } else if (hasMain) {
-                    drawViaPanel(pose, buffer, firstLine(text), VIA_CY, VIA_CZ, packedLight);
+                } else if (hasMain || preview) {
+                    drawViaPanel(pose, buffer, be, 0, firstLine(text), VIA_CY, VIA_CZ, packedLight);
                 }
             }
             case SPEED_LIMIT -> {
@@ -133,28 +135,33 @@ public class RailSignRenderer implements BlockEntityRenderer<RailSignBlockEntity
                     // Triple: la de arriba sube 2px respecto a la normal; desde esa referencia la
                     // central va -17 (movida 0.05 atras por z-fighting) y la inferior -34.
                     float triTop = SPEED_CY + 2f;
-                    drawExtraSpeed(pose, buffer, text, triTop, DIAMOND_FACE_Z);
-                    drawExtraSpeed(pose, buffer, be.getText2(), triTop - 17f, DIAMOND_FACE_Z_BACK);
-                    drawExtraSpeed(pose, buffer, be.getText3(), triTop - 34f, DIAMOND_FACE_Z);
+                    drawExtraSpeed(pose, buffer, be, 0, text, triTop, DIAMOND_FACE_Z);
+                    drawExtraSpeed(pose, buffer, be, 1, be.getText2(), triTop - 17f, DIAMOND_FACE_Z_BACK);
+                    drawExtraSpeed(pose, buffer, be, 2, be.getText3(), triTop - 34f, DIAMOND_FACE_Z);
                 } else {
-                    if (hasMain) {
-                        drawOnNorthFace(pose, buffer, List.of(firstLine(text)), DIAMOND_CX, SPEED_CY,
+                    if (hasMain || preview) {
+                        drawOnNorthFace(pose, buffer, be, 0, List.of(firstLine(text)), DIAMOND_CX, SPEED_CY,
                                 DIAMOND_FACE_Z, BLACK, FULL_BRIGHT, DIAMOND_MAX_W, DIAMOND_MAX_H, DIAMOND_TEXT_ROT);
                     }
                     if (stack == SpeedLimitBlock.Stack.DOUBLE) {
                         // Segunda velocidad: 21px por debajo (editable aparte).
-                        drawExtraSpeed(pose, buffer, be.getText2(), SPEED_CY - 21f, DIAMOND_FACE_Z);
+                        drawExtraSpeed(pose, buffer, be, 1, be.getText2(), SPEED_CY - 21f, DIAMOND_FACE_Z);
                     }
                 }
             }
             case LTV -> {
                 List<String> lines = List.of(firstLine(text));
-                drawOnNorthFace(pose, buffer, lines, DIAMOND_CX, DIAMOND_CY, DIAMOND_FACE_Z, BLACK, FULL_BRIGHT,
+                drawOnNorthFace(pose, buffer, be, 0, lines, DIAMOND_CX, DIAMOND_CY, DIAMOND_FACE_Z, BLACK, FULL_BRIGHT,
                         DIAMOND_MAX_W, DIAMOND_MAX_H, DIAMOND_TEXT_ROT);
             }
             case NORMAL -> {
                 List<String> lines = splitLines(text, 2);
-                drawOnNorthFace(pose, buffer, lines, NORMAL_CX, NORMAL_CY, NORMAL_FACE_Z, BLACK, FULL_BRIGHT,
+                // En la vista previa, si se edita la 2a linea (aun vacia) ya se reparte en dos lineas.
+                int editing = SignEditPreview.focusedLine(be, 0);
+                while (lines.size() <= editing) {
+                    lines.add("");
+                }
+                drawOnNorthFace(pose, buffer, be, 0, lines, NORMAL_CX, NORMAL_CY, NORMAL_FACE_Z, BLACK, FULL_BRIGHT,
                         NORMAL_MAX_W, NORMAL_MAX_H, 0f);
             }
             default -> { /* LTV_END: sin texto */ }
@@ -164,16 +171,18 @@ public class RailSignRenderer implements BlockEntityRenderer<RailSignBlockEntity
     }
 
     /** Dibuja una señal de velocidad apilada (una linea, estilo rombo) si el texto no esta vacio. */
-    private void drawExtraSpeed(PoseStack pose, MultiBufferSource buffer, String t, float cy, float faceZ) {
-        if (t == null || t.isEmpty()) {
+    private void drawExtraSpeed(PoseStack pose, MultiBufferSource buffer, RailSignBlockEntity be, int slot,
+                                String t, float cy, float faceZ) {
+        if (t == null || (t.isEmpty() && !SignEditPreview.isTarget(be))) {
             return;
         }
-        drawOnNorthFace(pose, buffer, List.of(firstLine(t)), DIAMOND_CX, cy, faceZ,
+        drawOnNorthFace(pose, buffer, be, slot, List.of(firstLine(t)), DIAMOND_CX, cy, faceZ,
                 BLACK, FULL_BRIGHT, DIAMOND_MAX_W, DIAMOND_MAX_H, DIAMOND_TEXT_ROT);
     }
 
     /** Texto en la cara frontal (norte, -Z). El texto horizontal se ve recto de frente. */
-    private void drawOnNorthFace(PoseStack pose, MultiBufferSource buffer, List<String> lines,
+    private void drawOnNorthFace(PoseStack pose, MultiBufferSource buffer, RailSignBlockEntity be, int slot,
+                                 List<String> lines,
                                  float cx, float cy, float faceZ, int color, int light,
                                  float maxWpx, float maxHpx, float textRot) {
         pose.pushPose();
@@ -183,20 +192,21 @@ public class RailSignRenderer implements BlockEntityRenderer<RailSignBlockEntity
         if (textRot != 0f) {
             pose.mulPose(Axis.ZP.rotationDegrees(textRot));
         }
-        drawLinesCentered(pose, buffer, lines, color, light, maxWpx, maxHpx);
+        drawLinesCentered(pose, buffer, be, slot, lines, color, light, maxWpx, maxHpx);
         pose.popPose();
     }
 
     /** Dibuja un numero de via en ambas caras (±X) de un panel colgante centrado en cy/cz. */
-    private void drawViaPanel(PoseStack pose, MultiBufferSource buffer, String number,
+    private void drawViaPanel(PoseStack pose, MultiBufferSource buffer, RailSignBlockEntity be, int slot, String number,
                              float cy, float cz, int packedLight) {
         List<String> lines = List.of(number);
-        drawOnXFace(pose, buffer, lines, cy, cz, VIA_FACE_E, true, VIA_WHITE, packedLight, VIA_MAX_W, VIA_MAX_H);
-        drawOnXFace(pose, buffer, lines, cy, cz, VIA_FACE_W, false, VIA_WHITE, packedLight, VIA_MAX_W, VIA_MAX_H);
+        drawOnXFace(pose, buffer, be, slot, lines, cy, cz, VIA_FACE_E, true, VIA_WHITE, packedLight, VIA_MAX_W, VIA_MAX_H);
+        drawOnXFace(pose, buffer, be, slot, lines, cy, cz, VIA_FACE_W, false, VIA_WHITE, packedLight, VIA_MAX_W, VIA_MAX_H);
     }
 
     /** Texto en una cara lateral (±X): panel del cartel de via, visible por ambos lados. */
-    private void drawOnXFace(PoseStack pose, MultiBufferSource buffer, List<String> lines,
+    private void drawOnXFace(PoseStack pose, MultiBufferSource buffer, RailSignBlockEntity be, int slot,
+                             List<String> lines,
                              float cy, float cz, float faceX, boolean east, int color, int light,
                              float maxWpx, float maxHpx) {
         pose.pushPose();
@@ -204,7 +214,7 @@ public class RailSignRenderer implements BlockEntityRenderer<RailSignBlockEntity
         // La fuente mira a +Z; girar para que mire a +X (este) o -X (oeste).
         pose.mulPose(Axis.YP.rotationDegrees(east ? 90f : -90f));
         pose.translate(0, 0, Z_OFFSET);
-        drawLinesCentered(pose, buffer, lines, color, light, maxWpx, maxHpx);
+        drawLinesCentered(pose, buffer, be, slot, lines, color, light, maxWpx, maxHpx);
         pose.popPose();
     }
 
@@ -212,7 +222,8 @@ public class RailSignRenderer implements BlockEntityRenderer<RailSignBlockEntity
      * Dibuja las lineas centradas (horizontal y vertical) escalando para que el bloque de texto
      * quepa en maxWpx × maxHpx. Con pocas letras el texto sale grande (limitado por el alto).
      */
-    private void drawLinesCentered(PoseStack pose, MultiBufferSource buffer, List<String> lines,
+    private void drawLinesCentered(PoseStack pose, MultiBufferSource buffer, RailSignBlockEntity be, int slot,
+                                   List<String> lines,
                                    int color, int light, float maxWpx, float maxHpx) {
         int n = lines.size();
         if (n == 0) {
@@ -239,6 +250,7 @@ public class RailSignRenderer implements BlockEntityRenderer<RailSignBlockEntity
             float y = yStart + i * lh;
             font.drawInBatch(l, x, y, color, false, matrix, buffer,
                     Font.DisplayMode.POLYGON_OFFSET, 0, light);
+            SignEditPreview.drawCursor(font, be, slot, i, l, x, y, color, matrix, buffer, light);
         }
         pose.popPose();
     }

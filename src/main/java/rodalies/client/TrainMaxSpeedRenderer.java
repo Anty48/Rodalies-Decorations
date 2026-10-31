@@ -43,7 +43,7 @@ public class TrainMaxSpeedRenderer implements BlockEntityRenderer<TrainMaxSpeedB
     public void render(TrainMaxSpeedBlockEntity be, float partialTick, PoseStack pose,
                        MultiBufferSource buffer, int packedLight, int packedOverlay) {
         String text = be.getText();
-        if (text == null || text.isEmpty()) {
+        if (text == null || (text.isEmpty() && !SignEditPreview.isTarget(be))) {
             return;
         }
         Direction facing = be.getBlockState().getValue(TrainMaxSpeedBlock.FACING);
@@ -67,7 +67,7 @@ public class TrainMaxSpeedRenderer implements BlockEntityRenderer<TrainMaxSpeedB
         pose.translate(CX / 16f, CY / 16f, FACE_Z / 16f);
         pose.mulPose(Axis.YP.rotationDegrees(180f)); // la fuente mira a +Z; girar para mirar al norte
         pose.translate(0, 0, Z_OFFSET);
-        drawCentered(pose, buffer, text, color, light);
+        drawCentered(pose, buffer, be, text, color, light);
 
         pose.popPose();
     }
@@ -80,7 +80,7 @@ public class TrainMaxSpeedRenderer implements BlockEntityRenderer<TrainMaxSpeedB
         return (argb & 0xFF000000) | (r << 16) | (g << 8) | b;
     }
 
-    private void drawCentered(PoseStack pose, MultiBufferSource buffer, String line, int color, int light) {
+    private void drawCentered(PoseStack pose, MultiBufferSource buffer, TrainMaxSpeedBlockEntity be, String line, int color, int light) {
         float lh = font.lineHeight;
         float w = Math.max(1f, font.width(line));
         float scale = Math.min((MAX_W / 16f) / w, (MAX_H / 16f) / lh);
@@ -90,6 +90,7 @@ public class TrainMaxSpeedRenderer implements BlockEntityRenderer<TrainMaxSpeedB
         Matrix4f matrix = pose.last().pose();
         font.drawInBatch(line, -font.width(line) / 2f, -lh / 2f, color, false, matrix, buffer,
                 Font.DisplayMode.POLYGON_OFFSET, 0, light);
+        SignEditPreview.drawCursor(font, be, 0, 0, line, -font.width(line) / 2f, -lh / 2f, color, matrix, buffer, light);
         pose.popPose();
     }
 

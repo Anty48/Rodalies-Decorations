@@ -79,7 +79,7 @@ public class StationSignalRenderer implements BlockEntityRenderer<StationSignalB
     public void render(StationSignalBlockEntity be, float partialTick, PoseStack pose,
                        MultiBufferSource buffer, int packedLight, int packedOverlay) {
         String text = be.getText();
-        if (text == null || text.isEmpty()) {
+        if (text == null || (text.isEmpty() && !SignEditPreview.isTarget(be))) {
             return;
         }
 
@@ -102,13 +102,13 @@ public class StationSignalRenderer implements BlockEntityRenderer<StationSignalB
         pose.mulPose(Axis.YP.rotationDegrees(-blockstateY(facing)));
         pose.translate(-0.5, -0.5, -0.5);
 
-        drawFace(text, pose, buffer, true, hasLogo, centerY, frontZ);   // cara frontal (norte)
-        drawFace(text, pose, buffer, false, hasLogo, centerY, backZ);   // cara trasera (sur)
+        drawFace(be, text, pose, buffer, true, hasLogo, centerY, frontZ);   // cara frontal (norte)
+        drawFace(be, text, pose, buffer, false, hasLogo, centerY, backZ);   // cara trasera (sur)
 
         pose.popPose();
     }
 
-    private void drawFace(String text, PoseStack pose, MultiBufferSource buffer, boolean front,
+    private void drawFace(StationSignalBlockEntity be, String text, PoseStack pose, MultiBufferSource buffer, boolean front,
                           boolean hasLogo, float centerY, float z) {
         pose.pushPose();
 
@@ -135,6 +135,7 @@ public class StationSignalRenderer implements BlockEntityRenderer<StationSignalB
         float y = -font.lineHeight / 2f;       // centrado vertical
         font.drawInBatch(text, x, y, COLOR, false, matrix, buffer,
                 Font.DisplayMode.POLYGON_OFFSET, 0, LIGHT);
+        SignEditPreview.drawCursor(font, be, 0, 0, text, x, y, COLOR, matrix, buffer, LIGHT);
 
         pose.popPose();
     }
