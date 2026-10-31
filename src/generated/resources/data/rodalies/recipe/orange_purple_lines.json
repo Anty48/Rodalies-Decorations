@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "O": {
+      "item": "minecraft:orange_dye"
+    },
+    "P": {
+      "item": "minecraft:purple_dye"
+    },
+    "Q": {
+      "item": "minecraft:quartz_block"
+    }
+  },
+  "pattern": [
+    "O",
+    "P",
+    "Q"
+  ],
+  "result": {
+    "count": 1,
+    "id": "rodalies:orange_purple_lines"
+  }
+}

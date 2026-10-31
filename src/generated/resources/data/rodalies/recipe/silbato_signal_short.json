@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "rodalies:base"
+    },
+    "C": {
+      "item": "minecraft:white_dye"
+    },
+    "L": {
+      "item": "minecraft:gray_dye"
+    },
+    "R": {
+      "item": "minecraft:gray_dye"
+    }
+  },
+  "pattern": [
+    "LCR",
+    " B "
+  ],
+  "result": {
+    "count": 2,
+    "id": "rodalies:silbato_signal_short"
+  }
+}

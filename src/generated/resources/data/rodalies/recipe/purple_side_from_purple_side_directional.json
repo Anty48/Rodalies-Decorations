@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "rodalies:purple_side_directional"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "rodalies:purple_side"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "O": {
+      "item": "minecraft:orange_terracotta"
+    },
+    "Q": {
+      "item": "minecraft:quartz"
+    }
+  },
+  "pattern": [
+    " O ",
+    "OQO",
+    " O "
+  ],
+  "result": {
+    "count": 4,
+    "id": "rodalies:r_logo"
+  }
+}

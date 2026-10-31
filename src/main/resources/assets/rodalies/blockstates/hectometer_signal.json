@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "facing=north,part=bottom": { "model": "rodalies:block/hectometer_signal" },
+    "facing=east,part=bottom":  { "model": "rodalies:block/hectometer_signal", "y": 90 },
+    "facing=south,part=bottom": { "model": "rodalies:block/hectometer_signal", "y": 180 },
+    "facing=west,part=bottom":  { "model": "rodalies:block/hectometer_signal", "y": 270 },
+
+    "facing=north,part=top": { "model": "rodalies:block/hectometer_signal_empty" },
+    "facing=east,part=top":  { "model": "rodalies:block/hectometer_signal_empty" },
+    "facing=south,part=top": { "model": "rodalies:block/hectometer_signal_empty" },
+    "facing=west,part=top":  { "model": "rodalies:block/hectometer_signal_empty" }
+  }
+}

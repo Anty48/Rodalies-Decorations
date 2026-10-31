@@ -1,0 +1,36 @@
+# eclipse
+bin
+*.launch
+.settings
+.metadata
+.classpath
+.project
+
+# idea
+out
+*.ipr
+*.iws
+*.iml
+.idea
+
+# gradle
+build
+.gradle
+
+# other
+eclipse
+run
+run-data
+runs
+
+# NeoForge / ModDevGradle
+.neoforge
+
+# Jars de dependencias de dev de Create/Flywheel/Registrate (compileOnly via flatDir 'libs'); no se versionan.
+libs
+
+# Area de staging local (exports de Blockbench, texturas, jars de Create, capturas). No se versiona.
+things_for_claude
+
+# Ajustes locales de Claude Code (por maquina). No se versionan.
+.claude/settings.local.json

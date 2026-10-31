@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "rodalies:renfe_logo_directional"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "rodalies:renfe_logo"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "rodalies:base"
+    },
+    "C": {
+      "item": "minecraft:yellow_dye"
+    },
+    "L": {
+      "item": "minecraft:yellow_dye"
+    },
+    "R": {
+      "item": "minecraft:yellow_dye"
+    }
+  },
+  "pattern": [
+    "LCR",
+    " B "
+  ],
+  "result": {
+    "count": 2,
+    "id": "rodalies:ltv_short"
+  }
+}

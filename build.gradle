@@ -1,0 +1,173 @@
+plugins {
+    id 'java-library'
+    id 'eclipse'
+    id 'idea'
+    id 'maven-publish'
+    id 'net.neoforged.moddev' version '2.0.146'
+    id 'com.hypherionmc.modutils.modpublisher' version '2.2.4'
+}
+
+version = mod_version
+group = mod_group_id
+
+base {
+    archivesName = mod_id
+}
+
+// Minecraft 1.21.1 corre sobre Java 21.
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+neoForge {
+    version = project.neo_version
+
+    // Mojmap oficiales por defecto. (Parchment opcional; se puede anadir mas adelante.)
+
+    runs {
+        client {
+            client()
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        }
+        server {
+            server()
+            programArgument '--nogui'
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        }
+        gameTestServer {
+            type = "gameTestServer"
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        }
+        data {
+            data()
+            programArguments.addAll '--mod', project.mod_id, '--all',
+                    '--output', file('src/generated/resources/').getAbsolutePath(),
+                    '--existing', file('src/main/resources/').getAbsolutePath()
+        }
+        configureEach {
+            systemProperty 'forge.logging.markers', 'REGISTRIES'
+            logLevel = org.slf4j.event.Level.DEBUG
+        }
+    }
+
+    mods {
+        "${mod_id}" {
+            sourceSet(sourceSets.main)
+        }
+    }
+}
+
+// Los recursos generados por datagen se empaquetan igual que los escritos a mano.
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+// Create compat DESACTIVADO hasta tener los jars de Create/Flywheel/Registrate para 1.21.1 en ./libs.
+// La clase rodalies.compat.create.CreateCompat importa API de Create, asi que se excluye de la
+// compilacion mientras no esten esas dependencias (ver dependencies + RodaliesMod.commonSetup).
+sourceSets.main.java {
+    exclude 'rodalies/compat/**'
+}
+
+repositories {
+    mavenLocal()
+    // Jars locales de Create/Flywheel/Registrate PARA 1.21.1 en ./libs (integracion OPCIONAL).
+    flatDir { dir 'libs' }
+}
+
+dependencies {
+    // === Create (OPCIONAL) ===
+    // Compat de apertura automatica de la puerta al parar en estacion. Igual que en la version Forge:
+    // compileOnly (solo compila contra su API) y en runtime es opcional. NECESITA los jars de Create 6.x,
+    // Flywheel y Registrate PARA 1.21.1 en ./libs (los de 1.20.1 NO valen). Descomentar cuando esten:
+    //
+    // compileOnly ':create:<version-1.21.1>'
+    // compileOnly ':flywheel:<version-1.21.1>'
+    // compileOnly ':registrate:<version-1.21.1>'
+}
+
+tasks.named('processResources', ProcessResources).configure {
+    var replaceProperties = [
+            minecraft_version      : minecraft_version,
+            minecraft_version_range: minecraft_version_range,
+            neo_version            : neo_version,
+            neo_version_range      : neo_version_range,
+            loader_version_range   : loader_version_range,
+            mod_id                 : mod_id,
+            mod_name               : mod_name,
+            mod_license            : mod_license,
+            mod_version            : mod_version,
+            mod_authors            : mod_authors,
+            mod_description        : mod_description,
+    ]
+    inputs.properties replaceProperties
+
+    filesMatching(['META-INF/neoforge.mods.toml', 'pack.mcmeta']) {
+        expand replaceProperties
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+publishing {
+    publications {
+        register('mavenJava', MavenPublication) {
+            from components.java
+        }
+    }
+    repositories {
+        maven { url "file://${project.projectDir}/mcmodsrepo" }
+    }
+}
+
+// --- Publicacion en CurseForge, Modrinth y GitHub Releases (modpublisher) ---
+// Tokens por variables de entorno: CURSE_TOKEN y MODRINTH_TOKEN. GITHUB_TOKEN es opcional: si no esta,
+// se usa el token de `gh auth token`. Las notas de la version salen de release-notes.md.
+// Tareas: publishMod (todo) o publishCurseforge / publishModrinth / publishGithub por separado.
+// La release de GitHub (tag v<version>) la comparten Forge y NeoForge: la crea el primero que publique
+// y el otro le añade su jar (updateRelease).
+static String githubToken() {
+    String env = System.getenv('GITHUB_TOKEN')
+    if (env) {
+        return env
+    }
+    try {
+        return 'gh auth token'.execute().text.trim()
+    } catch (ignored) {
+        return null
+    }
+}
+
+publisher {
+    apiKeys {
+        curseforge System.getenv('CURSE_TOKEN')
+        modrinth System.getenv('MODRINTH_TOKEN')
+        github githubToken()
+    }
+
+    setCurseID(curseforge_id)
+    setModrinthID(modrinth_id)
+    // -PpublishDryRun: no sube nada, solo comprueba la configuracion.
+    setDebug(project.hasProperty('publishDryRun'))
+    setVersionType('release')
+    setChangelog(file('release-notes.md'))
+    setProjectVersion(project.version.toString())
+    setDisplayName("Rodalies Decorations ${project.version}")
+    setGameVersions(*publish_game_versions.split(',').collect { it.trim() })
+    setLoaders('neoforge')
+    setCurseEnvironment('both')
+    javaVersions.set([JavaVersion.VERSION_21])
+    setArtifact("build/libs/${mod_id}-${project.version}.jar")
+
+    github {
+        repo = 'Anty48/Rodalies-Decorations'
+        tag = "v${project.version}"
+        createTag = true
+        createRelease = true
+        updateRelease = true
+        target = 'main'
+    }
+}
+
+// Publicar siempre el jar recien compilado.
+['publishMod', 'publishCurseforge', 'publishModrinth', 'publishGithub'].each { name ->
+    tasks.matching { it.name == name }.configureEach { dependsOn 'build' }
+}

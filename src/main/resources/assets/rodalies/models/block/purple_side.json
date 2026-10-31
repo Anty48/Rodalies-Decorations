@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top":    "rodalies:block/purpleside_top_bottom",
+    "bottom": "rodalies:block/purpleside_top_bottom",
+    "side":   "rodalies:block/purpleside_side"
+  }
+}

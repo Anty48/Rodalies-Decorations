@@ -1,0 +1,18 @@
+{
+  "variants": {
+    "facing=north,part=center": { "model": "rodalies:block/parabrisas_447" },
+    "facing=east,part=center":  { "model": "rodalies:block/parabrisas_447", "y": 90 },
+    "facing=south,part=center": { "model": "rodalies:block/parabrisas_447", "y": 180 },
+    "facing=west,part=center":  { "model": "rodalies:block/parabrisas_447", "y": 270 },
+
+    "facing=north,part=left":  { "model": "rodalies:block/parabrisas_447_empty" },
+    "facing=east,part=left":   { "model": "rodalies:block/parabrisas_447_empty" },
+    "facing=south,part=left":  { "model": "rodalies:block/parabrisas_447_empty" },
+    "facing=west,part=left":   { "model": "rodalies:block/parabrisas_447_empty" },
+
+    "facing=north,part=right": { "model": "rodalies:block/parabrisas_447_empty" },
+    "facing=east,part=right":  { "model": "rodalies:block/parabrisas_447_empty" },
+    "facing=south,part=right": { "model": "rodalies:block/parabrisas_447_empty" },
+    "facing=west,part=right":  { "model": "rodalies:block/parabrisas_447_empty" }
+  }
+}

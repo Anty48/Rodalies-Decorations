@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "rodalies:white_sliding_train_door_back"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "rodalies:white_sliding_train_door"
+  }
+}

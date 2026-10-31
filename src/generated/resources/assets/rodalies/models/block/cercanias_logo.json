@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "rodalies:block/cercanias_top_bottom",
+    "side": "rodalies:block/cercanias_side",
+    "top": "rodalies:block/cercanias_top_bottom"
+  }
+}

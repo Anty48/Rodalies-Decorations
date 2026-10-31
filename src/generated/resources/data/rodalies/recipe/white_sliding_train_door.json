@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "Q": {
+      "item": "minecraft:quartz_block"
+    }
+  },
+  "pattern": [
+    "QQ",
+    "GG",
+    "QQ"
+  ],
+  "result": {
+    "count": 3,
+    "id": "rodalies:white_sliding_train_door"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "minecraft:gray_concrete"
+    },
+    {
+      "item": "rodalies:orange_purple_lines_bottom"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "rodalies:double_lines_gray_concrete"
+  }
+}

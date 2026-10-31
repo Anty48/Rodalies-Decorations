@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rodalies:station_signal_plain"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "rodalies:blocks/station_signal_plain"
+}

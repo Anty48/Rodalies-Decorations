@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "rodalies:block/train_max_speed"
+    },
+    "facing=east": {
+      "model": "rodalies:block/train_max_speed",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "rodalies:block/train_max_speed",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "rodalies:block/train_max_speed",
+      "y": 270
+    }
+  }
+}

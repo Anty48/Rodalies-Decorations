@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "rodalies:block/cercanias_top_bottom",
+    "down": "rodalies:block/cercanias_top_bottom",
+    "up": "rodalies:block/cercanias_top_bottom",
+    "north": "rodalies:block/cercanias_side",
+    "south": "rodalies:block/cercanias_top_bottom",
+    "east": "rodalies:block/cercanias_top_bottom",
+    "west": "rodalies:block/cercanias_top_bottom"
+  }
+}

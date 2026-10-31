@@ -1,0 +1,82 @@
+{
+	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
+	"texture_size": [16, 16],
+	"textures": {
+		"concrete": "minecraft:block/gray_concrete",
+		"cartel": "rodalies:block/cartel_estacion_plain",
+		"particle": "minecraft:block/gray_concrete"
+	},
+	"elements": [
+		{
+			"name": "poste",
+			"from": [7, -16, 7],
+			"to": [9, 21, 9],
+			"faces": {
+				"north": {"uv": [12, 0, 14, 16], "texture": "#concrete"},
+				"east": {"uv": [12, 0, 14, 16], "texture": "#concrete"},
+				"south": {"uv": [12, 0, 14, 16], "texture": "#concrete"},
+				"west": {"uv": [12, 0, 14, 16], "texture": "#concrete"},
+				"up": {"uv": [12, 0, 14, 12], "texture": "#concrete"},
+				"down": {"uv": [12, 0, 14, 12], "texture": "#concrete"}
+			}
+		},
+		{
+			"name": "banda",
+			"from": [-16, 21, 7],
+			"to": [32, 23, 9],
+			"faces": {
+				"north": {"uv": [0, 6, 16, 8], "texture": "#concrete"},
+				"east": {"uv": [0, 6, 2, 8], "texture": "#concrete"},
+				"south": {"uv": [0, 6, 16, 8], "texture": "#concrete"},
+				"west": {"uv": [0, 6, 2, 8], "texture": "#concrete"},
+				"up": {"uv": [0, 6, 16, 8], "texture": "#concrete"},
+				"down": {"uv": [0, 6, 16, 8], "texture": "#concrete"}
+			}
+		},
+		{
+			"name": "panel",
+			"from": [-16, 23, 7],
+			"to": [32, 32, 9],
+			"faces": {
+				"north": {"uv": [0, 0, 12.625, 2.40132], "texture": "#cartel"},
+				"south": {"uv": [0, 0, 12.625, 2.40132], "texture": "#cartel"},
+				"east": {"uv": [9.8, 5.5, 10.3, 7.75], "texture": "#cartel"},
+				"west": {"uv": [5.3, 5.5, 5.8, 7.75], "texture": "#cartel"},
+				"up": {"uv": [15.51184, 4.14079, 3.51184, 3.64079], "texture": "#cartel"},
+				"down": {"uv": [15.5, 4.55, 3.5, 5.05], "texture": "#cartel"}
+			}
+		}
+	],
+	"display": {
+		"gui": {
+			"rotation": [30, 225, 0],
+			"translation": [0, -2, 0],
+			"scale": [0.2, 0.2, 0.2]
+		},
+		"ground": {
+			"translation": [0, 2, 0],
+			"scale": [0.15, 0.15, 0.15]
+		},
+		"fixed": {
+			"rotation": [0, 180, 0],
+			"scale": [0.3, 0.3, 0.3]
+		},
+		"thirdperson_righthand": {
+			"translation": [0, 4, 0],
+			"scale": [0.2, 0.2, 0.2]
+		},
+		"thirdperson_lefthand": {
+			"translation": [0, 4, 0],
+			"scale": [0.2, 0.2, 0.2]
+		},
+		"firstperson_righthand": {
+			"rotation": [0, 45, 0],
+			"scale": [0.2, 0.2, 0.2]
+		},
+		"firstperson_lefthand": {
+			"rotation": [0, 45, 0],
+			"scale": [0.2, 0.2, 0.2]
+		}
+	}
+}

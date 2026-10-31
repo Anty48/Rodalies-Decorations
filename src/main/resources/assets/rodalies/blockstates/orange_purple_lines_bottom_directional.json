@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "rodalies:block/orange_purple_lines_bottom_directional"
+    },
+    "facing=south": {
+      "model": "rodalies:block/orange_purple_lines_bottom_directional",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "rodalies:block/orange_purple_lines_bottom_directional",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "rodalies:block/orange_purple_lines_bottom_directional",
+      "y": 270
+    },
+    "facing=up": {
+      "model": "rodalies:block/orange_purple_lines_bottom_directional",
+      "x": 270
+    },
+    "facing=down": {
+      "model": "rodalies:block/orange_purple_lines_bottom_directional",
+      "x": 90
+    }
+  }
+}

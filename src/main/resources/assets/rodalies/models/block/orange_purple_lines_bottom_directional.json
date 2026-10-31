@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "minecraft:block/quartz_block_bottom",
+    "down": "minecraft:block/quartz_block_bottom",
+    "up": "minecraft:block/quartz_block_bottom",
+    "north": "rodalies:block/orange_purple_lines_bottom",
+    "south": "minecraft:block/quartz_block_bottom",
+    "east": "minecraft:block/quartz_block_bottom",
+    "west": "minecraft:block/quartz_block_bottom"
+  }
+}

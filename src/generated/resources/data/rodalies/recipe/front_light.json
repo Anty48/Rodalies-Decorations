@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "minecraft:gray_concrete"
+    },
+    {
+      "item": "rodalies:train_light"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "rodalies:front_light"
+  }
+}

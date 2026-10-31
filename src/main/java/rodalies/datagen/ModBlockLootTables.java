@@ -1,0 +1,148 @@
+package rodalies.datagen;
+
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.loot.BlockLootSubProvider;
+import net.minecraft.world.flag.FeatureFlags;
+import net.minecraft.world.level.block.Block;
+import rodalies.ModBlocks;
+
+import java.util.List;
+import java.util.Set;
+
+/**
+ * Loot tables de los bloques nuevos: cada bloque se dropea a sí mismo.
+ * Solo debe listar en getKnownBlocks() los bloques para los que genera loot.
+ *
+ * Port a 1.21: el constructor de {@link BlockLootSubProvider} recibe el {@link HolderLookup.Provider}.
+ */
+public class ModBlockLootTables extends BlockLootSubProvider {
+
+    public ModBlockLootTables(HolderLookup.Provider registries) {
+        super(Set.of(), FeatureFlags.REGISTRY.allFlags(), registries);
+    }
+
+    @Override
+    protected void generate() {
+        // Bloques antiguos (antes con loot escrito a mano; ahora por datagen para el formato 1.21).
+        dropSelf(ModBlocks.R_LOGO.get());
+        dropSelf(ModBlocks.RENFE_LOGO.get());
+        dropSelf(ModBlocks.PURPLE_SIDE.get());
+        dropSelf(ModBlocks.R_LOGO_DIRECTIONAL.get());
+        dropSelf(ModBlocks.RENFE_LOGO_DIRECTIONAL.get());
+        dropSelf(ModBlocks.PURPLE_SIDE_DIRECTIONAL.get());
+        dropSelf(ModBlocks.CERCANIAS_LOGO_DIRECTIONAL.get());
+        dropSelf(ModBlocks.CERCANIAS_LOGO.get());
+        dropSelf(ModBlocks.ORANGE_PURPLE_LINES.get());
+        dropSelf(ModBlocks.ORANGE_PURPLE_LINES_DIRECTIONAL.get());
+        dropSelf(ModBlocks.ORANGE_PURPLE_LINES_BOTTOM.get());
+        dropSelf(ModBlocks.ORANGE_PURPLE_LINES_BOTTOM_DIRECTIONAL.get());
+        dropSelf(ModBlocks.DOUBLE_LINES_GRAY_CONCRETE.get());
+        dropSelf(ModBlocks.TRAIN_LIGHT.get());
+        dropSelf(ModBlocks.FRONT_LIGHT.get());
+        dropSelf(ModBlocks.TRAIN_WINDOW.get());
+        dropSelf(ModBlocks.TRAIN_MAX_SPEED.get());
+        dropSelf(ModBlocks.HECTOMETER_SIGNAL.get());
+        dropSelf(ModBlocks.PARABRISAS_447.get());
+        dropSelf(ModBlocks.STATION_SIGNAL.get());
+        dropSelf(ModBlocks.STATION_SIGNAL_PLAIN.get());
+        dropSelf(ModBlocks.PLATFORM_NUMBER_SIGNAL.get());
+        dropSelf(ModBlocks.SPEED_LIMIT.get());
+        dropSelf(ModBlocks.LTV.get());
+        dropSelf(ModBlocks.LTV_END.get());
+        dropSelf(ModBlocks.NORMAL_SIGNAL.get());
+        dropSelf(ModBlocks.SPEED_LIMIT_SHORT.get());
+        dropSelf(ModBlocks.LTV_SHORT.get());
+        dropSelf(ModBlocks.LTV_END_SHORT.get());
+        dropSelf(ModBlocks.NORMAL_SIGNAL_SHORT.get());
+        dropSelf(ModBlocks.APEADERO_SIGNAL.get());
+        dropSelf(ModBlocks.APEADERO_SIGNAL_SHORT.get());
+        dropSelf(ModBlocks.SILBATO_SIGNAL.get());
+        dropSelf(ModBlocks.SILBATO_SIGNAL_SHORT.get());
+        dropSelf(ModBlocks.STOP_SIGNAL.get());
+        dropSelf(ModBlocks.STOP_SIGNAL_SHORT.get());
+        // Modo pared: sin item propio; RailSignItem los asocia a su item normal/short, asi que dropSelf
+        // devuelve el item con el que se coloco.
+        dropSelf(ModBlocks.SPEED_LIMIT_WALL.get());
+        dropSelf(ModBlocks.SPEED_LIMIT_SHORT_WALL.get());
+        dropSelf(ModBlocks.LTV_WALL.get());
+        dropSelf(ModBlocks.LTV_SHORT_WALL.get());
+        dropSelf(ModBlocks.LTV_END_WALL.get());
+        dropSelf(ModBlocks.LTV_END_SHORT_WALL.get());
+        dropSelf(ModBlocks.NORMAL_SIGNAL_WALL.get());
+        dropSelf(ModBlocks.NORMAL_SIGNAL_SHORT_WALL.get());
+        dropSelf(ModBlocks.APEADERO_SIGNAL_WALL.get());
+        dropSelf(ModBlocks.APEADERO_SIGNAL_SHORT_WALL.get());
+        dropSelf(ModBlocks.SILBATO_SIGNAL_WALL.get());
+        dropSelf(ModBlocks.SILBATO_SIGNAL_SHORT_WALL.get());
+        dropSelf(ModBlocks.STOP_SIGNAL_WALL.get());
+        dropSelf(ModBlocks.STOP_SIGNAL_SHORT_WALL.get());
+        // Puerta: loot de puerta vanilla (createDoorTable) -> la condicion half=lower hace que dropee
+        // EXACTAMENTE 1 (al romper una puerta las 2 mitades pasan por dropResources; la condicion
+        // suprime el duplicado). Con dropSelf normal dropaba 2.
+        add(ModBlocks.SLIDING_TRAIN_DOOR.get(), createDoorTable(ModBlocks.SLIDING_TRAIN_DOOR.get()));
+        add(ModBlocks.SLIDING_TRAIN_DOOR_BACK.get(), createDoorTable(ModBlocks.SLIDING_TRAIN_DOOR_BACK.get()));
+        add(ModBlocks.WHITE_SLIDING_TRAIN_DOOR.get(), createDoorTable(ModBlocks.WHITE_SLIDING_TRAIN_DOOR.get()));
+        add(ModBlocks.WHITE_SLIDING_TRAIN_DOOR_BACK.get(), createDoorTable(ModBlocks.WHITE_SLIDING_TRAIN_DOOR_BACK.get()));
+        dropSelf(ModBlocks.BASE.get());
+    }
+
+    @Override
+    protected Iterable<Block> getKnownBlocks() {
+        return List.of(
+                ModBlocks.R_LOGO.get(),
+                ModBlocks.RENFE_LOGO.get(),
+                ModBlocks.PURPLE_SIDE.get(),
+                ModBlocks.R_LOGO_DIRECTIONAL.get(),
+                ModBlocks.RENFE_LOGO_DIRECTIONAL.get(),
+                ModBlocks.PURPLE_SIDE_DIRECTIONAL.get(),
+                ModBlocks.CERCANIAS_LOGO_DIRECTIONAL.get(),
+                ModBlocks.CERCANIAS_LOGO.get(),
+                ModBlocks.ORANGE_PURPLE_LINES.get(),
+                ModBlocks.ORANGE_PURPLE_LINES_DIRECTIONAL.get(),
+                ModBlocks.ORANGE_PURPLE_LINES_BOTTOM.get(),
+                ModBlocks.ORANGE_PURPLE_LINES_BOTTOM_DIRECTIONAL.get(),
+                ModBlocks.DOUBLE_LINES_GRAY_CONCRETE.get(),
+                ModBlocks.TRAIN_LIGHT.get(),
+                ModBlocks.FRONT_LIGHT.get(),
+                ModBlocks.TRAIN_WINDOW.get(),
+                ModBlocks.TRAIN_MAX_SPEED.get(),
+                ModBlocks.HECTOMETER_SIGNAL.get(),
+                ModBlocks.PARABRISAS_447.get(),
+                ModBlocks.STATION_SIGNAL.get(),
+                ModBlocks.STATION_SIGNAL_PLAIN.get(),
+                ModBlocks.PLATFORM_NUMBER_SIGNAL.get(),
+                ModBlocks.SPEED_LIMIT.get(),
+                ModBlocks.LTV.get(),
+                ModBlocks.LTV_END.get(),
+                ModBlocks.NORMAL_SIGNAL.get(),
+                ModBlocks.SPEED_LIMIT_SHORT.get(),
+                ModBlocks.LTV_SHORT.get(),
+                ModBlocks.LTV_END_SHORT.get(),
+                ModBlocks.NORMAL_SIGNAL_SHORT.get(),
+                ModBlocks.APEADERO_SIGNAL.get(),
+                ModBlocks.APEADERO_SIGNAL_SHORT.get(),
+                ModBlocks.SILBATO_SIGNAL.get(),
+                ModBlocks.SILBATO_SIGNAL_SHORT.get(),
+                ModBlocks.STOP_SIGNAL.get(),
+                ModBlocks.STOP_SIGNAL_SHORT.get(),
+                ModBlocks.SPEED_LIMIT_WALL.get(),
+                ModBlocks.SPEED_LIMIT_SHORT_WALL.get(),
+                ModBlocks.LTV_WALL.get(),
+                ModBlocks.LTV_SHORT_WALL.get(),
+                ModBlocks.LTV_END_WALL.get(),
+                ModBlocks.LTV_END_SHORT_WALL.get(),
+                ModBlocks.NORMAL_SIGNAL_WALL.get(),
+                ModBlocks.NORMAL_SIGNAL_SHORT_WALL.get(),
+                ModBlocks.APEADERO_SIGNAL_WALL.get(),
+                ModBlocks.APEADERO_SIGNAL_SHORT_WALL.get(),
+                ModBlocks.SILBATO_SIGNAL_WALL.get(),
+                ModBlocks.SILBATO_SIGNAL_SHORT_WALL.get(),
+                ModBlocks.STOP_SIGNAL_WALL.get(),
+                ModBlocks.STOP_SIGNAL_SHORT_WALL.get(),
+                ModBlocks.SLIDING_TRAIN_DOOR.get(),
+                ModBlocks.SLIDING_TRAIN_DOOR_BACK.get(),
+                ModBlocks.WHITE_SLIDING_TRAIN_DOOR.get(),
+                ModBlocks.WHITE_SLIDING_TRAIN_DOOR_BACK.get(),
+                ModBlocks.BASE.get());
+    }
+}

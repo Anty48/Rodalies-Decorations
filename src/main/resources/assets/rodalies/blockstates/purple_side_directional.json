@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "rodalies:block/purple_side_directional"
+    },
+    "facing=south": {
+      "model": "rodalies:block/purple_side_directional",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "rodalies:block/purple_side_directional",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "rodalies:block/purple_side_directional",
+      "y": 270
+    },
+    "facing=up": {
+      "model": "rodalies:block/purple_side_directional",
+      "x": 270
+    },
+    "facing=down": {
+      "model": "rodalies:block/purple_side_directional",
+      "x": 90
+    }
+  }
+}

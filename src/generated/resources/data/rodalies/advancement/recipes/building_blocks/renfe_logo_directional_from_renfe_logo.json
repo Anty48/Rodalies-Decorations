@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_renfe_logo": {
+      "conditions": {
+        "items": [
+          {
+            "items": "rodalies:renfe_logo"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "rodalies:renfe_logo_directional_from_renfe_logo"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_renfe_logo"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "rodalies:renfe_logo_directional_from_renfe_logo"
+    ]
+  }
+}
