@@ -106,8 +106,52 @@ Usa el wrapper `.\gradlew`:
 | `.\gradlew build`     | Compila y empaqueta el jar en `build/libs/` |
 | `.\gradlew runClient` | Lanza Minecraft con el mod para probar en vivo |
 | `.\gradlew runServer` | Servidor de pruebas |
+| `.\gradlew publishMod` | Publica el jar en CurseForge, Modrinth y GitHub Releases (ver *Publicación*) |
 
 Si Gradle se queja de red y las dependencias ya están cacheadas: añade `--offline`.
+
+## Port NeoForge 1.21.1
+
+El mismo mod (mismo `mod_id = rodalies`, misma versión) existe para **NeoForge 1.21.1** en la carpeta
+hermana **`../Rodalies-NeoForge-1.21.1`**. Es otro proyecto Gradle (ModDevGradle, Java 21) y su código
+vive en la rama **`neoforge-1.21.1`** de este mismo repo de GitHub, con historia independiente de
+`main` (no se mergean entre sí).
+
+- **Se mantiene al día con Forge.** Cada cambio de este repo se porta allí con un merge a 3 bandas
+  en un repo temporal: base = commit de Forge de la última sincronización, "ours" = ficheros del port,
+  "theirs" = Forge HEAD (solo `src/main/java`, `assets` y `data/minecraft`). Normalizar CRLF→LF en
+  los tres lados antes de mergear. Las recetas/loot del port se regeneran con su propio `runData`.
+- **Diferencias de API 1.21 ya resueltas** (aplicarlas al código nuevo): paquetes con
+  `PacketDistributor.sendToServer` (no `ModNetwork.CHANNEL`); `useWithoutItem`/`useItemOn` en vez de
+  `use`; `codec()` obligatorio en `HorizontalDirectionalBlock`; sin `DistExecutor` (llamar a
+  `ClientHooks` bajo `isClientSide`); BlockEntity con `HolderLookup.Provider` en save/load;
+  `getRenderBoundingBox` va en el renderer; `ResourceLocation.fromNamespaceAndPath`;
+  `Properties.ofFullCopy`; sin `setRenderLayer` (el `render_type` va en el modelo/datagen); UV de
+  sprite normalizados 0..1; tags en `data/<ns>/tags/block` (singular); en `Screen`, `super.render`
+  ya pinta el fondo.
+- El jar del port se llama `rodalies-neoforge-<versión>.jar` (el de Forge, `rodalies-<versión>.jar`).
+
+## Publicación (CurseForge, Modrinth, GitHub)
+
+Ambos proyectos usan el plugin **modpublisher** (bloque `publisher {}` al final de `build.gradle`):
+
+- Un solo proyecto por plataforma para los dos loaders: CurseForge `1500015`, Modrinth `joFpSEnd`
+  (`curseforge_id` / `modrinth_id` en `gradle.properties`). `publish_game_versions` fija las
+  versiones de Minecraft con las que se etiqueta el archivo.
+- Tokens en variables de entorno de usuario de Windows: `CURSE_TOKEN` y `MODRINTH_TOKEN`. GitHub
+  usa `gh auth token`. Una sesión abierta antes de crearlos no los ve: leerlos con
+  `[Environment]::GetEnvironmentVariable('CURSE_TOKEN','User')` y pasarlos a Gradle.
+- Las notas de la versión salen de **`release-notes.md`** (una por proyecto; en inglés, sin
+  caracteres raros como flechas). El historial completo está en la página `Version-History` de la
+  wiki de GitHub (repo aparte `Rodalies-Decorations.wiki.git`); `changelog.txt` es el del MDK.
+- Simular sin subir nada: `.\gradlew publishMod -PpublishDryRun`.
+- La release de GitHub (`v<versión>`, título `v<versión> — Descripción`) la comparten los dos jars.
+  Si `publishGithub` falla (ya pasó en 2.2.7: se quedó en borrador), terminarla con
+  `gh release upload` + `gh release edit --draft=false`.
+
+**Flujo de una versión nueva:** subir el último dígito de `mod_version` (en los dos proyectos),
+portar los cambios a NeoForge, `build`, commit + push de ambos, actualizar la wiki y
+`release-notes.md`, y `publishMod` en los dos (Forge primero).
 
 ## Carpeta `things_for_claude/` (área de staging)
 
