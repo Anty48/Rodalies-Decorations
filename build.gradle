@@ -11,7 +11,9 @@ version = mod_version
 group = mod_group_id
 
 base {
-    archivesName = mod_id
+    // Sufijo -neoforge: el jar comparte la release de GitHub con el de Forge (rodalies-<version>.jar)
+    // y los assets de una release no pueden repetir nombre.
+    archivesName = "${mod_id}-neoforge"
 }
 
 // Minecraft 1.21.1 corre sobre Java 21.
@@ -155,7 +157,7 @@ publisher {
     setLoaders('neoforge')
     setCurseEnvironment('both')
     javaVersions.set([JavaVersion.VERSION_21])
-    setArtifact("build/libs/${mod_id}-${project.version}.jar")
+    setArtifact("build/libs/${base.archivesName.get()}-${project.version}.jar")
 
     github {
         repo = 'Anty48/Rodalies-Decorations'

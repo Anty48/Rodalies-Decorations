@@ -5,7 +5,7 @@ The NeoForge 1.21.1 version catches up with the Forge 1.20.1 version: everything
 
 - **New text editing screen with live preview**: when you edit a sign, the sign itself is shown
   head-on and you type directly on it (with a blinking cursor), just like vanilla signs. Signs with
-  several texts are edited all in the same screen (↑/↓ or Tab to switch field, Enter to confirm,
+  several texts are edited all in the same screen (Up/Down arrows or Tab to switch field, Enter to confirm,
   Esc to cancel).
 - **Wall mode** for the single signals (speed, TSR, End of TSR, warning sign, halt, whistle and
   immediate stop): right-click the face of a block while looking straight at it and the signal is
