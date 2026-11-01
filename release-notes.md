@@ -13,8 +13,8 @@ The NeoForge 1.21.1 version catches up with the Forge 1.20.1 version: everything
   masts) it snaps to the support with no gap.
 - **Renewed speed and TSR models**: slightly smaller diamonds, with the text rescaled to match.
 - **Train maximum speed sign**: the text is now lit like the block face around it.
-- **White sliding train door** (opens forwards / backwards), with a textured top face; it also
-  opens automatically at Create stations.
+- **White sliding train door** (opens forwards / backwards), with a textured top face. (Automatic
+  opening at Create stations is not available on NeoForge 1.21.1 yet.)
 - New decorative blocks: **train window**, **train light**, **front light**, **orange-purple lines
   (bottom)** in both versions and **double lines on gray concrete**.
 - Fix: the train doors are now correctly tagged as doors in 1.21.1.
