@@ -35,6 +35,10 @@ Forge 1.20.1 (47.4.10), Java 17.
 
 Ver [`CLAUDE.md`](CLAUDE.md) para el detalle del proyecto y el flujo para añadir bloques.
 
+## Discord
+
+Dudas, bugs, sugerencias y avisos de versiones nuevas en el **[servidor de Discord](https://discord.gg/EZN8XGdhhD)**.
+
 ## ☕ Support my work
 
 If you like my projects and want to support what I do:

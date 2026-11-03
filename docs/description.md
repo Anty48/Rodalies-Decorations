@@ -60,3 +60,7 @@ signals, double platform numbers, hectometre posts) are edited in a single scree
 
 The wiki covers installation, every block and signal, stacking, crafting recipes and the version
 history: https://github.com/Anty48/Rodalies-Decorations/wiki
+
+## Community
+
+Questions, bug reports, suggestions and update announcements on the **[Discord server](https://discord.gg/EZN8XGdhhD)**.
