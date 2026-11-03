@@ -149,9 +149,12 @@ Ambos proyectos usan el plugin **modpublisher** (bloque `publisher {}` al final 
   Si `publishGithub` falla (ya pasó en 2.2.7: se quedó en borrador), terminarla con
   `gh release upload` + `gh release edit --draft=false`.
 
-**Flujo de una versión nueva:** subir el último dígito de `mod_version` (en los dos proyectos),
+**Flujo de una versión nueva:** poner en `mod_version` la versión que diga el usuario (en los dos proyectos),
 portar los cambios a NeoForge, `build`, commit + push de ambos, actualizar la wiki y
 `release-notes.md`, y `publishMod` en los dos (Forge primero).
+
+> **Nunca publiques** (`publishMod`, releases) salvo que el usuario lo diga explícitamente **y** diga a qué
+> versión pasarlo. Ver la regla en `../CLAUDE.md` §3.
 
 ## Carpeta `things_for_claude/` (área de staging)
 
