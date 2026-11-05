@@ -68,6 +68,10 @@ public class ClientSetup {
         Map<ResourceLocation, BakedModel> models = event.getModels();
         for (RegistryObject<Block> entry : ModBlocks.BLOCKS.getEntries()) {
             Block block = entry.get();
+            if (block instanceof JunctionBoxBlock) {
+                wrapJunctionBox(models, block);
+                continue;
+            }
             if (!(block instanceof RailSignWallBlock)) {
                 continue;
             }
@@ -82,6 +86,19 @@ public class ClientSetup {
                 models.computeIfPresent(mrl, (k, model) ->
                         new OffsetSignModel(model, toSupport.getStepX() * dist, toSupport.getStepZ() * dist));
             }
+        }
+    }
+
+    /** Caja de conexiones: cada estado desplazado traslada su modelo segun offset_x/offset_z (en pixeles). */
+    private static void wrapJunctionBox(Map<ResourceLocation, BakedModel> models, Block block) {
+        for (BlockState state : block.getStateDefinition().getPossibleStates()) {
+            int x = state.getValue(JunctionBoxBlock.OFFSET_X) - JunctionBoxBlock.CENTER;
+            int z = state.getValue(JunctionBoxBlock.OFFSET_Z) - JunctionBoxBlock.CENTER;
+            if (x == 0 && z == 0) {
+                continue;
+            }
+            ModelResourceLocation mrl = BlockModelShaper.stateToModelLocation(state);
+            models.computeIfPresent(mrl, (k, model) -> new OffsetSignModel(model, x / 16f, z / 16f));
         }
     }
 }

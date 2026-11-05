@@ -34,5 +34,10 @@ public class ModNetwork {
                 .decoder(SignTextPacket::new)
                 .consumerMainThread(SignTextPacket::handle)
                 .add();
+        CHANNEL.messageBuilder(JunctionBoxPacket.class, id++)
+                .encoder(JunctionBoxPacket::encode)
+                .decoder(JunctionBoxPacket::new)
+                .consumerMainThread(JunctionBoxPacket::handle)
+                .add();
     }
 }

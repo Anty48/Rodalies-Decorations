@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_red_cercanias_aluminium": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "rodalies:red_cercanias_aluminium"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "rodalies:cercanias_logo_inverted"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_red_cercanias_aluminium",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "rodalies:cercanias_logo_inverted"
+    ]
+  },
+  "sends_telemetry_event": false
+}

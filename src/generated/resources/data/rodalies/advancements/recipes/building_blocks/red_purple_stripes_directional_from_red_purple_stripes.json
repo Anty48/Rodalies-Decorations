@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_red_purple_stripes": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "rodalies:red_purple_stripes"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "rodalies:red_purple_stripes_directional_from_red_purple_stripes"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_red_purple_stripes",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "rodalies:red_purple_stripes_directional_from_red_purple_stripes"
+    ]
+  },
+  "sends_telemetry_event": false
+}

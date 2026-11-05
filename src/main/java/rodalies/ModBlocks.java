@@ -17,22 +17,24 @@ public class ModBlocks {
 
     // --- Clases de bloques ---
 
+    // Dureza/herramienta = las de su bloque "padre" (con el que se craftea): ver los copy de abajo.
+    // Se pican con pico (tag minecraft mineable/pickaxe).
+
     public static class Rgrande extends Block {
         public Rgrande() {
-            super(BlockBehaviour.Properties.of().strength(2.0f));
+            super(BlockBehaviour.Properties.copy(Blocks.ORANGE_TERRACOTTA));
         }
     }
 
     public static class RenfeLogo extends Block {
         public RenfeLogo() {
-            super(BlockBehaviour.Properties.of().strength(2.0f));
+            super(BlockBehaviour.Properties.copy(Blocks.QUARTZ_BLOCK));
         }
     }
 
     public static class PurpleSide extends Block {
     public PurpleSide() {
-        super(BlockBehaviour.Properties.of()
-            .strength(2.0f)); // cambia la dureza si quieres
+        super(BlockBehaviour.Properties.copy(Blocks.QUARTZ_BLOCK));
     }
 }
     // --- Registro de bloques ---
@@ -49,56 +51,93 @@ public class ModBlocks {
     public static final RegistryObject<Block> PURPLE_SIDE =
     BLOCKS.register("purple_side", () -> new PurpleSide());
 
-    // Cercanias logo: dureza del cuarzo (0.8). Sin subclase: Block directo.
+    // Cercanias logo: mismas propiedades que el smooth quartz (con el que se craftea). Sin subclase.
     public static final RegistryObject<Block> CERCANIAS_LOGO =
         BLOCKS.register("cercanias_logo",
-            () -> new Block(BlockBehaviour.Properties.of().strength(0.8f)));
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.SMOOTH_QUARTZ)));
+
+    // Aluminio rojo de Cercanias: cubo rojo liso. Se craftea con piedra (+ hierro y tinte rojo) -> props de la
+    // piedra.
+    public static final RegistryObject<Block> RED_CERCANIAS_ALUMINIUM =
+        BLOCKS.register("red_cercanias_aluminium",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
+
+    // Cercanias logo de colores invertidos: logo blanco sobre fondo rojo; top/bottom aluminio rojo.
+    // Se craftea con aluminio rojo -> mismas props (las de la piedra).
+    public static final RegistryObject<Block> CERCANIAS_LOGO_INVERTED =
+        BLOCKS.register("cercanias_logo_inverted",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
+
+    // Logo invertido "de una cara": el logo solo en la cara frontal, el resto aluminio rojo.
+    public static final RegistryObject<Block> CERCANIAS_LOGO_INVERTED_DIRECTIONAL =
+        BLOCKS.register("cercanias_logo_inverted_directional",
+            () -> new DirectionalLogoBlock(BlockBehaviour.Properties.copy(Blocks.STONE)));
 
     // --- Variantes "de una cara" (logo/franja solo en la cara donde lo colocas). Se craftean 1:1 con su
     //     hermano de caras iguales y viceversa (recetas shapeless hand-written). Ver DirectionalLogoBlock. ---
     public static final RegistryObject<Block> R_LOGO_DIRECTIONAL =
         BLOCKS.register("r_logo_directional",
-            () -> new DirectionalLogoBlock(BlockBehaviour.Properties.of().strength(2.0f)));
+            () -> new DirectionalLogoBlock(BlockBehaviour.Properties.copy(Blocks.ORANGE_TERRACOTTA)));
 
     public static final RegistryObject<Block> RENFE_LOGO_DIRECTIONAL =
         BLOCKS.register("renfe_logo_directional",
-            () -> new DirectionalLogoBlock(BlockBehaviour.Properties.of().strength(2.0f)));
+            () -> new DirectionalLogoBlock(BlockBehaviour.Properties.copy(Blocks.QUARTZ_BLOCK)));
 
     public static final RegistryObject<Block> PURPLE_SIDE_DIRECTIONAL =
         BLOCKS.register("purple_side_directional",
-            () -> new DirectionalLogoBlock(BlockBehaviour.Properties.of().strength(2.0f)));
+            () -> new DirectionalLogoBlock(BlockBehaviour.Properties.copy(Blocks.QUARTZ_BLOCK)));
 
     public static final RegistryObject<Block> CERCANIAS_LOGO_DIRECTIONAL =
         BLOCKS.register("cercanias_logo_directional",
-            () -> new DirectionalLogoBlock(BlockBehaviour.Properties.of().strength(0.8f)));
+            () -> new DirectionalLogoBlock(BlockBehaviour.Properties.copy(Blocks.SMOOTH_QUARTZ)));
 
     // Franja naranja+morada sobre cuarzo: las 4 caras laterales llevan la franja (naranja arriba,
     // morada abajo); top/bottom son smooth quartz. Decorativo simple (cubeBottomTop via datagen).
     public static final RegistryObject<Block> ORANGE_PURPLE_LINES =
         BLOCKS.register("orange_purple_lines",
-            () -> new Block(BlockBehaviour.Properties.of().strength(0.8f)));
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.QUARTZ_BLOCK)));
 
     // Variante "de una cara": la franja SOLO en la cara frontal (DirectionalLogoBlock), resto smooth quartz.
     public static final RegistryObject<Block> ORANGE_PURPLE_LINES_DIRECTIONAL =
         BLOCKS.register("orange_purple_lines_directional",
-            () -> new DirectionalLogoBlock(BlockBehaviour.Properties.of().strength(0.8f)));
+            () -> new DirectionalLogoBlock(BlockBehaviour.Properties.copy(Blocks.QUARTZ_BLOCK)));
 
     // Variante "bottom": misma idea que orange_purple_lines pero con la franja pegada abajo (naranja
     // encima de morada, en el tercio inferior). Caras laterales con textura propia; top/bottom smooth quartz.
     public static final RegistryObject<Block> ORANGE_PURPLE_LINES_BOTTOM =
         BLOCKS.register("orange_purple_lines_bottom",
-            () -> new Block(BlockBehaviour.Properties.of().strength(0.8f)));
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.QUARTZ_BLOCK)));
 
     // "Bottom" de una cara: la franja inferior SOLO en la cara frontal (DirectionalLogoBlock).
     public static final RegistryObject<Block> ORANGE_PURPLE_LINES_BOTTOM_DIRECTIONAL =
         BLOCKS.register("orange_purple_lines_bottom_directional",
-            () -> new DirectionalLogoBlock(BlockBehaviour.Properties.of().strength(0.8f)));
+            () -> new DirectionalLogoBlock(BlockBehaviour.Properties.copy(Blocks.QUARTZ_BLOCK)));
 
     // Franja doble sobre hormigon gris: caras laterales con la franja, cara superior gray concrete y
     // cara inferior smooth quartz. Solo existe en version de caras iguales (sin variante de una cara).
     public static final RegistryObject<Block> DOUBLE_LINES_GRAY_CONCRETE =
         BLOCKS.register("double_lines_gray_concrete",
-            () -> new Block(BlockBehaviour.Properties.of().strength(0.8f)));
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.GRAY_CONCRETE)));
+
+    // Cuarzo con linea roja: como orange_purple_lines pero con una sola franja roja (laterales); top/bottom
+    // smooth quartz.
+    public static final RegistryObject<Block> RED_STRIPE =
+        BLOCKS.register("red_stripe",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.QUARTZ_BLOCK)));
+
+    // Cuarzo con lineas roja y lila (laterales); top/bottom smooth quartz.
+    public static final RegistryObject<Block> RED_PURPLE_STRIPES =
+        BLOCKS.register("red_purple_stripes",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.QUARTZ_BLOCK)));
+
+    // Variantes "de una cara" de las franjas roja y roja+lila (franja solo en la cara frontal).
+    public static final RegistryObject<Block> RED_STRIPE_DIRECTIONAL =
+        BLOCKS.register("red_stripe_directional",
+            () -> new DirectionalLogoBlock(BlockBehaviour.Properties.copy(Blocks.QUARTZ_BLOCK)));
+
+    public static final RegistryObject<Block> RED_PURPLE_STRIPES_DIRECTIONAL =
+        BLOCKS.register("red_purple_stripes_directional",
+            () -> new DirectionalLogoBlock(BlockBehaviour.Properties.copy(Blocks.QUARTZ_BLOCK)));
 
     // Luz de tren: bloque luminoso (luz 15) con las mismas caracteristicas que la sea lantern (blando,
     // sonido de cristal). Todas las caras iguales. Se craftea 4 con hierro en cruz + antorcha al centro.
@@ -113,8 +152,7 @@ public class ModBlocks {
     // la textura de faros frontales; top/bottom gray concrete. NO confundir con la luz de tren.
     public static final RegistryObject<Block> FRONT_LIGHT =
         BLOCKS.register("front_light",
-            () -> new Block(BlockBehaviour.Properties.of()
-                .strength(1.8f)
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.GRAY_CONCRETE)
                 .lightLevel(s -> 15)));
 
     // Ventana de tren: bloque de cristal (todas las propiedades del cristal vanilla) con las caras
@@ -128,7 +166,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> PARABRISAS_447 =
         BLOCKS.register("parabrisas_447",
             () -> new Parabrisas447Block(BlockBehaviour.Properties.of()
-                .strength(1.5f)
+                .strength(0.3f)
                 .sound(SoundType.GLASS)
                 .noOcclusion()));
 
@@ -300,7 +338,7 @@ public class ModBlocks {
     // quartz. Lleva texto editable de hasta 4 caracteres centrado en el rombo (BlockEntity + renderer).
     public static final RegistryObject<Block> TRAIN_MAX_SPEED =
         BLOCKS.register("train_max_speed",
-            () -> new TrainMaxSpeedBlock(BlockBehaviour.Properties.of().strength(0.8f)));
+            () -> new TrainMaxSpeedBlock(BlockBehaviour.Properties.copy(Blocks.QUARTZ_BLOCK)));
 
     // Señal de hectometro: poste de diorita con placa (modelo 3D que sobresale 1 celda hacia arriba).
     // Multiblock vertical de 2 celdas; texto editable en 2 filas (arriba grande, abajo pequeña).
@@ -314,7 +352,13 @@ public class ModBlocks {
     // FRONT (adelante, por defecto) y BACK (atras). Se intercambian en la mesa de crafteo (receta
     // shapeless 1:1, sin gastar materiales).
     private static BlockBehaviour.Properties doorProps() {
-        return BlockBehaviour.Properties.of().strength(1.5f, 10.0f).sound(SoundType.METAL).noOcclusion();
+        // Dureza de la terracota naranja (su material); sonido de metal.
+        return BlockBehaviour.Properties.of().strength(1.25f, 4.2f).sound(SoundType.METAL).noOcclusion();
+    }
+
+    // Puerta blanca: dureza del bloque de cuarzo.
+    private static BlockBehaviour.Properties whiteDoorProps() {
+        return BlockBehaviour.Properties.of().strength(0.8f).sound(SoundType.METAL).noOcclusion();
     }
 
     public static final RegistryObject<Block> SLIDING_TRAIN_DOOR =
@@ -336,11 +380,22 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> WHITE_SLIDING_TRAIN_DOOR =
         BLOCKS.register("white_sliding_train_door",
-            () -> new SlidingTrainDoorBlock(doorProps(), true, WHITE_DOOR_TEX, WHITE_DOOR_TEX, WHITE_DOOR_TOP));
+            () -> new SlidingTrainDoorBlock(whiteDoorProps(), true, WHITE_DOOR_TEX, WHITE_DOOR_TEX, WHITE_DOOR_TOP));
 
     public static final RegistryObject<Block> WHITE_SLIDING_TRAIN_DOOR_BACK =
         BLOCKS.register("white_sliding_train_door_back",
-            () -> new SlidingTrainDoorBlock(doorProps(), false, WHITE_DOOR_TEX, WHITE_DOOR_TEX, WHITE_DOOR_TOP));
+            () -> new SlidingTrainDoorBlock(whiteDoorProps(), false, WHITE_DOOR_TEX, WHITE_DOOR_TEX, WHITE_DOOR_TOP));
+
+    // Cajas de conexiones (modelo 3D: poste + caja). Propiedades del hormigon gris claro (su material
+    // principal). La normal se desplaza dentro de la celda con un menu (JunctionBoxBlock); la de cables
+    // solo se orienta al colocarla (JunctionBoxCablesBlock).
+    public static final RegistryObject<Block> JUNCTION_BOX =
+        BLOCKS.register("junction_box",
+            () -> new JunctionBoxBlock(BlockBehaviour.Properties.copy(Blocks.LIGHT_GRAY_CONCRETE).noOcclusion()));
+
+    public static final RegistryObject<Block> JUNCTION_BOX_WITH_CABLES =
+        BLOCKS.register("junction_box_with_cables",
+            () -> new JunctionBoxCablesBlock(BlockBehaviour.Properties.copy(Blocks.LIGHT_GRAY_CONCRETE).noOcclusion()));
 
     // --- Registro de items ---
 
@@ -362,6 +417,18 @@ public class ModBlocks {
     public static final RegistryObject<Item> CERCANIAS_LOGO_ITEM =
         ITEMS.register("cercanias_logo",
             () -> new BlockItem(CERCANIAS_LOGO.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> RED_CERCANIAS_ALUMINIUM_ITEM =
+        ITEMS.register("red_cercanias_aluminium",
+            () -> new BlockItem(RED_CERCANIAS_ALUMINIUM.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> CERCANIAS_LOGO_INVERTED_DIRECTIONAL_ITEM =
+        ITEMS.register("cercanias_logo_inverted_directional",
+            () -> new BlockItem(CERCANIAS_LOGO_INVERTED_DIRECTIONAL.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> CERCANIAS_LOGO_INVERTED_ITEM =
+        ITEMS.register("cercanias_logo_inverted",
+            () -> new BlockItem(CERCANIAS_LOGO_INVERTED.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> R_LOGO_DIRECTIONAL_ITEM =
         ITEMS.register("r_logo_directional",
@@ -398,6 +465,22 @@ public class ModBlocks {
     public static final RegistryObject<Item> DOUBLE_LINES_GRAY_CONCRETE_ITEM =
         ITEMS.register("double_lines_gray_concrete",
             () -> new BlockItem(DOUBLE_LINES_GRAY_CONCRETE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> RED_STRIPE_ITEM =
+        ITEMS.register("red_stripe",
+            () -> new BlockItem(RED_STRIPE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> RED_PURPLE_STRIPES_ITEM =
+        ITEMS.register("red_purple_stripes",
+            () -> new BlockItem(RED_PURPLE_STRIPES.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> RED_STRIPE_DIRECTIONAL_ITEM =
+        ITEMS.register("red_stripe_directional",
+            () -> new BlockItem(RED_STRIPE_DIRECTIONAL.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> RED_PURPLE_STRIPES_DIRECTIONAL_ITEM =
+        ITEMS.register("red_purple_stripes_directional",
+            () -> new BlockItem(RED_PURPLE_STRIPES_DIRECTIONAL.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> TRAIN_LIGHT_ITEM =
         ITEMS.register("train_light",
@@ -511,6 +594,14 @@ public class ModBlocks {
         ITEMS.register("white_sliding_train_door_back",
             () -> new BlockItem(WHITE_SLIDING_TRAIN_DOOR_BACK.get(), new Item.Properties()));
 
+    public static final RegistryObject<Item> JUNCTION_BOX_ITEM =
+        ITEMS.register("junction_box",
+            () -> new BlockItem(JUNCTION_BOX.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> JUNCTION_BOX_WITH_CABLES_ITEM =
+        ITEMS.register("junction_box_with_cables",
+            () -> new BlockItem(JUNCTION_BOX_WITH_CABLES.get(), new Item.Properties()));
+
     // --- Creative Tab ---
 
     public static final DeferredRegister<CreativeModeTab> CREATIVE_TABS =
@@ -530,11 +621,18 @@ public class ModBlocks {
                 output.accept(PURPLE_SIDE_DIRECTIONAL_ITEM.get());
                 output.accept(CERCANIAS_LOGO_ITEM.get());
                 output.accept(CERCANIAS_LOGO_DIRECTIONAL_ITEM.get());
+                output.accept(CERCANIAS_LOGO_INVERTED_ITEM.get());
+                output.accept(CERCANIAS_LOGO_INVERTED_DIRECTIONAL_ITEM.get());
+                output.accept(RED_CERCANIAS_ALUMINIUM_ITEM.get());
                 output.accept(ORANGE_PURPLE_LINES_ITEM.get());
                 output.accept(ORANGE_PURPLE_LINES_DIRECTIONAL_ITEM.get());
                 output.accept(ORANGE_PURPLE_LINES_BOTTOM_ITEM.get());
                 output.accept(ORANGE_PURPLE_LINES_BOTTOM_DIRECTIONAL_ITEM.get());
                 output.accept(DOUBLE_LINES_GRAY_CONCRETE_ITEM.get());
+                output.accept(RED_STRIPE_ITEM.get());
+                output.accept(RED_STRIPE_DIRECTIONAL_ITEM.get());
+                output.accept(RED_PURPLE_STRIPES_ITEM.get());
+                output.accept(RED_PURPLE_STRIPES_DIRECTIONAL_ITEM.get());
                 output.accept(TRAIN_LIGHT_ITEM.get());
                 output.accept(FRONT_LIGHT_ITEM.get());
                 output.accept(TRAIN_MAX_SPEED_ITEM.get());
@@ -546,6 +644,8 @@ public class ModBlocks {
                 output.accept(SLIDING_TRAIN_DOOR_BACK_ITEM.get());
                 output.accept(WHITE_SLIDING_TRAIN_DOOR_ITEM.get());
                 output.accept(WHITE_SLIDING_TRAIN_DOOR_BACK_ITEM.get());
+                output.accept(JUNCTION_BOX_ITEM.get());
+                output.accept(JUNCTION_BOX_WITH_CABLES_ITEM.get());
             })
             .build());
 

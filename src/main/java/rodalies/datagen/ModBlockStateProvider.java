@@ -28,6 +28,16 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         simpleBlockWithItem(ModBlocks.CERCANIAS_LOGO.get(), cercaniasModel);
 
+        // Cercanias logo invertido: logo blanco sobre rojo en los laterales, top/bottom rojo liso.
+        ResourceLocation redAluminium = modLoc("block/red_cercanias_aluminium");
+        ModelFile cercaniasInvertedModel = models().cubeBottomTop(
+                "cercanias_logo_inverted", modLoc("block/cercanias_side_inverted"), redAluminium, redAluminium);
+        simpleBlockWithItem(ModBlocks.CERCANIAS_LOGO_INVERTED.get(), cercaniasInvertedModel);
+
+        // Aluminio rojo: todas las caras iguales.
+        ModelFile redAluminiumModel = models().cubeAll("red_cercanias_aluminium", redAluminium);
+        simpleBlockWithItem(ModBlocks.RED_CERCANIAS_ALUMINIUM.get(), redAluminiumModel);
+
         // Franja naranja+morada: laterales con la franja, top/bottom smooth quartz (cube_bottom_top).
         // Nota: el cuarzo liso reutiliza la textura quartz_block_bottom (no existe smooth_quartz.png).
         ResourceLocation smoothQuartz = mcLoc("block/quartz_block_bottom");
@@ -39,6 +49,14 @@ public class ModBlockStateProvider extends BlockStateProvider {
         ModelFile linesBottomModel = models().cubeBottomTop(
                 "orange_purple_lines_bottom", modLoc("block/orange_purple_lines_bottom"), smoothQuartz, smoothQuartz);
         simpleBlockWithItem(ModBlocks.ORANGE_PURPLE_LINES_BOTTOM.get(), linesBottomModel);
+
+        // Linea roja y lineas roja+lila sobre cuarzo: laterales con la franja, top/bottom smooth quartz.
+        ModelFile redStripeModel = models().cubeBottomTop(
+                "red_stripe", modLoc("block/red_stripe"), smoothQuartz, smoothQuartz);
+        simpleBlockWithItem(ModBlocks.RED_STRIPE.get(), redStripeModel);
+        ModelFile redPurpleStripesModel = models().cubeBottomTop(
+                "red_purple_stripes", modLoc("block/red_purple_stripes"), smoothQuartz, smoothQuartz);
+        simpleBlockWithItem(ModBlocks.RED_PURPLE_STRIPES.get(), redPurpleStripesModel);
 
         // Franja doble sobre gray concrete: laterales con la franja, top gray concrete, bottom smooth quartz.
         ResourceLocation grayConcrete = mcLoc("block/gray_concrete");

@@ -155,6 +155,10 @@ public class ClientHooks {
                 Framing.front(8f, 26.5f, 15f, 16f));
     }
 
+    public static void openJunctionBoxScreen(BlockPos pos) {
+        Minecraft.getInstance().setScreen(new JunctionBoxScreen(pos));
+    }
+
     private static void open(Component title, BlockEntity sign, Field[] fields, int focused,
                              BiConsumer<BlockEntity, String[]> apply, Consumer<String[]> send, Framing framing) {
         Minecraft.getInstance().setScreen(new SignPreviewEditScreen(title, sign, fields, focused, apply, send, framing));

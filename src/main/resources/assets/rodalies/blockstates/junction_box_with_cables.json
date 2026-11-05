@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=south": { "model": "rodalies:block/junction_box_with_cables" },
+    "facing=west":  { "model": "rodalies:block/junction_box_with_cables", "y": 90 },
+    "facing=north": { "model": "rodalies:block/junction_box_with_cables", "y": 180 },
+    "facing=east":  { "model": "rodalies:block/junction_box_with_cables", "y": 270 }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rodalies:red_stripe_directional"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "rodalies:blocks/red_stripe_directional"
+}

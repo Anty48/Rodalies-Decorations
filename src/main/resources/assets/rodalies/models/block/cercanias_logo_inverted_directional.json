@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "rodalies:block/red_cercanias_aluminium",
+    "down": "rodalies:block/red_cercanias_aluminium",
+    "up": "rodalies:block/red_cercanias_aluminium",
+    "north": "rodalies:block/cercanias_side_inverted",
+    "south": "rodalies:block/red_cercanias_aluminium",
+    "east": "rodalies:block/red_cercanias_aluminium",
+    "west": "rodalies:block/red_cercanias_aluminium"
+  }
+}

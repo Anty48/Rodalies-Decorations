@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "rodalies:red_stripe_directional"
+    }
+  ],
+  "result": {
+    "item": "rodalies:red_stripe"
+  }
+}

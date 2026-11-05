@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "rodalies:cercanias_logo_inverted"
+    }
+  ],
+  "result": {
+    "item": "rodalies:cercanias_logo_inverted_directional"
+  }
+}

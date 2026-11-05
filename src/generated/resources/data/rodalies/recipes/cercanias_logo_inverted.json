@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "Q": {
+      "item": "minecraft:quartz"
+    },
+    "R": {
+      "item": "rodalies:red_cercanias_aluminium"
+    }
+  },
+  "pattern": [
+    " R ",
+    "RQR",
+    " R "
+  ],
+  "result": {
+    "count": 4,
+    "item": "rodalies:cercanias_logo_inverted"
+  },
+  "show_notification": true
+}
