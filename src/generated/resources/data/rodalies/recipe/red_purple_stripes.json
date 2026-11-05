@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "P": {
+      "item": "minecraft:purple_dye"
+    },
+    "Q": {
+      "item": "minecraft:quartz_block"
+    },
+    "R": {
+      "item": "minecraft:red_dye"
+    }
+  },
+  "pattern": [
+    "R",
+    "P",
+    "Q"
+  ],
+  "result": {
+    "count": 1,
+    "id": "rodalies:red_purple_stripes"
+  }
+}

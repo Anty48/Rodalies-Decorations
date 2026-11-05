@@ -22,5 +22,7 @@ public class ModNetwork {
                 RailSignUpdatePacket::handle);
         registrar.playToServer(SignTextPacket.TYPE, SignTextPacket.STREAM_CODEC,
                 SignTextPacket::handle);
+        registrar.playToServer(JunctionBoxPacket.TYPE, JunctionBoxPacket.STREAM_CODEC,
+                JunctionBoxPacket::handle);
     }
 }

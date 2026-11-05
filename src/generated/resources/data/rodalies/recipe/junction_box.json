@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:light_gray_concrete"
+    },
+    "I": {
+      "item": "minecraft:iron_bars"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "Y": {
+      "item": "minecraft:yellow_concrete"
+    }
+  },
+  "pattern": [
+    " Y ",
+    "CRC",
+    " I "
+  ],
+  "result": {
+    "count": 8,
+    "id": "rodalies:junction_box"
+  }
+}

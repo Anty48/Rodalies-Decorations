@@ -8,6 +8,7 @@ import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.world.item.Item;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
@@ -67,6 +68,94 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('X', Blocks.SMOOTH_QUARTZ)
                 .define('T', Items.RED_DYE)
                 .unlockedBy("has_smooth_quartz", has(Blocks.SMOOTH_QUARTZ))
+                .save(output);
+
+        // Aluminio rojo: fila de piedra arriba y abajo, y en medio tinte rojo - hierro - tinte rojo -> 12.
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.RED_CERCANIAS_ALUMINIUM.get(), 12)
+                .pattern("SSS")
+                .pattern("RIR")
+                .pattern("SSS")
+                .define('S', Blocks.STONE)
+                .define('R', Items.RED_DYE)
+                .define('I', Items.IRON_INGOT)
+                .unlockedBy("has_red_dye", has(Items.RED_DYE))
+                .save(output);
+
+        // Cercanias logo INVERTIDO (logo blanco sobre rojo): como la R de Rodalies (terracota naranja en cruz
+        // con cuarzo al centro), pero con aluminio rojo -> 4.
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.CERCANIAS_LOGO_INVERTED.get(), 4)
+                .pattern(" R ")
+                .pattern("RQR")
+                .pattern(" R ")
+                .define('R', ModBlocks.RED_CERCANIAS_ALUMINIUM.get())
+                .define('Q', Items.QUARTZ)
+                .unlockedBy("has_red_cercanias_aluminium", has(ModBlocks.RED_CERCANIAS_ALUMINIUM.get()))
+                .save(output);
+
+        // Cuarzo con linea roja: tinte rojo sobre bloque de cuarzo (como la franja naranja+morada, con un tinte).
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.RED_STRIPE.get(), 1)
+                .pattern("R")
+                .pattern("Q")
+                .define('R', Items.RED_DYE)
+                .define('Q', Blocks.QUARTZ_BLOCK)
+                .unlockedBy("has_quartz_block", has(Blocks.QUARTZ_BLOCK))
+                .save(output);
+
+        // Cuarzo con lineas roja y lila: columna roja-morada-cuarzo (la misma que la naranja+morada).
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.RED_PURPLE_STRIPES.get(), 1)
+                .pattern("R")
+                .pattern("P")
+                .pattern("Q")
+                .define('R', Items.RED_DYE)
+                .define('P', Items.PURPLE_DYE)
+                .define('Q', Blocks.QUARTZ_BLOCK)
+                .unlockedBy("has_quartz_block", has(Blocks.QUARTZ_BLOCK))
+                .save(output);
+
+        // Conversion 1:1 de los bloques nuevos de caras iguales <-> su variante de una cara.
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.CERCANIAS_LOGO_INVERTED_DIRECTIONAL.get(), 1)
+                .requires(ModBlocks.CERCANIAS_LOGO_INVERTED.get())
+                .unlockedBy("has_cercanias_logo_inverted", has(ModBlocks.CERCANIAS_LOGO_INVERTED.get()))
+                .save(output, ResourceLocation.fromNamespaceAndPath("rodalies", "cercanias_logo_inverted_directional_from_cercanias_logo_inverted"));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.CERCANIAS_LOGO_INVERTED.get(), 1)
+                .requires(ModBlocks.CERCANIAS_LOGO_INVERTED_DIRECTIONAL.get())
+                .unlockedBy("has_cercanias_logo_inverted_directional", has(ModBlocks.CERCANIAS_LOGO_INVERTED_DIRECTIONAL.get()))
+                .save(output, ResourceLocation.fromNamespaceAndPath("rodalies", "cercanias_logo_inverted_from_cercanias_logo_inverted_directional"));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.RED_STRIPE_DIRECTIONAL.get(), 1)
+                .requires(ModBlocks.RED_STRIPE.get())
+                .unlockedBy("has_red_stripe", has(ModBlocks.RED_STRIPE.get()))
+                .save(output, ResourceLocation.fromNamespaceAndPath("rodalies", "red_stripe_directional_from_red_stripe"));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.RED_STRIPE.get(), 1)
+                .requires(ModBlocks.RED_STRIPE_DIRECTIONAL.get())
+                .unlockedBy("has_red_stripe_directional", has(ModBlocks.RED_STRIPE_DIRECTIONAL.get()))
+                .save(output, ResourceLocation.fromNamespaceAndPath("rodalies", "red_stripe_from_red_stripe_directional"));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.RED_PURPLE_STRIPES_DIRECTIONAL.get(), 1)
+                .requires(ModBlocks.RED_PURPLE_STRIPES.get())
+                .unlockedBy("has_red_purple_stripes", has(ModBlocks.RED_PURPLE_STRIPES.get()))
+                .save(output, ResourceLocation.fromNamespaceAndPath("rodalies", "red_purple_stripes_directional_from_red_purple_stripes"));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.RED_PURPLE_STRIPES.get(), 1)
+                .requires(ModBlocks.RED_PURPLE_STRIPES_DIRECTIONAL.get())
+                .unlockedBy("has_red_purple_stripes_directional", has(ModBlocks.RED_PURPLE_STRIPES_DIRECTIONAL.get()))
+                .save(output, ResourceLocation.fromNamespaceAndPath("rodalies", "red_purple_stripes_from_red_purple_stripes_directional"));
+
+        // Caja de conexiones: tapa de hormigon amarillo (Y), redstone dentro (R) y cuerpo de hormigon gris
+        // claro (C) sobre una reja de hierro (I, el poste) -> 8 cajas.
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModBlocks.JUNCTION_BOX.get(), 8)
+                .pattern(" Y ")
+                .pattern("CRC")
+                .pattern(" I ")
+                .define('Y', Blocks.YELLOW_CONCRETE)
+                .define('R', Items.REDSTONE)
+                .define('C', Blocks.LIGHT_GRAY_CONCRETE)
+                .define('I', Items.IRON_BARS)
+                .unlockedBy("has_light_gray_concrete", has(Blocks.LIGHT_GRAY_CONCRETE))
+                .save(output);
+
+        // Caja de conexiones con cables: caja + lingote de cobre (los cables), en cualquier disposicion.
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.DECORATIONS, ModBlocks.JUNCTION_BOX_WITH_CABLES.get(), 1)
+                .requires(ModBlocks.JUNCTION_BOX.get())
+                .requires(Items.COPPER_INGOT)
+                .unlockedBy("has_junction_box", has(ModBlocks.JUNCTION_BOX.get()))
                 .save(output);
 
         // Franja naranja+morada CENTRADA: columna vertical de cuarzo (abajo) + 2 tintes encima. Leida de
@@ -154,7 +243,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .save(output);
 
         // Senal de hectometro: 3 dioritas en columna.
-        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModBlocks.HECTOMETER_SIGNAL.get(), 1)
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModBlocks.HECTOMETER_SIGNAL.get(), 4)
                 .pattern("D")
                 .pattern("D")
                 .pattern("D")
@@ -171,8 +260,8 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_black_stained_glass", has(Blocks.BLACK_STAINED_GLASS))
                 .save(output);
 
-        // Cartel de estacion de Rodalies (con tinte naranja de marca).
-        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModBlocks.STATION_SIGNAL.get(), 1)
+        // Cartel de estacion de Rodalies (con tinte naranja de marca) -> 5.
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModBlocks.STATION_SIGNAL.get(), 5)
                 .pattern("CCC")
                 .pattern("OL ")
                 .pattern(" L ")
@@ -182,8 +271,8 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_gray_concrete", has(Blocks.GRAY_CONCRETE))
                 .save(output);
 
-        // Cartel de estacion generico (sin logo).
-        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModBlocks.STATION_SIGNAL_PLAIN.get(), 1)
+        // Cartel de estacion generico (sin logo) -> 5.
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModBlocks.STATION_SIGNAL_PLAIN.get(), 5)
                 .pattern("CCC")
                 .pattern(" L ")
                 .pattern(" L ")

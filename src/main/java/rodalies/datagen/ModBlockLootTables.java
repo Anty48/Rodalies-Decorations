@@ -84,6 +84,15 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         add(ModBlocks.WHITE_SLIDING_TRAIN_DOOR.get(), createDoorTable(ModBlocks.WHITE_SLIDING_TRAIN_DOOR.get()));
         add(ModBlocks.WHITE_SLIDING_TRAIN_DOOR_BACK.get(), createDoorTable(ModBlocks.WHITE_SLIDING_TRAIN_DOOR_BACK.get()));
         dropSelf(ModBlocks.BASE.get());
+        dropSelf(ModBlocks.CERCANIAS_LOGO_INVERTED.get());
+        dropSelf(ModBlocks.RED_STRIPE.get());
+        dropSelf(ModBlocks.RED_PURPLE_STRIPES.get());
+        dropSelf(ModBlocks.JUNCTION_BOX.get());
+        dropSelf(ModBlocks.JUNCTION_BOX_WITH_CABLES.get());
+        dropSelf(ModBlocks.RED_CERCANIAS_ALUMINIUM.get());
+        dropSelf(ModBlocks.CERCANIAS_LOGO_INVERTED_DIRECTIONAL.get());
+        dropSelf(ModBlocks.RED_STRIPE_DIRECTIONAL.get());
+        dropSelf(ModBlocks.RED_PURPLE_STRIPES_DIRECTIONAL.get());
     }
 
     @Override
@@ -143,6 +152,15 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                 ModBlocks.SLIDING_TRAIN_DOOR_BACK.get(),
                 ModBlocks.WHITE_SLIDING_TRAIN_DOOR.get(),
                 ModBlocks.WHITE_SLIDING_TRAIN_DOOR_BACK.get(),
-                ModBlocks.BASE.get());
+                ModBlocks.BASE.get(),
+                ModBlocks.CERCANIAS_LOGO_INVERTED.get(),
+                ModBlocks.RED_STRIPE.get(),
+                ModBlocks.RED_PURPLE_STRIPES.get(),
+                ModBlocks.JUNCTION_BOX.get(),
+                ModBlocks.JUNCTION_BOX_WITH_CABLES.get(),
+                ModBlocks.RED_CERCANIAS_ALUMINIUM.get(),
+                ModBlocks.CERCANIAS_LOGO_INVERTED_DIRECTIONAL.get(),
+                ModBlocks.RED_STRIPE_DIRECTIONAL.get(),
+                ModBlocks.RED_PURPLE_STRIPES_DIRECTIONAL.get());
     }
 }

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "R": {
+      "item": "minecraft:red_dye"
+    },
+    "S": {
+      "item": "minecraft:stone"
+    }
+  },
+  "pattern": [
+    "SSS",
+    "RIR",
+    "SSS"
+  ],
+  "result": {
+    "count": 12,
+    "id": "rodalies:red_cercanias_aluminium"
+  }
+}

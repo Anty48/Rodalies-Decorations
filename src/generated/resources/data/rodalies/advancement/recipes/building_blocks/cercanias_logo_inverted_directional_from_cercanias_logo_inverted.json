@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_cercanias_logo_inverted": {
+      "conditions": {
+        "items": [
+          {
+            "items": "rodalies:cercanias_logo_inverted"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "rodalies:cercanias_logo_inverted_directional_from_cercanias_logo_inverted"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_cercanias_logo_inverted"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "rodalies:cercanias_logo_inverted_directional_from_cercanias_logo_inverted"
+    ]
+  }
+}

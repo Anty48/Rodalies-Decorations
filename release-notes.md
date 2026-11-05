@@ -1,22 +1,34 @@
-## 2.2.7 (NeoForge 1.21.1)
+## 2.3.0 - The Cercanias Update
 
-The NeoForge 1.21.1 version catches up with the Forge 1.20.1 version: everything from 2.2.3 to
-2.2.7 is now included.
+### New blocks
+- **Red Cercanias Aluminium**: plain red block. Recipe: a row of stone on top and on the bottom, and
+  red dye - iron ingot - red dye in the middle. Gives 12.
+- **Cercanias Logo (Inverted Colors)**: white Cercanias logo on red, with red aluminium on top and
+  bottom. Recipe: 4 red aluminium in a cross with nether quartz in the centre. Gives 4.
+- **Quartz with Red Line**: red dye over a quartz block. Gives 1.
+- **Quartz with Red & Purple Lines**: red dye, purple dye and a quartz block in a column (top to
+  bottom). Gives 1.
+- **One-sided variants** of the three blocks above (logo or stripe only on the front face). They
+  convert 1:1 with their normal version in both directions, like the other logos.
+- **Junction Box**: small trackside box on a post. Recipe: yellow concrete on top, light grey
+  concrete - redstone - light grey concrete in the middle and iron bars below. Gives 8.
+  - Right-click it to open a menu with North / South / East / West arrows and a Center button.
+    Each click moves the box 1 pixel; Shift + click moves it to the edge (3 pixels).
+  - **Set default** saves the current position: the next junction boxes you place will use it.
+- **Junction Box with Cables**: the same box with two cables going down to the ground on one side.
+  Recipe: junction box + copper ingot. Gives 1. The cables face away from you when you place it.
 
-- **New text editing screen with live preview**: when you edit a sign, the sign itself is shown
-  head-on and you type directly on it (with a blinking cursor), just like vanilla signs. Signs with
-  several texts are edited all in the same screen (Up/Down arrows or Tab to switch field, Enter to confirm,
-  Esc to cancel).
-- **Wall mode** for the single signals (speed, TSR, End of TSR, warning sign, halt, whistle and
-  immediate stop): right-click the face of a block while looking straight at it and the signal is
-  placed without its post, flush against that block. On thin supports (fences, walls, catenary
-  masts) it snaps to the support with no gap.
-- **Renewed speed and TSR models**: slightly smaller diamonds, with the text rescaled to match.
-- **Train maximum speed sign**: the text is now lit like the block face around it.
-- **White sliding train door** (opens forwards / backwards), with a textured top face. (Automatic
-  opening at Create stations is not available on NeoForge 1.21.1 yet.)
-- New decorative blocks: **train window**, **train light**, **front light**, **orange-purple lines
-  (bottom)** in both versions and **double lines on gray concrete**.
-- Fix: the train doors are now correctly tagged as doors in 1.21.1.
+### Recipe changes
+- Station signs (both versions): now give **5** instead of 1.
+- Hectometre post: now gives **4** instead of 1.
+
+### Mining
+- All the mod's blocks (except glass and the train light) are now **mined with a pickaxe**, and
+  each one takes as long to break as the block it is crafted from (for example the Rodalies "R" logo
+  breaks like orange terracotta).
+- Like their vanilla materials, the logos, stripes, red aluminium, the concrete-based blocks, the
+  train maximum speed sign and the junction boxes now **need a pickaxe to drop**.
+
+Both Forge 1.20.1 and NeoForge 1.21.1 get the same changes.
 
 Full history: https://github.com/Anty48/Rodalies-Decorations/wiki/Version-History

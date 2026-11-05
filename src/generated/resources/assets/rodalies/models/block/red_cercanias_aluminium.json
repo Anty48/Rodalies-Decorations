@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "rodalies:block/red_cercanias_aluminium"
+  }
+}
