@@ -135,6 +135,16 @@ public class ModBlocks {
         BLOCKS.register("red_stripe_directional",
             () -> new DirectionalLogoBlock(BlockBehaviour.Properties.copy(Blocks.QUARTZ_BLOCK)));
 
+    // Cuarzo con linea roja ARRIBA (franja pegada al borde superior de los laterales); top/bottom smooth
+    // quartz. Por defecto se craftea la variante de una cara; esta se obtiene 1:1 desde ella.
+    public static final RegistryObject<Block> RED_STRIPE_TOP =
+        BLOCKS.register("red_stripe_top",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.QUARTZ_BLOCK)));
+
+    public static final RegistryObject<Block> RED_STRIPE_TOP_DIRECTIONAL =
+        BLOCKS.register("red_stripe_top_directional",
+            () -> new DirectionalLogoBlock(BlockBehaviour.Properties.copy(Blocks.QUARTZ_BLOCK)));
+
     public static final RegistryObject<Block> RED_PURPLE_STRIPES_DIRECTIONAL =
         BLOCKS.register("red_purple_stripes_directional",
             () -> new DirectionalLogoBlock(BlockBehaviour.Properties.copy(Blocks.QUARTZ_BLOCK)));
@@ -478,6 +488,14 @@ public class ModBlocks {
         ITEMS.register("red_stripe_directional",
             () -> new BlockItem(RED_STRIPE_DIRECTIONAL.get(), new Item.Properties()));
 
+    public static final RegistryObject<Item> RED_STRIPE_TOP_ITEM =
+        ITEMS.register("red_stripe_top",
+            () -> new BlockItem(RED_STRIPE_TOP.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> RED_STRIPE_TOP_DIRECTIONAL_ITEM =
+        ITEMS.register("red_stripe_top_directional",
+            () -> new BlockItem(RED_STRIPE_TOP_DIRECTIONAL.get(), new Item.Properties()));
+
     public static final RegistryObject<Item> RED_PURPLE_STRIPES_DIRECTIONAL_ITEM =
         ITEMS.register("red_purple_stripes_directional",
             () -> new BlockItem(RED_PURPLE_STRIPES_DIRECTIONAL.get(), new Item.Properties()));
@@ -631,6 +649,8 @@ public class ModBlocks {
                 output.accept(DOUBLE_LINES_GRAY_CONCRETE_ITEM.get());
                 output.accept(RED_STRIPE_ITEM.get());
                 output.accept(RED_STRIPE_DIRECTIONAL_ITEM.get());
+                output.accept(RED_STRIPE_TOP_DIRECTIONAL_ITEM.get());
+                output.accept(RED_STRIPE_TOP_ITEM.get());
                 output.accept(RED_PURPLE_STRIPES_ITEM.get());
                 output.accept(RED_PURPLE_STRIPES_DIRECTIONAL_ITEM.get());
                 output.accept(TRAIN_LIGHT_ITEM.get());

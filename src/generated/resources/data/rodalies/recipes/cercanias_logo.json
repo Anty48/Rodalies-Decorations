@@ -5,9 +5,14 @@
     "T": {
       "item": "minecraft:red_dye"
     },
-    "X": {
-      "item": "minecraft:smooth_quartz"
-    }
+    "X": [
+      {
+        "item": "minecraft:quartz_block"
+      },
+      {
+        "item": "minecraft:smooth_quartz"
+      }
+    ]
   },
   "pattern": [
     " X ",

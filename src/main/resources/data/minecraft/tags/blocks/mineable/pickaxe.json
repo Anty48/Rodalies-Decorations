@@ -16,6 +16,7 @@
     "rodalies:orange_purple_lines_bottom_directional",
     "rodalies:double_lines_gray_concrete",
     "rodalies:red_stripe",
+    "rodalies:red_stripe_top",
     "rodalies:red_purple_stripes",
     "rodalies:front_light",
     "rodalies:train_max_speed",
@@ -61,6 +62,7 @@
     "rodalies:red_cercanias_aluminium",
     "rodalies:cercanias_logo_inverted_directional",
     "rodalies:red_stripe_directional",
+    "rodalies:red_stripe_top_directional",
     "rodalies:red_purple_stripes_directional"
   ]
 }

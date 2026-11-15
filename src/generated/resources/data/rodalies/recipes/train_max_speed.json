@@ -5,9 +5,14 @@
     "D": {
       "item": "minecraft:black_dye"
     },
-    "Q": {
-      "item": "minecraft:quartz_block"
-    }
+    "Q": [
+      {
+        "item": "minecraft:quartz_block"
+      },
+      {
+        "item": "minecraft:smooth_quartz"
+      }
+    ]
   },
   "pattern": [
     "D",

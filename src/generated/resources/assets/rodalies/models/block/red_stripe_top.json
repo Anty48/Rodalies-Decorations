@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "minecraft:block/quartz_block_bottom",
+    "side": "rodalies:block/red_stripe_top",
+    "top": "minecraft:block/quartz_block_bottom"
+  }
+}

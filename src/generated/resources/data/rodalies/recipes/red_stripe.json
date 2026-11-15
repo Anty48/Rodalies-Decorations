@@ -2,16 +2,20 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "Q": {
-      "item": "minecraft:quartz_block"
-    },
+    "Q": [
+      {
+        "item": "minecraft:quartz_block"
+      },
+      {
+        "item": "minecraft:smooth_quartz"
+      }
+    ],
     "R": {
       "item": "minecraft:red_dye"
     }
   },
   "pattern": [
-    "R",
-    "Q"
+    "RQ"
   ],
   "result": {
     "item": "rodalies:red_stripe"

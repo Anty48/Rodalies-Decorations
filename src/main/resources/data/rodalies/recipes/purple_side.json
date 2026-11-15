@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    { "item": "minecraft:quartz_block" },
+    [{ "item": "minecraft:quartz_block" }, { "item": "minecraft:smooth_quartz" }],
     { "item": "minecraft:purple_dye" }
   ],
   "result": {

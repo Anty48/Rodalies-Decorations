@@ -26,18 +26,21 @@ import java.util.function.Consumer;
  */
 public class ModRecipeProvider extends RecipeProvider {
 
+    /** Bloque de cuarzo o cuarzo liso: todas las recetas con cuarzo aceptan cualquiera de los dos. */
+    private static final Ingredient QUARTZ = Ingredient.of(Blocks.QUARTZ_BLOCK, Blocks.SMOOTH_QUARTZ);
+
     public ModRecipeProvider(PackOutput output) {
         super(output);
     }
 
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> writer) {
-        // Cercanias logo: tinte rojo (T) en el centro rodeado en cruz por smooth quartz (X).
+        // Cercanias logo: tinte rojo (T) en el centro rodeado en cruz por cuarzo o cuarzo liso (X).
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.CERCANIAS_LOGO.get(), 4)
                 .pattern(" X ")
                 .pattern("XTX")
                 .pattern(" X ")
-                .define('X', Blocks.SMOOTH_QUARTZ)
+                .define('X', QUARTZ)
                 .define('T', Items.RED_DYE)
                 .unlockedBy("has_smooth_quartz", has(Blocks.SMOOTH_QUARTZ))
                 .save(writer);
@@ -64,12 +67,21 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_red_cercanias_aluminium", has(ModBlocks.RED_CERCANIAS_ALUMINIUM.get()))
                 .save(writer);
 
-        // Cuarzo con linea roja: tinte rojo sobre bloque de cuarzo (como la franja naranja+morada, con un tinte).
+        // Cuarzo con linea roja: tinte rojo al lado del cuarzo, en horizontal (vale a izquierda o derecha:
+        // las recetas shaped admiten la version reflejada).
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.RED_STRIPE.get(), 1)
+                .pattern("RQ")
+                .define('R', Items.RED_DYE)
+                .define('Q', QUARTZ)
+                .unlockedBy("has_quartz_block", has(Blocks.QUARTZ_BLOCK))
+                .save(writer);
+
+        // Cuarzo con linea roja ARRIBA: tinte rojo encima del cuarzo -> la variante de una cara.
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.RED_STRIPE_TOP_DIRECTIONAL.get(), 1)
                 .pattern("R")
                 .pattern("Q")
                 .define('R', Items.RED_DYE)
-                .define('Q', Blocks.QUARTZ_BLOCK)
+                .define('Q', QUARTZ)
                 .unlockedBy("has_quartz_block", has(Blocks.QUARTZ_BLOCK))
                 .save(writer);
 
@@ -80,7 +92,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .pattern("Q")
                 .define('R', Items.RED_DYE)
                 .define('P', Items.PURPLE_DYE)
-                .define('Q', Blocks.QUARTZ_BLOCK)
+                .define('Q', QUARTZ)
                 .unlockedBy("has_quartz_block", has(Blocks.QUARTZ_BLOCK))
                 .save(writer);
 
@@ -101,6 +113,14 @@ public class ModRecipeProvider extends RecipeProvider {
                 .requires(ModBlocks.RED_STRIPE_DIRECTIONAL.get())
                 .unlockedBy("has_red_stripe_directional", has(ModBlocks.RED_STRIPE_DIRECTIONAL.get()))
                 .save(writer, new ResourceLocation("rodalies", "red_stripe_from_red_stripe_directional"));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.RED_STRIPE_TOP.get(), 1)
+                .requires(ModBlocks.RED_STRIPE_TOP_DIRECTIONAL.get())
+                .unlockedBy("has_red_stripe_top_directional", has(ModBlocks.RED_STRIPE_TOP_DIRECTIONAL.get()))
+                .save(writer, new ResourceLocation("rodalies", "red_stripe_top_from_red_stripe_top_directional"));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.RED_STRIPE_TOP_DIRECTIONAL.get(), 1)
+                .requires(ModBlocks.RED_STRIPE_TOP.get())
+                .unlockedBy("has_red_stripe_top", has(ModBlocks.RED_STRIPE_TOP.get()))
+                .save(writer, new ResourceLocation("rodalies", "red_stripe_top_directional_from_red_stripe_top"));
         ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.RED_PURPLE_STRIPES_DIRECTIONAL.get(), 1)
                 .requires(ModBlocks.RED_PURPLE_STRIPES.get())
                 .unlockedBy("has_red_purple_stripes", has(ModBlocks.RED_PURPLE_STRIPES.get()))
@@ -138,7 +158,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .pattern("Q")
                 .define('O', Items.ORANGE_DYE)
                 .define('P', Items.PURPLE_DYE)
-                .define('Q', Blocks.QUARTZ_BLOCK)
+                .define('Q', QUARTZ)
                 .unlockedBy("has_quartz_block", has(Blocks.QUARTZ_BLOCK))
                 .save(writer);
 
@@ -150,7 +170,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .pattern("P")
                 .define('O', Items.ORANGE_DYE)
                 .define('P', Items.PURPLE_DYE)
-                .define('Q', Blocks.QUARTZ_BLOCK)
+                .define('Q', QUARTZ)
                 .unlockedBy("has_quartz_block", has(Blocks.QUARTZ_BLOCK))
                 .save(writer);
 
@@ -200,7 +220,7 @@ public class ModRecipeProvider extends RecipeProvider {
 
         // Ventana de tren: 1 bloque de cuarzo + 1 cristal, en cualquier disposicion (shapeless).
         ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.TRAIN_WINDOW.get(), 1)
-                .requires(Blocks.QUARTZ_BLOCK)
+                .requires(QUARTZ)
                 .requires(Blocks.GLASS)
                 .unlockedBy("has_glass", has(Blocks.GLASS))
                 .save(writer);
@@ -210,7 +230,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .pattern("D")
                 .pattern("Q")
                 .define('D', Items.BLACK_DYE)
-                .define('Q', Blocks.QUARTZ_BLOCK)
+                .define('Q', QUARTZ)
                 .unlockedBy("has_quartz_block", has(Blocks.QUARTZ_BLOCK))
                 .save(writer);
 
@@ -292,7 +312,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .pattern("QQ")
                 .pattern("GG")
                 .pattern("QQ")
-                .define('Q', Blocks.QUARTZ_BLOCK)
+                .define('Q', QUARTZ)
                 .define('G', Blocks.GLASS)
                 .unlockedBy("has_quartz_block", has(Blocks.QUARTZ_BLOCK))
                 .save(writer);

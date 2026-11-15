@@ -1,4 +1,4 @@
-// 1.20.1	2026-11-05T11:41:03.5282178	Loot Tables
+// 1.20.1	2026-11-15T20:09:59.8563119	Loot Tables
 f4bbf98525ea925dc88532f51796d0eb41e3fd55 data/rodalies/loot_tables/blocks/apeadero_signal.json
 7372fea34db50ff4756abeac1df2d40d13dd24c3 data/rodalies/loot_tables/blocks/apeadero_signal_short.json
 dd59f8e3d5c768812020f9eb83c905649b45cb54 data/rodalies/loot_tables/blocks/apeadero_signal_short_wall.json
@@ -35,6 +35,8 @@ a31194e5363250e722ed1d2c3141c48e3d018b32 data/rodalies/loot_tables/blocks/platfo
 bfa739eb8e95bd4e53a3b6fae989ea32bca304ad data/rodalies/loot_tables/blocks/red_purple_stripes_directional.json
 e92731bc35829ad89b020f7ae7ce6ca33e51177e data/rodalies/loot_tables/blocks/red_stripe.json
 35c8eb72b29e264a48da7e3bcac053446a14631c data/rodalies/loot_tables/blocks/red_stripe_directional.json
+76932140bd78d5ed03fddf739f8cbb41008f76e7 data/rodalies/loot_tables/blocks/red_stripe_top.json
+375c60b14045e0583a54dbbf32923a019abad01b data/rodalies/loot_tables/blocks/red_stripe_top_directional.json
 963db605ad95ee51aebbda9248965aade87dd17e data/rodalies/loot_tables/blocks/silbato_signal.json
 1ee25dde7bdf3150ebcc55333f5d67f83f9be05d data/rodalies/loot_tables/blocks/silbato_signal_short.json
 c19980f942e49790399c10df82ba5aceb78b9ac7 data/rodalies/loot_tables/blocks/silbato_signal_short_wall.json

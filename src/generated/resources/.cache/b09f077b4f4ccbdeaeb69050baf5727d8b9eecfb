@@ -1,4 +1,4 @@
-// 1.20.1	2026-11-05T11:41:03.5219858	Block States: rodalies
+// 1.20.1	2026-11-15T20:09:59.8445809	Block States: rodalies
 f7f941c04c9669fd9c65410f306fb540cbb14684 assets/rodalies/blockstates/cercanias_logo.json
 5fbe9767b55fb1e3e84b0ccc4dab3c41cba6c5d3 assets/rodalies/blockstates/cercanias_logo_inverted.json
 e4702106b0fa40a40ee2134dce568b592892bb16 assets/rodalies/blockstates/double_lines_gray_concrete.json
@@ -8,6 +8,7 @@ fb9f0bda491f36ec4971375dfadaefde387aa2da assets/rodalies/blockstates/orange_purp
 e69e7e8864bd48e8aff2e83df3807621e519c59b assets/rodalies/blockstates/red_cercanias_aluminium.json
 3e85e978ca27c396e4413bb4f103df65a0540ed8 assets/rodalies/blockstates/red_purple_stripes.json
 2fcff5353c3ae5f8e7da060208a9b1ee74fb50d3 assets/rodalies/blockstates/red_stripe.json
+593f1e41265be13b3a86422dcf3d58c6c96b1ad7 assets/rodalies/blockstates/red_stripe_top.json
 7b62905a3b2a28a42c728e577243088505987020 assets/rodalies/blockstates/train_light.json
 7323fa880543dd7bae70b90c1cefe77bb0e13ca6 assets/rodalies/blockstates/train_window.json
 7854513b86211847aa19fda2c02d4d1a4162d4a3 assets/rodalies/models/block/cercanias_logo.json
@@ -19,6 +20,7 @@ bb7c6fef5faa2ac8b1addb16000a9bad31ec8f76 assets/rodalies/models/block/orange_pur
 b2437d78ab54334f6ff64c15a9d47c6124ba492a assets/rodalies/models/block/red_cercanias_aluminium.json
 0e82deca3a505ab397da102eff1e5bbf295f9451 assets/rodalies/models/block/red_purple_stripes.json
 87d741dd43050369840b26e6fac1cfa226d09cdc assets/rodalies/models/block/red_stripe.json
+f46b61975465c2cc888655625f0bd529f498250a assets/rodalies/models/block/red_stripe_top.json
 0fc44f70cd7c5c30809a80bb850c90f34749a796 assets/rodalies/models/block/train_light.json
 005b0ea308667fcc7b9b44ab0470929d7290d224 assets/rodalies/models/block/train_window.json
 b3f02f7b048633a52d223197823cb909cb7bece7 assets/rodalies/models/item/cercanias_logo.json
@@ -30,5 +32,6 @@ a3b41da2c2dc8fd26345adadd6f63cebdec6feff assets/rodalies/models/item/orange_purp
 87214e0548c8a6258cb374049e3bee9dffa3f3c8 assets/rodalies/models/item/red_cercanias_aluminium.json
 0730199a83f4b060bd22aaa88c42c22ce4cf2211 assets/rodalies/models/item/red_purple_stripes.json
 4353165cfeea448ea2a95e7def14020ea3ab7c64 assets/rodalies/models/item/red_stripe.json
+938b35dbd3ad901967ced48527a137bffe45574c assets/rodalies/models/item/red_stripe_top.json
 dac9c674b254d41e0e7dbaf000f08a32ebbbaef0 assets/rodalies/models/item/train_light.json
 772ac0d9a1134e51854846ac0731e6559ade1e3b assets/rodalies/models/item/train_window.json

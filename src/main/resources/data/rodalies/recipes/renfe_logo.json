@@ -6,9 +6,10 @@
     " O "
   ],
   "key": {
-    "O": {
-      "item": "minecraft:quartz_block"
-    },
+    "O": [
+      { "item": "minecraft:quartz_block" },
+      { "item": "minecraft:smooth_quartz" }
+    ],
     "Q": {
       "item": "minecraft:purple_dye"
     }
