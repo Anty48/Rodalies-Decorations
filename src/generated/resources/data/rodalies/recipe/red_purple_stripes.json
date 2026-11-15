@@ -5,9 +5,14 @@
     "P": {
       "item": "minecraft:purple_dye"
     },
-    "Q": {
-      "item": "minecraft:quartz_block"
-    },
+    "Q": [
+      {
+        "item": "minecraft:quartz_block"
+      },
+      {
+        "item": "minecraft:smooth_quartz"
+      }
+    ],
     "R": {
       "item": "minecraft:red_dye"
     }

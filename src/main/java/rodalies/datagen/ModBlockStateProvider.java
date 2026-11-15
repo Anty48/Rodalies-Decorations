@@ -54,6 +54,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
         ModelFile redStripeModel = models().cubeBottomTop(
                 "red_stripe", modLoc("block/red_stripe"), smoothQuartz, smoothQuartz);
         simpleBlockWithItem(ModBlocks.RED_STRIPE.get(), redStripeModel);
+        ModelFile redStripeTopModel = models().cubeBottomTop(
+                "red_stripe_top", modLoc("block/red_stripe_top"), smoothQuartz, smoothQuartz);
+        simpleBlockWithItem(ModBlocks.RED_STRIPE_TOP.get(), redStripeTopModel);
         ModelFile redPurpleStripesModel = models().cubeBottomTop(
                 "red_purple_stripes", modLoc("block/red_purple_stripes"), smoothQuartz, smoothQuartz);
         simpleBlockWithItem(ModBlocks.RED_PURPLE_STRIPES.get(), redPurpleStripesModel);

@@ -5,9 +5,14 @@
     "G": {
       "item": "minecraft:glass"
     },
-    "Q": {
-      "item": "minecraft:quartz_block"
-    }
+    "Q": [
+      {
+        "item": "minecraft:quartz_block"
+      },
+      {
+        "item": "minecraft:smooth_quartz"
+      }
+    ]
   },
   "pattern": [
     "QQ",

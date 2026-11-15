@@ -93,6 +93,8 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(ModBlocks.CERCANIAS_LOGO_INVERTED_DIRECTIONAL.get());
         dropSelf(ModBlocks.RED_STRIPE_DIRECTIONAL.get());
         dropSelf(ModBlocks.RED_PURPLE_STRIPES_DIRECTIONAL.get());
+        dropSelf(ModBlocks.RED_STRIPE_TOP.get());
+        dropSelf(ModBlocks.RED_STRIPE_TOP_DIRECTIONAL.get());
     }
 
     @Override
@@ -161,6 +163,8 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                 ModBlocks.RED_CERCANIAS_ALUMINIUM.get(),
                 ModBlocks.CERCANIAS_LOGO_INVERTED_DIRECTIONAL.get(),
                 ModBlocks.RED_STRIPE_DIRECTIONAL.get(),
-                ModBlocks.RED_PURPLE_STRIPES_DIRECTIONAL.get());
+                ModBlocks.RED_PURPLE_STRIPES_DIRECTIONAL.get(),
+                ModBlocks.RED_STRIPE_TOP.get(),
+                ModBlocks.RED_STRIPE_TOP_DIRECTIONAL.get());
     }
 }

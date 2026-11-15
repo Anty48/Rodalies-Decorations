@@ -123,6 +123,15 @@ public class ModBlocks {
             BLOCKS.registerBlock("red_stripe_directional", DirectionalLogoBlock::new,
                     BlockBehaviour.Properties.ofFullCopy(Blocks.QUARTZ_BLOCK));
 
+    // Cuarzo con linea roja ARRIBA (franja pegada al borde superior de los laterales); top/bottom smooth
+    // quartz. Por defecto se craftea la variante de una cara; esta se obtiene 1:1 desde ella.
+    public static final DeferredBlock<Block> RED_STRIPE_TOP =
+            BLOCKS.registerBlock("red_stripe_top", Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.QUARTZ_BLOCK));
+
+    public static final DeferredBlock<Block> RED_STRIPE_TOP_DIRECTIONAL =
+            BLOCKS.registerBlock("red_stripe_top_directional", DirectionalLogoBlock::new,
+                    BlockBehaviour.Properties.ofFullCopy(Blocks.QUARTZ_BLOCK));
+
     public static final DeferredBlock<Block> RED_PURPLE_STRIPES_DIRECTIONAL =
             BLOCKS.registerBlock("red_purple_stripes_directional", DirectionalLogoBlock::new,
                     BlockBehaviour.Properties.ofFullCopy(Blocks.QUARTZ_BLOCK));
@@ -338,6 +347,8 @@ public class ModBlocks {
     public static final DeferredItem<BlockItem> RED_STRIPE_ITEM = ITEMS.registerSimpleBlockItem(RED_STRIPE);
     public static final DeferredItem<BlockItem> RED_PURPLE_STRIPES_ITEM = ITEMS.registerSimpleBlockItem(RED_PURPLE_STRIPES);
     public static final DeferredItem<BlockItem> RED_STRIPE_DIRECTIONAL_ITEM = ITEMS.registerSimpleBlockItem(RED_STRIPE_DIRECTIONAL);
+    public static final DeferredItem<BlockItem> RED_STRIPE_TOP_ITEM = ITEMS.registerSimpleBlockItem(RED_STRIPE_TOP);
+    public static final DeferredItem<BlockItem> RED_STRIPE_TOP_DIRECTIONAL_ITEM = ITEMS.registerSimpleBlockItem(RED_STRIPE_TOP_DIRECTIONAL);
     public static final DeferredItem<BlockItem> RED_PURPLE_STRIPES_DIRECTIONAL_ITEM = ITEMS.registerSimpleBlockItem(RED_PURPLE_STRIPES_DIRECTIONAL);
     public static final DeferredItem<BlockItem> TRAIN_LIGHT_ITEM = ITEMS.registerSimpleBlockItem(TRAIN_LIGHT);
     public static final DeferredItem<BlockItem> FRONT_LIGHT_ITEM = ITEMS.registerSimpleBlockItem(FRONT_LIGHT);
@@ -395,6 +406,8 @@ public class ModBlocks {
                         output.accept(DOUBLE_LINES_GRAY_CONCRETE_ITEM.get());
                         output.accept(RED_STRIPE_ITEM.get());
                         output.accept(RED_STRIPE_DIRECTIONAL_ITEM.get());
+                        output.accept(RED_STRIPE_TOP_DIRECTIONAL_ITEM.get());
+                        output.accept(RED_STRIPE_TOP_ITEM.get());
                         output.accept(RED_PURPLE_STRIPES_ITEM.get());
                         output.accept(RED_PURPLE_STRIPES_DIRECTIONAL_ITEM.get());
                         output.accept(TRAIN_LIGHT_ITEM.get());
